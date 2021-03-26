@@ -13,6 +13,7 @@ A、B区：https://yzc.hsi.com.cn/kyzx/jybzc/202009/20200904/1972918872.html
 
 ### 整理资料下载
 
+[院校库](https://github.com/xx025/yzw-spider/raw/main/documentation/%E9%99%A2%E6%A0%A1%E5%BA%93.xlsx)
 
 ### 在线脚本
 在此之前我也写了一个油猴脚本：前往[安装](https://greasyfork.org/zh-CN/scripts/423952)
