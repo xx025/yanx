@@ -18,3 +18,10 @@ A、B区：https://yzc.hsi.com.cn/kyzx/jybzc/202009/20200904/1972918872.html
 ### 在线脚本
 在此之前我也写了一个油猴脚本：前往[安装](https://greasyfork.org/zh-CN/scripts/423952)
 
+### 其他
+
+[github搜索'考研'](https://github.com/search?q=%E8%80%83%E7%A0%94)
+
+---
+请慎重对待和使用，程序逻辑可能产生了错误的结果，请您仔细详查院校信息
+
