@@ -29,4 +29,4 @@ sht.range('A2:I2').value = ['计划', 'AB区', '院校名称', '所在地', '院
 sht.range('A3').options(expand='table').value = info
 sht.range('a1:k1').api.merge()#合并
 
-wb.save('Documentation/rexuslst.xlsx')
+wb.save('documentation/院校库.xlsx')
