@@ -10,10 +10,13 @@ A、B区：https://yzc.hsi.com.cn/kyzx/jybzc/202009/20200904/1972918872.html
 211工程名单：http://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html
 985工程名单：http://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html
 ```
+整理后的学校目录在：[eduList.py](eduList.py)
 
 ### 整理资料下载
 
-[院校库](https://github.com/xx025/yzw-spider/raw/main/documentation/%E9%99%A2%E6%A0%A1%E5%BA%93.xlsx)
+[院校库.xlsx](https://github.com/xx025/yzw-spider/raw/main/documentation/%E9%99%A2%E6%A0%A1%E5%BA%93.xlsx)
+
+[院校库(edudata.json)](https://github.com/xx025/yzw-spider/raw/main/edudata.json)
 
 ### 在线脚本
 在此之前我也写了一个油猴脚本：前往[安装](https://greasyfork.org/zh-CN/scripts/423952)
