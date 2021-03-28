@@ -1,8 +1,4 @@
-#!/usr/bin/python3
 # coding:  utf8
-# @File    : getExamSubjects.py
-# @author  :xx025
-
 import json
 import re
 from urllib import parse, request
@@ -10,7 +6,7 @@ from urllib import parse, request
 from bs4 import BeautifulSoup
 from requests import RequestException
 
-from eduList import list211
+from uinnfo.eduList import list211
 
 '''
 此脚本是为了获取某个学校某个专业的考试科目
@@ -113,9 +109,10 @@ def getN(shN, yjxkdm, mldm):
         f.write(json.dumps(getInfoExame(shN, yjxkdm, mldm), ensure_ascii=False) + '\n')
 
 
-if __name__ == '__main__':
-    yjxkdm = '0812'
-    mldm = '08'
-    for i in list211:
-        print(i)
-        getN(i, yjxkdm, mldm)
+# if __name__ == '__main__':
+#     yjxkdm = '0812'
+#     mldm = '08'
+#     for i in list211:
+#         print(i)
+#         getN(i, yjxkdm, mldm)
+getN('东北师范大学', '07', '0775')
