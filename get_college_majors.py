@@ -9,59 +9,12 @@ from requests import RequestException
 from uinnfo.eduList import list211
 
 '''
-此脚本是为了获取某个学校某个专业的考试科目
+此脚本是为了获取某个学校某类专业目录
 
 '''
-#
-# headers = {
-#     'Accept': ' text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-#     'Accept-Encoding': ' gzip, deflate, br',
-#     'Accept-Language': ' zh-CN,zh;q=0.9',
-#     'Cache-Control': ' max-age=0',
-#     'Connection': ' keep-alive',
-#     'Cookie': ' JSESSIONID=2EF609D5223C12FD32C030D6DF997F3C; zg_did=%7B%22did%22%3A%20%22178685f48124b-0dea03d8ab43ec-6252732d-144000-178685f481317%22%7D; aliyungf_tc=e6118c040f377c26fcd0cb97709daa2bcf32666b377bc53b8708409b59ab8b06; JSESSIONID=E1E823F4CCBFC65AD9C54B347E4045F0; XSRF-CCKTOKEN=33d68cd8d8e5c30816b1b4eb22784ca2; CHSICC_CLIENTFLAGYZ=e839bc16219ba5185d0ac62e0e39117d; CHSICC_CLIENTFLAGZSML=1f7c0048e2a49f1501a5e6658c46b4ea; acw_tc=781bad1016168517402707695e0d39f81aa0dbb02b43997ca7510949182552; zg_adfb574f9c54457db21741353c3b0aa7=%7B%22sid%22%3A%201616850032025%2C%22updated%22%3A%201616853092929%2C%22info%22%3A%201616658778142%2C%22superProperty%22%3A%20%22%7B%7D%22%2C%22platform%22%3A%20%22%7B%7D%22%2C%22utm%22%3A%20%22%7B%7D%22%2C%22referrerDomain%22%3A%20%22%22%2C%22landHref%22%3A%20%22https%3A%2F%2Fyz.chsi.com.cn%2F%22%7D',
-#     'DNT': ' 1',
-#     'Host': ' yz.chsi.com.cn',
-#     'sec-ch-ua': ' " Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"',
-#     'sec-ch-ua-mobile': ' ?0',
-#     'Sec-Fetch-Dest': ' document',
-#     'Sec-Fetch-Mode': ' navigate',
-#     'Sec-Fetch-Site': ' none',
-#     'Sec-Fetch-User': ' ?1',
-#     'Upgrade-Insecure-Requests': ' 1',
-#     'User-Agent': ' Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4449.6 Safari/537.36'
-# }
-
-
-# def get_one_page(url_, headers_):
-#     req = Request(url=url_, headers=headers_, method='POST')
-#     try:
-#         response = urlopen(req)
-#         if response.getcode() == 200:
-#             return gzip.decompress(response.read()).decode('utf8')
-#     except RequestException:
-#         return None
-
-# url = quote(url, safe=string.printable)#进行参数转换
-
-
-'''
-参数含义：
-ssdm:   省市         如：11
-dwmc:   单位名称      如：北京大学
-mldm:   学科门类      如：08
-mlmc:  （我不知道）
-yjxkdm: 学科类别      如：0812, 
-zymc:   专业
-xxfs:   学习方式
-pageno： 页码         如： 1  在多页的情况下返回第一页
-'''
-
-# url = "https://yz.chsi.com.cn/zsml/queryAction.do"
-# 查询页面
 url = 'https://yz.chsi.com.cn/zsml/querySchAction.do'
 
-
+# url = quote(url, safe=string.printable)#进行参数转换
 def post_url(formData):
     data_parse = parse.urlencode(formData)
     data = data_parse.encode('utf-8')
@@ -105,14 +58,25 @@ def getInfoExame(schoolName, yjxkdm, mldm):
 
 
 def getN(shN, yjxkdm, mldm):
-    with open('school_professional_directory/{}.json'.format(shN), 'w', encoding='utf-8') as f:
+    with open('university_majors/{}.json'.format(shN), 'w', encoding='utf-8') as f:
         f.write(json.dumps(getInfoExame(shN, yjxkdm, mldm), ensure_ascii=False) + '\n')
 
 
-# if __name__ == '__main__':
-#     yjxkdm = '0812'
-#     mldm = '08'
-#     for i in list211:
-#         print(i)
-#         getN(i, yjxkdm, mldm)
-getN('东北师范大学', '07', '0775')
+if __name__ == '__main__':
+    yjxkdm = '0812'
+    mldm = '08'
+    for i in list211:
+        print(i)
+        getN(i, yjxkdm, mldm)
+
+'''
+参数含义：
+ssdm:   省市         如：11
+dwmc:   单位名称      如：北京大学
+mldm:   学科门类      如：08
+mlmc:  （我不知道）
+yjxkdm: 学科类别      如：0812, 
+zymc:   专业
+xxfs:   学习方式
+pageno： 页码         如： 1  在多页的情况下返回第一页
+'''
