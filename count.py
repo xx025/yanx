@@ -9,7 +9,7 @@ from eduList import list211 ,list985
 rList985 = []
 rList211 = []
 
-with open('edudata.json', encoding='utf8') as f:
+with open('documentation/edudata.json', encoding='utf8') as f:
     data = json.load(f)
 for i in data['data']:
     if ('985' in i['计划']):
