@@ -9,7 +9,7 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 from requests import RequestException
 
-from eduList import list211, list985
+from uinnfo.eduList import list211, list985
 
 rel = []
 
@@ -96,5 +96,5 @@ print(rel)
 
 resultd = {'data': rel}
 
-with open('documentation/edudata.json', 'w', encoding='utf-8') as f:
+with open('uinnfo/edudata.json', 'w', encoding='utf-8') as f:
     f.write(json.dumps(resultd, ensure_ascii=False) + '\n')
