@@ -10,6 +10,8 @@ from urllib import parse, request
 from bs4 import BeautifulSoup
 from requests import RequestException
 
+from eduList import list211
+
 '''
 此脚本是为了获取某个学校某个专业的考试科目
 
@@ -76,12 +78,12 @@ def post_url(formData):
 
 
 # 查询的方式找到与参数对应的链接
-def getInfoExame(schoolName):
+def getInfoExame(schoolName, yjxkdm, mldm):
     nextPage = 1
     thead = ['考试方式', '院系所', '专业', '研究方向', '学习方式', '指导教师', '拟招生人数', '考试范围', '跨专业', '备注']
     listU = []
     while True:
-        formData = {'ssdm': '', 'dwmc': schoolName, 'mldm': '08', 'mlmc': '', 'yjxkdm': '0812', 'zymc': '', 'xxfs': '',
+        formData = {'ssdm': '', 'dwmc': schoolName, 'mldm': mldm, 'mlmc': '', 'yjxkdm': yjxkdm, 'zymc': '', 'xxfs': '',
                     'pageno': nextPage}
         soup = BeautifulSoup(post_url(formData), 'html.parser')
         table = soup.find('table', class_='ch-table').find('tbody').find_all('tr')
@@ -106,9 +108,14 @@ def getInfoExame(schoolName):
     return {schoolName: listU}
 
 
-def getN(shN):
+def getN(shN, yjxkdm, mldm):
     with open('school_professional_directory/{}.json'.format(shN), 'w', encoding='utf-8') as f:
-        f.write(json.dumps(getInfoExame(shN), ensure_ascii=False) + '\n')
+        f.write(json.dumps(getInfoExame(shN, yjxkdm, mldm), ensure_ascii=False) + '\n')
 
 
-getN('北京大学')
+if __name__ == '__main__':
+    yjxkdm = '0812'
+    mldm = '08'
+    for i in list211:
+        print(i)
+        getN(i, yjxkdm, mldm)
