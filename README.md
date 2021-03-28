@@ -14,9 +14,11 @@ A、B区：https://yzc.hsi.com.cn/kyzx/jybzc/202009/20200904/1972918872.html
 
 ### 整理资料下载
 
+一般情况下只需要下载其中一个就好了
+
 [院校库.xlsx](https://github.com/xx025/yzw-spider/raw/main/documentation/%E9%99%A2%E6%A0%A1%E5%BA%93.xlsx)
 
-[院校库(edudata.json)](https://github.com/xx025/yzw-spider/raw/main/edudata.json)
+[院校库(edudata.json)](https://github.com/xx025/yzw-spider/raw/main/documentation/edudata.json)
 
 ### 在线脚本
 在此之前我也写了一个油猴脚本：前往[安装](https://greasyfork.org/zh-CN/scripts/423952)
