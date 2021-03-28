@@ -1,3 +1,7 @@
+'''
+此脚本爬取学校目录并输出到edudata.json文件
+'''
+
 import gzip
 import json
 from urllib.request import Request, urlopen
@@ -34,9 +38,9 @@ Headers = {
 def getUnt(HTML):
     soup = BeautifulSoup(HTML, "lxml")  # 格式化
     result = soup.select("div tr")
+    th = ['计划', 'AB区', '院校名称', '所在地', '院校隶属', '研究生院', '自划线院校',
+          '网报公告', '招生简章', '在线咨询', '调剂办法']
     for i in result[1:]:
-        th = ['计划', 'AB区', '院校名称', '所在地', '院校隶属', '研究生院', '自划线院校',
-              '网报公告', '招生简章', '在线咨询', '调剂办法']
         kd = [u for u in i.find_all("td")]
         kd1 = [u.text.replace('\n', '').replace('\r', '').replace(' ', '') for u in kd[0:3]]
         kd0 = kd1[0:2]
@@ -92,5 +96,5 @@ print(rel)
 
 resultd = {'data': rel}
 
-with open('edudata.json', 'w', encoding='utf-8') as f:
+with open('documentation/edudata.json', 'w', encoding='utf-8') as f:
     f.write(json.dumps(resultd, ensure_ascii=False) + '\n')
