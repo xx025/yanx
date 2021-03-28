@@ -6,6 +6,13 @@ import json
 from eduList import list211 ,list985
 
 
+for i in list985:
+    if i not in list211:
+        print(i)
+else:
+    print('list985 包含于 list211')
+
+print("211:{}所 \t 985:{}所".format(len(list211),len(list985)))
 rList985 = []
 rList211 = []
 
@@ -17,10 +24,8 @@ for i in data['data']:
     if (i['计划'] == '211'):
         rList211.append(i['院校名称'])
 
-print(len(rList985))
-print(len(rList211))
+print("211:{} 所 \t985:{}所 共：{} 所".format(len(rList211),len(rList985),len(rList985)+len(rList211)))
 
-print(len(rList985)+len(rList211))
 for i in list985:
     if i not in rList985:
         print(i)
