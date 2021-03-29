@@ -9,14 +9,9 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 from requests import RequestException
 
-from uinnfo.eduList import list211, list985
+from uinnfo.loc_ab_uni_985211 import list211, list985, A, B
 
 rel = []
-
-A = ['北京', '天津', '河北', '山西', '辽宁', '吉林', '黑龙江', '上海', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '重庆',
-     '四川', '陕西']
-
-B = ['内蒙古', '广西', '海南', '贵州', '云南', '西藏', '甘肃', '青海', '宁夏', '新疆']
 
 Headers = {
     'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',

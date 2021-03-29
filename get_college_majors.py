@@ -6,7 +6,7 @@ from urllib import parse, request
 from bs4 import BeautifulSoup
 from requests import RequestException
 
-from uinnfo.eduList import list211
+from uinnfo.loc_ab_uni_985211 import list211
 
 '''
 此脚本是为了获取某个学校某类专业目录
