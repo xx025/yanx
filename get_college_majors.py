@@ -14,6 +14,7 @@ from uinnfo.eduList import list211
 '''
 url = 'https://yz.chsi.com.cn/zsml/querySchAction.do'
 
+
 # url = quote(url, safe=string.printable)#进行参数转换
 def post_url(formData):
     data_parse = parse.urlencode(formData)
