@@ -68,7 +68,7 @@ if __name__ == '__main__':
         if my_file.exists():
             continue
         else:
-            print('第{}个 {}  进度{:.2}%'.format(num1, i[0], (num1 / num)*100))
+            print('第{}个 {}  进度{:.2}%'.format(num1, i[0], (num1 / num) * 100))
             # 写文件
             mydict = getexamscop(i)
             with open('college_majors_exam_scope/{}.json'.format(i[0]), 'w', encoding='utf-8') as f:
