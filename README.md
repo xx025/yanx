@@ -34,6 +34,8 @@ A、B区：https://yzc.hsi.com.cn/kyzx/jybzc/202009/20200904/1972918872.html
    
    ![](https://cdn.jsdelivr.net/gh/xx025/cloudimg/img/20210329220536.png)
 
+   ![](https://cdn.jsdelivr.net/gh/xx025/cloudimg/img/20210329220839.gif)
+
 ### 在线脚本
 
 在此之前我也写了一个油猴脚本：前往[安装](https://greasyfork.org/zh-CN/scripts/423952)
