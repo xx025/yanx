@@ -21,7 +21,11 @@ headers = {
 
 
 def getcookie(url):
-    driver = webdriver.Chrome(executable_path='chromedriver.exe')  # chrome插件路径
+    option = webdriver.ChromeOptions()
+    option.add_argument('headless')  # 设置option
+    driver = webdriver.Chrome(chrome_options=option)  # 调用带参数的谷歌浏览器
+
+    # driver = webdriver.Chrome(executable_path='chromedriver.exe')  # chrome插件路径
     driver.get(url)  # 榜单地址
     got_cookies = driver.get_cookies()
     format_cookies = ''.join([f'{i["name"]}={i["value"]}; ' for i in got_cookies])[:-2]

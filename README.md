@@ -10,7 +10,7 @@
     - [`rtcookies.py`](rtcookies.py) 借助selenium实时获取新的cookies、
     - [`output_excel.py`](output_to_excel/yxk.py)将[`main.py`](main.py)脚本输出文件整理成表格形式,
     - [`uinnfo/`](uinnfo/)包含大学的名单列表和一个效验脚本，
-    - [`university_majors_url/umu.json`](university_majors_url/umu.json)在(3）运行时生成一个保存保存考试范围链接的中间文件
+    - [`university_majors_url/umu.json`](university_majors_url/xsxw.json)在(3）运行时生成一个保存保存考试范围链接的中间文件
     - [`output_to_excel/major_exam_info.py`](output_to_excel/major_exam_info.py)将院校专业详细信息输出到表格
 ### 参考资料
 
@@ -35,6 +35,8 @@ A、B区：https://yzc.hsi.com.cn/kyzx/jybzc/202009/20200904/1972918872.html
    ![](https://cdn.jsdelivr.net/gh/xx025/cloudimg/img/20210329220536.png)
 
    ![](https://cdn.jsdelivr.net/gh/xx025/cloudimg/img/20210329220839.gif)
+
+3. 重点院校0854(电子信息专硕)
 
 ### 在线脚本
 

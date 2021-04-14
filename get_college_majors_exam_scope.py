@@ -43,33 +43,38 @@ def getexamscop(con):
     return {con[0]: list6}
 
 
-if __name__ == '__main__':
+def ks1(ml='',xw=''):
     udict = {}
     u_list = []
-    for filename in os.listdir("university_majors/"):
+
+    for filename in os.listdir("university_majors/{}/".format(ml)):
         u_list.append('{}'.format(filename[:-5]))
     for filename in u_list:
-        with open('university_majors/{}.json'.format(filename), 'r', encoding='utf8') as f:
+        with open('university_majors/{}/{}.json'.format(ml,filename), 'r', encoding='utf8') as f:
             load_dict = json.load(f)
         udict[filename] = [u['考试范围'] for u in load_dict[filename]]
     # 写文件
-    with open('university_majors_url/umu.json', 'w', encoding='utf-8') as f:
+    with open('university_majors_url/{}.json'.format(xw), 'w', encoding='utf-8') as f:
         f.write(json.dumps(udict, ensure_ascii=False) + '\n')
     # 读文件
-    with open('university_majors_url/umu.json', 'r', encoding='utf8') as f:
+    with open('university_majors_url/{}.json'.format(xw), 'r', encoding='utf8') as f:
         u_url = json.load(f)
 
-    listqu = []
     num = len(u_url)
     num1 = 0
     for i in u_url.items():
         num1 += 1
-        my_file = Path('college_majors_exam_scope/{}.json'.format(i[0]))
+        my_file = Path('college_majors_exam_scope/{}/{}.json'.format(ml,i[0]))
         if my_file.exists():
             continue
         else:
             print('第{}个 {}  进度{:.2}%'.format(num1, i[0], (num1 / num) * 100))
             # 写文件
             mydict = getexamscop(i)
-            with open('college_majors_exam_scope/{}.json'.format(i[0]), 'w', encoding='utf-8') as f:
+            with open('college_majors_exam_scope/{}/{}.json'.format(ml,i[0]), 'w', encoding='utf-8') as f:
                 f.write(json.dumps(mydict, ensure_ascii=False) + '\n')
+
+
+if __name__ == '__main__':
+    #ml ，学硕是（08,xsxw)，专硕是(zyxw,zyxw)
+    ks1(ml='zyxw',xw='zyxw')

@@ -28,14 +28,13 @@ def post_url(formData):
 
 
 # 查询的方式找到与参数对应的链接
-def getInfoExame(schoolName, yjxkdm, mldm):
+def getInfoExame(schoolName, formdata):
     nextPage = 1
     thead = ['考试方式', '院系所', '专业', '研究方向', '学习方式', '指导教师', '拟招生人数', '考试范围', '跨专业', '备注']
     listU = []
     while True:
-        formData = {'ssdm': '', 'dwmc': schoolName, 'mldm': mldm, 'mlmc': '', 'yjxkdm': yjxkdm, 'zymc': '', 'xxfs': '',
-                    'pageno': nextPage}
-        soup = BeautifulSoup(post_url(formData), 'html.parser')
+        formdata['pageno']= nextPage
+        soup = BeautifulSoup(post_url(formdata), 'html.parser')
         table = soup.find('table', class_='ch-table').find('tbody').find_all('tr')
         for i in table:
             kd = i.find_all('td')
@@ -58,19 +57,28 @@ def getInfoExame(schoolName, yjxkdm, mldm):
     return {schoolName: listU}
 
 
-def getN(shN, yjxkdm, mldm):
-    with open('university_majors/{}.json'.format(shN), 'w', encoding='utf-8') as f:
-        f.write(json.dumps(getInfoExame(shN, yjxkdm, mldm), ensure_ascii=False) + '\n')
+def getN(shN, formdata):
+    with open('university_majors/{}/{}.json'.format(formdata['mldm'],shN), 'w', encoding='utf-8') as f:
+        f.write(json.dumps(getInfoExame(schoolName=shN, formdata=formdata), ensure_ascii=False) + '\n')
 
 
 if __name__ == '__main__':
     yjxkdm = '0812'
-    mldm = '08'
+    zymc = ''
+    mldm= '08'
     for i in list211:
         print(i)
-        getN(i, yjxkdm, mldm)
+        formdata = {'ssdm': '',
+                    'dwmc': i,
+                    'mldm': mldm,
+                    'mlmc': '',
+                    'yjxkdm': yjxkdm,
+                    'zymc': zymc,
+                    'xxfs': ''}
+        getN(i, formdata=formdata)
 
 '''
+学术学位
 参数含义：
 ssdm:   省市         如：11
 dwmc:   单位名称      如：北京大学
@@ -80,4 +88,15 @@ yjxkdm: 学科类别      如：0812,
 zymc:   专业
 xxfs:   学习方式
 pageno： 页码         如： 1  在多页的情况下返回第一页
+'''
+'''
+专业学位
+ssdm: 
+dwmc: 
+mldm: zyxw
+mlmc: 
+yjxkdm: 0854
+zymc: 电子信息
+xxfs: 
+
 '''
