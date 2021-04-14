@@ -11,8 +11,8 @@ from requests import RequestException
 from rtcookies import getcookie
 
 
-def get_one_page(url_):
-    headers_ = getcookie(url_)
+def get_one_page(url_,headers_):
+
     req = Request(url=url_, headers=headers_, method='POST')
     try:
         response = urlopen(req)
@@ -24,9 +24,12 @@ def get_one_page(url_):
 
 def getexamscop(con):
     list6 = []
-    for i in con[1]:
-        url = i
-        soup = BeautifulSoup(get_one_page(url_=url), 'html.parser')
+
+    for index,value in enumerate(con[1]):
+        url = value
+        headers = getcookie(url)
+        print('{}/{} \t{}'.format(index,len(con[1]),value))
+        soup = BeautifulSoup(get_one_page(url_=url,headers_=headers), 'html.parser')
         qq = soup.find(class_='zsml-wrapper')
         major_info = qq.find(class_='zsml-condition').select('tbody')[0]  # 专业信息
         thd = ['招生单位', '考试方式', '院系所', '跨专业', '专业', '学习方式', '研究方向', '指导老师', '拟招人数', '备注']

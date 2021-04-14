@@ -21,10 +21,13 @@ headers = {
 
 
 def getcookie(url):
+
+    '''无头浏览器配置'''
     option = webdriver.ChromeOptions()
     option.add_argument('headless')  # 设置option
     driver = webdriver.Chrome(chrome_options=option)  # 调用带参数的谷歌浏览器
 
+    # '''一般模式'''
     # driver = webdriver.Chrome(executable_path='chromedriver.exe')  # chrome插件路径
     driver.get(url)  # 榜单地址
     got_cookies = driver.get_cookies()
