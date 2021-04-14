@@ -32,10 +32,6 @@ sht.range('A2:I2').value = ['计划', 'AB区', '院校名称', '所在地', '院
 
 sht.range('A3').options(expand='table').value = info
 
-# h3-k3
-# ?   ?
-#
-
 kliy=['网报公告', '招生简章', '在线咨询', '调剂办法']
 max_col=len(infoUrl)
 

@@ -3,8 +3,8 @@
 ### 说明
 
 1. [`main.py`](main.py)脚本：从研招网院校库爬取院校信息并标注A区或B区和学校是否是985或211院校,文件输出在[`uinnfo/edudata.json`](uinnfo/edudata.json)
-2. [`get_college_majors.py`](get_college_majors.py)脚本：获取某个学校某类专业目录,输出json文件保存至[`university_majors/`](university_majors/)
-3. [`get_college_majors_exam_scope.py`](get_college_majors_exam_scope.py)
+2. [`main2.py`](main2.py)脚本：获取某个学校某类专业目录,输出json文件保存至[`university_majors/`](university_majors/)
+3. [`main3.py`](main3.py)
    获取某个学校的具体专业的考试科目招生人数等一些备注信息,文件输出在[`college_majors_exam_scope/`](college_majors_exam_scope/)
 4. 其他
     - [`rtcookies.py`](rtcookies.py) 借助selenium实时获取新的cookies、

@@ -63,7 +63,7 @@ def getN(shN, formdata):
 
 
 if __name__ == '__main__':
-    yjxkdm = '0812'
+    yjxkdm = '08'
     zymc = ''
     mldm= '08'
     for i in list211:
@@ -84,7 +84,7 @@ ssdm:   省市         如：11
 dwmc:   单位名称      如：北京大学
 mldm:   学科门类      如：08
 mlmc:  （我不知道）
-yjxkdm: 学科类别      如：0812, 
+yjxkdm: 学科类别      如：08, 
 zymc:   专业
 xxfs:   学习方式
 pageno： 页码         如： 1  在多页的情况下返回第一页
