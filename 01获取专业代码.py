@@ -50,4 +50,6 @@ for zy_code in data:
 
 else:
     con.commit()
-    con.close()
+
+
+con.close()
