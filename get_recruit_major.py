@@ -1,43 +1,44 @@
-import requests
 from bs4 import BeautifulSoup
 
 from con_db import cur, con
+from requests_ import req_method
 
-cursor = cur.execute("SELECT url  FROM tmpzhaoshengdanwei")
 
-data = [i[-1] for i in cursor]
-yx_data = []
-for i in data:
+class get_majors_of_edu:
+    def __init__(self, url):
+        self.url = url
+        self.data = []
 
-    while True:
-        url = 'https://yz.chsi.com.cn/' + i
-        r = requests.get(url=url)
-        soup = BeautifulSoup(r.text)
+    def __req_data(self):
 
-        for k in soup.select('.zsml-list-box tbody tr'):
-            ksfs = k.select('td')[0].text
-            yxs = k.select('td')[1].text
-            zy = k.select('td')[2].text
-            yjfx = k.select('td')[3].text
-            xxfs = k.select('td')[4].text
-            zdls = k.select('td')[5].text
-            zsrs = k.select('td')[6].select_one('script').text
-            ksfw = k.select('td')[7].select_one('a').get('href')
-            bz = k.select('td')[8].text
-            lrd = (i, ksfs, yxs, zy, yjfx, xxfs, zdls, zsrs, ksfw, bz)
-            print(lrd[1:-1])
-            yx_data.append(lrd)
+        while True:
+            page_text = req_method(url=self.url, method='get')
+            soup = BeautifulSoup(page_text)
 
-        if 'unable' in soup.select_one('.lip-last').get('class'):
-            break
-        else:
-            print(url)
-            print('存在下一页')
-            break
+            for k in soup.select('.zsml-list-box tbody tr'):
+                ksfs = k.select('td')[0].text
+                yxs = k.select('td')[1].text
+                zy = k.select('td')[2].text
+                yjfx = k.select('td')[3].text
+                xxfs = k.select('td')[4].text
+                zdls = k.select('td')[5].text
+                zsrs = k.select('td')[6].select_one('script').text
+                ksfw = k.select('td')[7].select_one('a').get('href')
+                bz = k.select('td')[8].text
+                lrd = (self.url, ksfs, yxs, zy, yjfx, xxfs, zdls, zsrs, ksfw, bz)
+                print(lrd[1:-1])
+                self.data.append(lrd)
+            if 'unable' in soup.select_one('.lip-last').get('class'):
+                break
+            else:
+                print(self.url)
+                print('存在下一页')
+                break
+        self.__store_in_db()
 
-cur.execute('DELETE FROM tmpyuanxiaozhuanye ')
-cur.executemany('INSERT INTO tmpyuanxiaozhuanye (yxlj, ksfs, yxs, zy, yjfx, xxfs, zdls, zsrs, ksfw, bz) VALUES (?,?,'
-                '?,?,?,?,?,?,?,?)', yx_data)
-
-con.commit()
-con.close()
+    def __store_in_db(self):
+        # cur.execute('DELETE FROM tmpyuanxiaozhuanye')
+        cur.executemany(
+            'INSERT INTO yuanxiaozhuanye(yxlj, ksfs, yxs, zy, yjfx, xxfs, zdls, zsrs, ksfw, bz)'
+            'VALUES (?,?,?,?,?,?,?,?,?,?)', self.data)
+        con.commit()

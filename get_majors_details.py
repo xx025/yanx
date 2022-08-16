@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 from con_db import con
 
-r = con.execute('SELECT ksfw FROM tmpyuanxiaozhuanye')
+r = con.execute('SELECT ksfw FROM yuanxiaozhuanye')
 
 url = 'https://yz.chsi.com.cn'
 

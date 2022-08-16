@@ -3,14 +3,14 @@ import re
 from bs4 import BeautifulSoup
 
 from con_db import cur, con
-from requests_ import req_post
+from requests_ import req_method
 
 
 class get_zsyx:
     def __init__(self, mldm: str, yjxkm: str, ssdm='', dwmc='', mlmc='', zymc='', xxfs=''):
         self.url = 'https://yz.chsi.com.cn/zsml/queryAction.do'
         self.__data = []
-        cur.execute('DELETE FROM tmpzhaoshengdanwei')
+        cur.execute('DELETE FROM zhaoshengyuanxiao')
         self.__req_data = {'ssdm': ssdm,
                            'dwmc': dwmc,
                            'mldm': mldm,
@@ -21,7 +21,7 @@ class get_zsyx:
 
     def req_data(self):
         while True:
-            page_text = req_post(url=self.url, data=self.__req_data)
+            page_text = req_method(url=self.url, data=self.__req_data)
 
             '''
             地区代码：'ssdm': '',
@@ -65,13 +65,13 @@ class get_zsyx:
         self.__store_in_db()
 
     def __store_in_db(self):
-        cur.execute('DELETE FROM tmpzhaoshengdanwei')
-        cur.executemany('INSERT INTO tmpzhaoshengdanwei (zsdw, local, yjsy, zzhxyx, bsd, url)'
+        cur.execute('DELETE FROM zhaoshengyuanxiao')
+        cur.executemany('INSERT INTO zhaoshengyuanxiao (zsdw, local, yjsy, zzhxyx, bsd, url)'
                         ' VALUES (?,?,?,?,?,?)', self.__data)
         con.commit()
 
     def get_data(self):
-        cursor = cur.execute("SELECT *  FROM tmpzhaoshengdanwei")
+        cursor = cur.execute("SELECT *  FROM zhaoshengyuanxiao")
         data = [i for i in cursor]
         if len(data) == 0:
             self.__req_data()

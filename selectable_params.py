@@ -1,7 +1,7 @@
 import json
 
 from con_db import cur, con
-from requests_ import req_post
+from requests_ import req_method
 
 
 class location_code:
@@ -10,7 +10,7 @@ class location_code:
         self.__data = []
 
     def __req_data(self):
-        json_data = json.loads(req_post(self.__url))
+        json_data = json.loads(req_method(self.__url))
         self.__data = [(k['dm'], k['mc']) for k in json_data]
         self.__store_in_db()
 
@@ -42,7 +42,7 @@ class xkml_code:
         self.__data = []
 
     def __req_data(self):
-        json_data = json.loads(req_post(self.url))
+        json_data = json.loads(req_method(self.url))
         self.__data = [(k['dm'], k['mc']) for k in json_data]
         self.__store_in_db()
 
@@ -75,7 +75,7 @@ class xkly_code:
 
     def __req_data(self):
         # 获取学科门类或领域
-        r = req_post(url=self.url, data={'mldm': self.__mldm})
+        r = req_method(url=self.url, data={'mldm': self.__mldm})
         self.__data = [(self.__mldm, k['mc'], k['dm']) for k in json.loads(r)]
         self.__store_in_db()
 
@@ -102,7 +102,7 @@ class zy_name:
         self.__ly_code = ly_code
 
     def __req_data(self):
-        r = req_post(url=self.url, data={'q': self.__ly_code})
+        r = req_method(url=self.url, data={'q': self.__ly_code})
         req_data = json.loads(r)
         self.__data = [(self.__ly_code, req_data[i], str(i + 1)) for i in range(len(req_data))]
         self.__store_in_db()
