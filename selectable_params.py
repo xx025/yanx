@@ -128,8 +128,8 @@ class zy_name:
         con.commit()
 
     def get_data(self):
-        cursor = cur.execute("SELECT *  FROM zhuanye_name where zy_code=?", (self.__ly_code,))
-        data = [(i[2], i[1]) for i in cursor]
+        cursor = cur.execute("SELECT dm,name  FROM zhuanye_name where zy_code=?", (self.__ly_code,))
+        data = [i for i in cursor]
         if len(data) == 0:
             self.__req_data()
             return self.get_data()

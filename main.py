@@ -1,42 +1,39 @@
-import os
 
-from show_def import show_welcome
 from user import user
+from user.show_def import show_welcome
 
 show_welcome()
+print('''在正式开始之前，将需要问你几个问题作''')
 
-print('''在爬虫运行之前，将需要问你几个问题作为爬虫爬取条件''')
+user1 = user()
 
-use1 = user()
-
-diqu = use1.xuanzediqu()
-# 选择地区 如 北京
-a = input('回车继续')
-os.system('cls')
-
-xkml = use1.xuanzemenlei()
+user1.set_discipline()
 # 选择学科门类，如 学硕 08 工学 或 专硕
-a = input('回车继续')
-os.system('cls')
 
+user1.set_field_of_study()
+# 选择专业领域 ，如 学硕 0812 计算机科学与技术
 
-xkly = use1.xuanzelingyu(xkml)
-# 选择专业领域 ，如 学硕 0812 计算机科学与技术 或 专硕 0854 电子信息
-a = input('回车继续')
-os.system('cls')
-
-
-zyn = use1.xuanzezhuanye(xkly)
+user1.set_major()
 # 选择具体专业，如 大数据科学与工程
-a = input('回车继续')
-os.system('cls')
 
-
-xxfs = use1.xuenzexuexifangshi()
+user1.set_learn_way()
 # 选择学习方式，如 全日制 或 非全
 
-# dl_zsyx = get_zsyx(mldm=xkml, yjxkm=xkly, ssdm=diqu, zymc=zyn, xxfs=xxfs)
-#
-# data = dl_zsyx.get_data()
-# # 获取到招生院校，进一步可筛选 双一流、985、211 和地区相关条件
-# # 再下一步 将获取院校里的专业
+user1.set_location()
+# 选择地区 如 北京
+
+user1.set_construction_plans()
+# 选择学校建设计划 如 双一流11
+
+
+# user1.set_user_choice_items(location_codes=None,
+#                             discipline_code='05',
+#                             field_of_study_code='0501',
+#                             majors=None,
+#                             learn_mode=None,
+#                             construction_plans={'211': '0', '985': '0', '11': '0'})
+
+
+user1.dl_schools()
+
+user1.dl_majors()

@@ -1,9 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 
-from con_db import con
+from db import con
 
-r = con.execute('SELECT ksfw FROM yuanxiaozhuanye')
+r = con.execute('SELECT ksfw FROM recruit_major')
 
 url = 'https://yz.chsi.com.cn'
 
