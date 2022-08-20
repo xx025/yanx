@@ -2,7 +2,6 @@ import requests
 
 
 def req_method(url, data={}, method='post', params={}):
-    print('打开：' + url)
 
     if method == 'post':
         if data is {}:
@@ -15,5 +14,4 @@ def req_method(url, data={}, method='post', params={}):
         else:
             page = requests.get(url=url, params=params)
 
-    print('加载成功')
     return page.text

@@ -9,7 +9,7 @@ class get_majors_of_edu:
         self.url = url
         self.data = []
 
-    def __req_data(self):
+    def req_data(self):
 
         while True:
             page_text = req_method(url=self.url, method='get')
@@ -37,7 +37,7 @@ class get_majors_of_edu:
         self.__store_in_db()
 
     def __store_in_db(self):
-        # cur.execute('DELETE FROM tmpyuanxiaozhuanye')
+
         cur.executemany(
             'INSERT INTO yuanxiaozhuanye(yxlj, ksfs, yxs, zy, yjfx, xxfs, zdls, zsrs, ksfw, bz)'
             'VALUES (?,?,?,?,?,?,?,?,?,?)', self.data)

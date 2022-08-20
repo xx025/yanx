@@ -11,17 +11,17 @@ class get_zsyx:
         self.url = 'https://yz.chsi.com.cn/zsml/queryAction.do'
         self.__data = []
         cur.execute('DELETE FROM zhaoshengyuanxiao')
-        self.__req_data = {'ssdm': ssdm,
-                           'dwmc': dwmc,
-                           'mldm': mldm,
-                           'mlmc': mlmc,
-                           'yjxkdm': yjxkm,
-                           'zymc': zymc,
-                           'xxfs': xxfs}
+        self.__req_datas = {'ssdm': ssdm,
+                            'dwmc': dwmc,
+                            'mldm': mldm,
+                            'mlmc': mlmc,
+                            'yjxkdm': yjxkm,
+                            'zymc': zymc,
+                            'xxfs': xxfs}
 
-    def req_data(self):
+    def __req_data(self):
         while True:
-            page_text = req_method(url=self.url, data=self.__req_data)
+            page_text = req_method(url=self.url, data=self.__req_datas)
 
             '''
             地区代码：'ssdm': '',
@@ -38,9 +38,9 @@ class get_zsyx:
             list = soup.select(".ch-table tbody tr")
 
             for i in list:
-                url = i.select_one('td form a').get('href')
-                zsdw = i.select_one('td form a').text
-                local = i.select('td')[1].text
+                url = 'https://yz.chsi.com.cn' + i.select_one('td form a').get('href')
+                zsdw = (re.sub('\(.*?\)', '', i.select_one('td form a').text))
+                local = (re.sub('\(.*?\)', '', i.select('td')[1].text))
                 yjsy = i.select('td')[2].select('i').__len__()
                 zzhxyx = i.select('td')[3].select('i').__len__()
                 bsd = i.select('td')[4].select('i').__len__()
@@ -59,12 +59,13 @@ class get_zsyx:
             else:
                 next_page = next_page.select_one('a').get('onclick')
                 page_next = re.findall(r"[(](.*?)[)]", next_page)[-1]
-                self.__req_data['pageno'] = page_next
+                self.__req_datas['pageno'] = page_next
                 print('下一页' + page_next)
 
         self.__store_in_db()
 
     def __store_in_db(self):
+        cur.execute('DELETE FROM yuanxiaozhuanye')
         cur.execute('DELETE FROM zhaoshengyuanxiao')
         cur.executemany('INSERT INTO zhaoshengyuanxiao (zsdw, local, yjsy, zzhxyx, bsd, url)'
                         ' VALUES (?,?,?,?,?,?)', self.__data)

@@ -39,54 +39,6 @@ class get_edus:
         self.list985 = list985
         self.start = 0
 
-    # def req_data(self):
-    #     def req_data(self):
-    #         while True:
-    #             page_text = req_method(url=self.url, method='get', params={'start': '20'})
-    #             soup = BeautifulSoup(page_text)
-    # list = soup.select(".ch-table tbody tr")
-
-    #         for i in list:
-    #             url = i.select_one('td form a').get('href')
-    #             zsdw = i.select_one('td form a').text
-    #             local = i.select('td')[1].text
-    #             yjsy = i.select('td')[2].select('i').__len__()
-    #             zzhxyx = i.select('td')[3].select('i').__len__()
-    #             bsd = i.select('td')[4].select('i').__len__()
-    #
-    #             lds = (zsdw, local, yjsy, zzhxyx, bsd, url)
-    #             self.__data.append(lds)
-    #
-    #         if 'lip-input-box' in soup.select_one('.lip-last').get('class'):
-    #             # 页面较多取倒数第二个
-    #             next_page = soup.select('.lip')[soup.select('.lip').__len__() - 2]
-    #         else:
-    #             next_page = soup.select('.lip')[soup.select('.lip').__len__() - 1]
-    #
-    #         if 'unable' in next_page.get('class'):
-    #             break
-    #         else:
-    #             next_page = next_page.select_one('a').get('onclick')
-    #             page_next = re.findall(r"[(](.*?)[)]", next_page)[-1]
-    #             self.__req_data['pageno'] = page_next
-    #             print('下一页' + page_next)
-    #
-    #     self.__store_in_db()
-    #
-    # def __store_in_db(self):
-    #     cur.execute('DELETE FROM zhaoshengyuanxiao')
-    #     cur.executemany('INSERT INTO zhaoshengyuanxiao (zsdw, local, yjsy, zzhxyx, bsd, url)'
-    #                     ' VALUES (?,?,?,?,?,?)', self.__data)
-    #     con.commit()
-    #
-    # def get_data(self):
-    #     cursor = cur.execute("SELECT *  FROM zhaoshengyuanxiao")
-    #     data = [i for i in cursor]
-    #     if len(data) == 0:
-    #         self.__req_data()
-    #         return self.get_data()
-    #     else:
-    #         return data
     def __req_data(self):
         while True:
             page_text = req_method(url=self.url, method='get', params={'start': self.start})
@@ -111,7 +63,6 @@ class get_edus:
                              lishu=lishu,
                              yjsy=yjsy,
                              zzhx=zzhx)
-                print(newedu.info())
                 self.data.append(newedu.info())
         self.__store_in_db()
 
@@ -123,7 +74,6 @@ class get_edus:
         con.commit()
 
     def get_data(self):
-
         cursor = cur.execute("SELECT *  FROM edus")
         data = [i for i in cursor]
         if len(data) == 0:
@@ -132,6 +82,7 @@ class get_edus:
         else:
             return data
 
+
 cur.execute('DELETE FROM edus')
-new_get_edus = get_edus()
-new_get_edus.get_data()
+ge2 = get_edus()
+ge2.get_data()

@@ -1,6 +1,7 @@
 import json
 
 from con_db import cur, con
+from edu985211list import loc_A, loc_B
 from requests_ import req_method
 
 
@@ -11,23 +12,37 @@ class location_code:
 
     def __req_data(self):
         json_data = json.loads(req_method(self.__url))
-        self.__data = [(k['dm'], k['mc']) for k in json_data]
+
+        def check(str1):
+            for i in loc_A:
+                if i in str1:
+                    return 'a'
+            for i in loc_B:
+                if i in str1:
+                    return 'b'
+
+        for k in json_data:
+            self.__data.append((k['dm'], k['mc'], check(k['mc'])))
+
         self.__store_in_db()
 
     def __store_in_db(self):
         """
         数据库表设计
-            地区代码 地区名称
+            地区代码 地区名称 AB区
         :return:None
         """
         cur.execute('DELETE FROM location_code')
-        cur.executemany('INSERT INTO location_code (dm, mc) VALUES (?,?)', self.__data)
+        cur.executemany('INSERT INTO location_code (dm, mc,ab) VALUES (?,?,?)', self.__data)
         con.commit()
 
-    def get_data(self):
-        cursor = cur.execute("SELECT *  FROM location_code")
+    def get_data(self, ab: str):
+        if ab in ('a', 'b'):
+            cursor = cur.execute("SELECT *  FROM location_code where ab=?", (ab,))
+        else:
+            cursor = cur.execute("SELECT *  FROM location_code ")
 
-        data = [(i[0], i[1]) for i in cursor]
+        data = [(i[0], i[1], i[2]) for i in cursor]
         if len(data) == 0:
             self.__req_data()
             return self.get_data()
