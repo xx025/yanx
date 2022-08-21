@@ -1,6 +1,7 @@
+from dl_s import dl_yzw
 from user.selectable_params import xkml_code, xkly_code, zy_name, location_code, choice
 
-from user.yzw_pages import dl_yzw
+
 
 
 class user:
