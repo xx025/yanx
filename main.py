@@ -3,7 +3,6 @@ from user import user
 from user.show_def import show_welcome
 
 show_welcome()
-print('''在正式开始之前，将需要问你几个问题作''')
 
 user1 = user()
 
@@ -25,15 +24,15 @@ user1.set_location()
 user1.set_construction_plans()
 # 选择学校建设计划 如 双一流11
 
-
-# user1.set_user_choice_items(location_codes=None,
-#                             discipline_code='05',
-#                             field_of_study_code='0501',
-#                             majors=None,
-#                             learn_mode=None,
-#                             construction_plans={'211': '0', '985': '0', '11': '0'})
-
+'''user1.set_user_choice_items(location_codes=None,
+                            discipline_code='05',
+                            field_of_study_code='0501',
+                            majors=None,
+                            learn_mode=None,
+                            construction_plans={'211': '0', '985': '0', '11': '0'})'''
 
 user1.dl_schools()
+# 下载学校信息
 
 user1.dl_majors()
+# 下载专业信息

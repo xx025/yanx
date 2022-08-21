@@ -88,12 +88,12 @@ class choice:
     def discipline(self):
 
         self.xkml_code = xkml_code()
-
+        os.system('cls')
         print('''
-        1. 选择门类(*必选)
-            选择学硕或专硕，
-            1. 如果选择学硕请输入学硕门类后的代码(只能选择一个)
-            2. 如果你选择专硕，请输入:zyxw
+1. 选择门类(*必选)
+    选择学硕或专硕，
+    1. 如果选择学硕请输入学硕门类后的代码(只能选择一个)
+    2. 如果你选择专硕，请输入:zyxw
                     ''')
         print('学术学位（学硕）：')
         d = show_codes(self.xkml_code.get_data())
@@ -114,8 +114,8 @@ class choice:
 
     def major(self, ly_code):
         print('''
-        3. 选择专业
-            此项为非必选，如果你不做选择按回车键即可
+3. 选择专业
+    此项为非必选，如果你不做选择按回车键即可
                     ''')
         zy = zy_name(ly_code=ly_code)
         zy_data = zy.get_data()
@@ -144,10 +144,10 @@ class choice:
 
     def construction_plan(self):
         print('''
-        6. 选择院校建设计划
-            你是否选择学校是否是 双一流（111） 、985 或 211 院校，
-            如果选择选择请输入111、985 或 211 如果选择多项请加空格并依次输入
-            如果不做选择，请输入回车
+6. 选择院校建设计划
+    你是否选择学校是否是 双一流（111） 、985 或 211 院校，
+    如果选择选择请输入111、985 或 211 如果选择多项请加空格并依次输入
+    如果不做选择，请输入回车
                     ''')
 
         tmp_list = input('请选择：').strip().split(' ')
@@ -173,9 +173,10 @@ class choice:
         2. 选择领域
         :return:
         """
+        os.system('cls')
         print('''
-        2.选择领域(*必选)
-            请根据选择面的学科领域选择一个领域，并输入领域后的代码(只能选择一个)
+2.选择领域(*必选)
+    请根据选择面的学科领域选择一个领域，并输入领域后的代码(只能选择一个)
                     ''')
         m = xkly_code(dm=dm)
         d = show_codes(m.get_data())
@@ -199,10 +200,8 @@ class choice:
         :return:
         """
         print('''
-        4. 选择学习方式
-            全日制：1 ,
-            非全日制：2 ,
-            不做选择回车即可 ''')
+4. 选择学习方式
+    全日制：1 ,非全日制：2 ,不做选择回车即可 ''')
         xxfs = input('请选择：')
         self.__learn_mode = xxfs if xxfs in ['1', '2'] else None
 
