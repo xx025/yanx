@@ -5,13 +5,15 @@ from user.yzw_pages import dl_yzw
 
 class user:
     def __init__(self):
-        self.__location_codes = None
         self.__discipline_code = ''
         self.__field_of_study_code = ''
         self.__majors = None
+
+        self.__location_codes = None
         self.__learn_mode = None
+        self.__construction_plans = None
+
         self.choice = choice()
-        self.__construction_plans = {'211': '0', '985': '0', '11': '0'}
         self.dl_yzw = dl_yzw()
 
     def get_user_choice_items(self):
@@ -48,22 +50,22 @@ class user:
         self.__construction_plans = construction_plans
 
     def set_discipline(self):
-        pass
+        self.__discipline_code = self.choice.discipline()
 
     def set_field_of_study(self):
-        pass
+        self.__field_of_study_code = self.choice.field_of_study(dm=self.__discipline_code)
 
     def set_major(self):
-        pass
+        self.__majors = self.choice.major(self.__field_of_study_code)
 
     def set_learn_way(self):
-        pass
+        self.__learn_mode = self.choice.learn_code()
 
     def set_location(self):
-        pass
+        self.__location_codes = self.choice.location()
 
     def set_construction_plans(self):
-        self.choice.set_hh()
+        self.__construction_plans = self.choice.construction_plan()
 
     def __set_dl_school(self):
         self.dl_yzw.dl_schools.set_user_select_datas(self.get_user_choice_items())
