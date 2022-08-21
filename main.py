@@ -1,6 +1,21 @@
+import os
 
 from user import user
-from user.show_def import show_welcome
+
+
+def show_welcome():
+    os.system('cls')
+    print('''
+    爬虫功能：
+        1. 采集你所提供条件下的研招网所有考试院校的招生专业数据，
+        2. 另外还提供以下附加数据和条件：
+            1. 学校是A区院校或B区院校
+            2. 学校是双一流院校或985或211院校
+
+    在正式开始之前，将需要问你几个问题作
+    ''')
+    input('回车继续')
+
 
 show_welcome()
 
