@@ -51,3 +51,7 @@ user1.dl_schools()
 
 user1.dl_majors()
 # 下载专业信息
+
+
+user1.dl_details()
+# 下载具体招生考试科目人数等
