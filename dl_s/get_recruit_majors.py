@@ -2,7 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 
 from db import cur, con
-from user.yzw_pages import yzw_table
+from deal_text import replace_bank
+from dl_s.yzw_pages import yzw_table
 
 
 class dl_majors:
@@ -29,7 +30,7 @@ class dl_majors:
         for i in range(count):
             tmp_data = self.__req_data_on_page(url=self.__urls[i])
             for k in tmp_data:
-                print(k)
+                print(k[1:])
             print(f'正在下载招专业信息:[{i + 1}/{count}]')
             self.__data.extend(tmp_data)
         self.__store_in_db()
@@ -51,10 +52,15 @@ class dl_majors:
                 zy = k.select('td')[2].text
                 yjfx = k.select('td')[3].text
                 xxfs = k.select('td')[4].text
-                zdls = k.select('td')[5].text
-                zsrs = k.select('td')[6].select_one('script').text
-                ksfw = k.select('td')[7].select_one('a').get('href')
-                bz = k.select('td')[8].text
+                # 学习方式
+                zdls = replace_bank(k.select('td')[5].text)
+                # 指导老师
+                zsrs = k.select('td')[6].select_one('script').text.split('\'')[1]
+                # 招生人数
+                ksfw = k.select('td')[7].select_one('a').get('href').split('=')[-1]
+                # 考试方式 超链接
+                bz = replace_bank(k.select('td')[8].text)
+                # 备注
                 lrd = (url, ksfs, yxs, zy, yjfx, xxfs, zdls, zsrs, ksfw, bz)
                 result_list.append(lrd)
 
