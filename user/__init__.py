@@ -2,8 +2,6 @@ from dl_s import dl_yzw
 from user.selectable_params import xkml_code, xkly_code, zy_name, location_code, choice
 
 
-
-
 class user:
     def __init__(self):
         self.__discipline_code = ''
@@ -81,3 +79,6 @@ class user:
     def dl_majors(self):
         self.__set_dl_major()
         self.dl_yzw.dl_majors.dl_data()
+
+    def dl_details(self):
+        self.dl_yzw.dl_details.dl_data()
