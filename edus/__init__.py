@@ -82,7 +82,7 @@ class edu:
                 self.zzhx)
 
 
-class get_edus:
+class getEdu:
     def __init__(self):
         self.url = 'https://yz.chsi.com.cn/sch/'
         self.data = []
@@ -136,5 +136,5 @@ class get_edus:
             return data
 
 
-use2 = get_edus()
+use2 = getEdu()
 use2.get_data()
