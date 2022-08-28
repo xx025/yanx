@@ -1,4 +1,4 @@
-from dl_s import dl_yzw
+from dl_s import dlYzw
 from user.selectable_params import xkml_code, xkly_code, zy_name, location_code, choice
 
 
@@ -13,7 +13,7 @@ class user:
         self.__construction_plans = None
 
         self.choice = choice()
-        self.dl_yzw = dl_yzw()
+        self.dl_yzw = dlYzw()
 
     def get_user_choice_items(self):
         """
