@@ -8,7 +8,7 @@ from db import cur, con
 from dl_s.yzw_pages import yzw_table
 
 
-class dl_schools():
+class dl_schools:
     def __init__(self):
         self.url = 'https://yz.chsi.com.cn/zsml/queryAction.do'
         self.__data = []
