@@ -51,9 +51,9 @@ class dl_details:
                 'VALUES (?,?,?,?,?)', data)
             con.commit()
 
-            print(row1)
+            print(' '.join(row1[1:]))
             for j in data:
-                print(j)
+                print(''.join(j[1:]))
             print('{}/{}'.format(l_j, count))
 
     def set_urls(self):
