@@ -30,7 +30,7 @@ class dl_majors:
         for i in range(count):
             tmp_data = self.__req_data_on_page(url=self.__urls[i])
             for k in tmp_data:
-                print(k[1:])
+                print(''.join(k[1:]))
             print(f'正在下载招专业信息:[{i + 1}/{count}]')
             self.__data.extend(tmp_data)
         self.__store_in_db()
