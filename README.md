@@ -18,4 +18,4 @@
 venv\Scripts\python.exe main2.py
 ```
 
-![](img/2022-08-21_20-17-57.png)
+![](img/2022-08-29_11-37-48.png)
