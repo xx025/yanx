@@ -1,5 +1,5 @@
 from dl_s import dlYzw
-from user.selectable_params import xkml_code, xkly_code, zy_name, location_code, choice
+from user.selectable_params import xkml_code, xkly_code, zy_name, location_code
 
 
 class user:
@@ -12,7 +12,7 @@ class user:
         self.__learn_mode = None
         self.__construction_plans = None
 
-        self.choice = choice()
+        # self.choice = choice()
         self.dl_yzw = dlYzw()
 
     def get_user_choice_items(self):
@@ -48,8 +48,11 @@ class user:
         self.__learn_mode = learn_mode
         self.__construction_plans = construction_plans
 
-    def set_discipline(self):
-        self.__discipline_code = self.choice.discipline()
+    def set_discipline(self, code=None):
+        if code is None:
+            self.__discipline_code = self.choice.discipline()
+        else:
+            self.__discipline_code = code
 
     def set_field_of_study(self):
         self.__field_of_study_code = self.choice.field_of_study(dm=self.__discipline_code)
