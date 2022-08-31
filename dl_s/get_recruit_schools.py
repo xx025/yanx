@@ -4,7 +4,6 @@ from copy import copy
 import requests
 from bs4 import BeautifulSoup
 
-from db import cur, con
 from dl_s.yzw_pages import yzw_table
 
 
@@ -67,7 +66,7 @@ class dl_schools:
 
         self.__datas_for_req_get = datas_for_get
 
-    def dl_data(self):
+    def dl_data(self, con, cur):
         count = len(self.__datas_for_req_get)
         for i in range(count):
             # os.system('cls')
@@ -78,7 +77,7 @@ class dl_schools:
 
             self.__data.extend(tmp_data)
 
-        self.__store_in_db()
+        self.__store_in_db(con, cur)
 
     def __req_data_on_page(self, data):
 
@@ -118,7 +117,8 @@ class dl_schools:
 
         return result_list
 
-    def __store_in_db(self):
+    def __store_in_db(self, con, cur):
+
         cur.executemany('INSERT INTO recruit_school (zsdw, local, yjsy, zzhxyx, bsd, url)'
                         ' VALUES (?,?,?,?,?,?)', self.__data)
         con.commit()
