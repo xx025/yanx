@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from dl_s.yzw_pages import yzw_table
-from print_txt import print_t
+from deal_text.print_txt import print_t
 
 
 class dl_schools:
