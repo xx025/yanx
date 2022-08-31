@@ -1,7 +1,9 @@
+import os
 import threading
 from time import sleep
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox
 
 from db import del_tables
@@ -24,6 +26,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
+        MainWindow.setWindowIcon(QIcon(os.getcwd() + '/img/ico.ico'))
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser.setGeometry(QtCore.QRect(190, 50, 461, 71))
         self.textBrowser.setStyleSheet("border:0px")
