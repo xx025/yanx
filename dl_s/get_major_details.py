@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-from db import cur, con
 from deal_text import replace_bank
 
 
@@ -10,9 +9,9 @@ class dl_details:
         self.__data = []
         self.__urls = []
 
-    def dl_data(self):
+    def dl_data(self, con, cur):
         if len(self.__urls) == 0:
-            self.set_urls()
+            self.set_urls(con, cur)
 
         count = len(self.__urls)
         for l_j in range(len(self.__urls)):
@@ -46,6 +45,7 @@ class dl_details:
                 td = [replace_bank(k.text) for k in i.select('tr td')]
                 td.insert(0, sid)
                 data.append(td)
+
             cur.executemany(
                 'INSERT INTO exam_scope (id, political, foreign_language, pro_course_1, pro_course_2) '
                 'VALUES (?,?,?,?,?)', data)
@@ -56,6 +56,6 @@ class dl_details:
                 print(''.join(j[1:]))
             print('{}/{}'.format(l_j, count))
 
-    def set_urls(self):
+    def set_urls(self, con, cur):
         cons = cur.execute('select ksfw from recruit_major')
         self.__urls = ['https://yz.chsi.com.cn/zsml/kskm.jsp?id=' + i[0] for i in cons]
