@@ -19,8 +19,7 @@
 
 ## 使用演示:
 
-![](img/2022-09-01_01-25-44.png)
-
+<iframe src="//player.bilibili.com/player.html?aid=900106957&bvid=BV1SP4y1f7HG&cid=820513453&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 ## 爬虫功能：
 
