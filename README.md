@@ -40,6 +40,7 @@ SQLite
 
 ## 打包
 
+
 ```
 pyinstaller -D -w -i img/ico.ico main.py
 ```
