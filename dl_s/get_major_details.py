@@ -41,9 +41,11 @@ class dl_details:
                 'VALUES (?,?,?,?,?,?,?,?,?)', row1
             )
             scope_items = soup.select('.zsml-result .zsml-res-items')
+
             data = []
             for i in scope_items:
-                td = [replace_bank(k.text) for k in i.select('tr td')]
+                td = [replace_bank(k.contents[0]) for k in i.select('tr td')]
+
                 td.insert(0, sid)
                 data.append(td)
 
@@ -52,10 +54,7 @@ class dl_details:
                 'VALUES (?,?,?,?,?)', data)
             con.commit()
 
-            print_t(' '.join(row1[1:]))
-            for j in data:
-                print_t(''.join(j[1:]))
-            print_t('{}/{}'.format(l_j, count))
+            print_t('正在下载招生专业详情[{}/{}]'.format(l_j, count))
 
     def set_urls(self, con, cur):
         cons = cur.execute('select ksfw from recruit_major')
