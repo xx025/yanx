@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-from db import cur, con
 from deal_text import replace_bank
 from dl_s.yzw_pages import yzw_table
 
@@ -12,11 +11,11 @@ class dl_majors:
         self.__data = []
         self.__urls = None
 
-    def set_rules(self, rules):
+    def set_rules(self, rules, con, cur):
         self.__rules = rules
-        self.__set_urls()
+        self.__set_urls(con, cur)
 
-    def __set_urls(self):
+    def __set_urls(self, con, cur):
 
         t_data = [i[1] for i in self.__rules.items()]
         cons = cur.execute(
@@ -25,7 +24,7 @@ class dl_majors:
             t_data)
         self.__urls = [i[0] for i in cons]
 
-    def dl_data(self):
+    def dl_data(self, con, cur):
         count: int = len(self.__urls)
         for i in range(count):
             tmp_data = self.__req_data_on_page(url=self.__urls[i])
@@ -33,7 +32,7 @@ class dl_majors:
                 print(''.join(k[1:]))
             print(f'正在下载招专业信息:[{i + 1}/{count}]')
             self.__data.extend(tmp_data)
-        self.__store_in_db()
+        self.__store_in_db(con, cur)
 
         return self.__data
 
@@ -76,7 +75,7 @@ class dl_majors:
                 url = next_page_url + str(next_page)
         return result_list
 
-    def __store_in_db(self):
+    def __store_in_db(self, con, cur):
 
         cur.executemany(
             'INSERT INTO recruit_major(yxlj, ksfs, yxs, zy, yjfx, xxfs, zdls, zsrs, ksfw, bz)'
