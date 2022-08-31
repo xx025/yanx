@@ -24,5 +24,3 @@ class yzw_table:
 
         now_page = soup.select_one('.lip.selected a').text
         return int(now_page)
-
-
