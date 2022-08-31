@@ -16,7 +16,7 @@ class Ui_MainWindow(object):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(843, 800)
+        MainWindow.resize(843, 718)
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         MainWindow.setFont(font)
@@ -205,7 +205,13 @@ class Ui_MainWindow(object):
             t = threading.Thread(target=user1.dl_all, args=tuple())
             t.start()
 
-            GLOBALS_DICT['file_name'] = self.xuanze_menlei.currentText() + '-' + self.xuanzexueke.currentText()
+            def create_file_name():
+                name_1 = self.xuanze_menlei.currentText() + '-' + self.xuanzexueke.currentText()
+                name_2 = self.constraction_plans.currentText() + self.learn_mode.currentText() + self.edu_local.currentText()
+                name = name_1 + '-' + name_2
+                return name.replace('不做选择', '')
+
+            GLOBALS_DICT['file_name'] = create_file_name()
 
             # 下一步输出文件的前缀名
 
@@ -213,9 +219,8 @@ class Ui_MainWindow(object):
                 while True:
                     sleep(0.5)
                     if th1.is_alive():
-                        print("线程1 live")
+                        pass
                     else:
-                        print("线程1 dead")
                         self.pushButton2.setVisible(True)
                         break
 
