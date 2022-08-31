@@ -46,6 +46,8 @@ SQLite
 
 ## 打包
 
+### 打包步骤
+[![Watch the video](img/OIP-C.jpg)](https://www.bilibili.com/video/BV1Ce4y1Z7Nq/)
 ```
 venv\Scripts\activate.bat
 pyinstaller -F -w -i img/ico.ico main.py
