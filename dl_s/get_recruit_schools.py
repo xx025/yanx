@@ -4,8 +4,8 @@ from copy import copy
 import requests
 from bs4 import BeautifulSoup
 
-from dl_s.yzw_pages import yzw_table
 from deal_text.print_txt import print_t
+from dl_s.yzw_pages import yzw_table
 
 
 class dl_schools:
@@ -74,8 +74,6 @@ class dl_schools:
 
             print_t(f'正在下载招生院校信息:[{i + 1}/{count}]')
             tmp_data = self.__req_data_on_page(data=self.__datas_for_req_get[i])
-            print_t(' '.join([kl[:2][0] for kl in tmp_data]))
-
             self.__data.extend(tmp_data)
 
         self.__store_in_db(con, cur)
