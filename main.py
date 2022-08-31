@@ -1,11 +1,10 @@
-from datetime import datetime
 import threading
-from time import sleep
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 
 from dl_s.selectable_params import xkml_code, xkly_code
+from print_txt import GLOBALS_DICT
 from user import user
 from user.main_win_choice import choice
 
@@ -184,6 +183,7 @@ class Ui_MainWindow(object):
 
     def dl_click(self):
 
+        GLOBALS_DICT['text_area'] = self.textBrowser1
         if self.check():
             self.pushButton.setVisible(False)
 
@@ -197,7 +197,6 @@ class Ui_MainWindow(object):
             user1.set_construction_plans(code=choice.c_constraction_plans(self.constraction_plans.currentText()))
 
             user1.set_learn_way(code=choice.c_learn_mode(self.learn_mode.currentText()))
-
             t = threading.Thread(target=user1.dl_all, args=tuple())
             t.start()
 
