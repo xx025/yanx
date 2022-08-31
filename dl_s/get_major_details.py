@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from deal_text import replace_bank
+from print_txt import print_t
 
 
 class dl_details:
@@ -51,10 +52,10 @@ class dl_details:
                 'VALUES (?,?,?,?,?)', data)
             con.commit()
 
-            print(' '.join(row1[1:]))
+            print_t(' '.join(row1[1:]))
             for j in data:
-                print(''.join(j[1:]))
-            print('{}/{}'.format(l_j, count))
+                print_t(''.join(j[1:]))
+            print_t('{}/{}'.format(l_j, count))
 
     def set_urls(self, con, cur):
         cons = cur.execute('select ksfw from recruit_major')
