@@ -1,7 +1,7 @@
 from db import con, cur
+from deal_text.print_txt import print_t
 from dl_s import dlYzw
 from global_values import GLOBALS_DICT
-from deal_text.print_txt import print_t
 
 
 class user:
