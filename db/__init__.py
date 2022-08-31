@@ -4,6 +4,7 @@ import sqlite3
 
 class db_con:
     def __init__(self):
+        self.T = None
         self.con = None
         self.cur = None
 
@@ -16,13 +17,19 @@ class db_con:
 
 
 con_data = db_con()
+
+
+def del_tables():
+    cur.execute('DELETE  from zhuanye_name')
+    cur.execute('DELETE  from recruit_school')
+    cur.execute('DELETE  from recruit_major')
+    cur.execute('DELETE  from recruit_details')
+    cur.execute('DELETE  from exam_scope')
+
+
 con = con_data.get_con()
 cur = con_data.get_cur()
+del_tables()
 
 # cur.execute('DELETE  from xuekemenlei_code')
 # cur.execute('DELETE  from xuekelingyu_code')
-cur.execute('DELETE  from zhuanye_name')
-cur.execute('DELETE  from recruit_school')
-cur.execute('DELETE  from recruit_major')
-cur.execute('DELETE  from recruit_details')
-cur.execute('DELETE  from exam_scope')
