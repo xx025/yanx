@@ -1,3 +1,4 @@
+from db import db_con, con, cur
 from dl_s import dlYzw
 
 
@@ -13,6 +14,9 @@ class user:
 
         # self.choice = choice()
         self.dl_yzw = dlYzw()
+
+        self.con = con
+        self.cur = cur
 
     def get_user_choice_items(self):
         """
@@ -62,22 +66,28 @@ class user:
     def set_location(self, loca_code):
         self.__location_codes = loca_code
 
-    def set_construction_plans(self,code):
+    def set_construction_plans(self, code):
         self.__construction_plans = code
 
     def __set_dl_school(self):
         self.dl_yzw.dl_schools.set_user_select_datas(self.get_user_choice_items())
 
+    def __set_dl_major(self):
+        self.dl_yzw.dl_majors.set_rules(self.__construction_plans, con=self.con, cur=self.cur)
+
     def dl_schools(self):
         self.__set_dl_school()
-        self.dl_yzw.dl_schools.dl_data()
-
-    def __set_dl_major(self):
-        self.dl_yzw.dl_majors.set_rules(self.__construction_plans)
+        self.dl_yzw.dl_schools.dl_data(con=self.con, cur=self.cur)
 
     def dl_majors(self):
         self.__set_dl_major()
-        self.dl_yzw.dl_majors.dl_data()
+        self.dl_yzw.dl_majors.dl_data(con=self.con, cur=self.cur)
 
     def dl_details(self):
-        self.dl_yzw.dl_details.dl_data()
+        self.dl_yzw.dl_details.dl_data(con=self.con, cur=self.cur)
+
+    def dl_all(self):
+        self.dl_schools()
+        self.dl_majors()
+        self.dl_details()
+        print("全部下载结束")
