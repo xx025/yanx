@@ -11,9 +11,13 @@
 
 </div>
 
-## 使用
+## 使用:
+   ![](img/2022-09-01_01-25-44.png)
+### 下载：
+- 龟速下载:[GitHub Releases](https://github.com/xx025/YanX/releases/download/0.1/2022_YanX_Win64.zip)
+- 高速下载:[蓝奏云](https://wwu.lanzouv.com/ihzfD0aqva7a) 密码:c82p
 
-![](img/2022-08-31_18-04-20.png)
+
 
 ## 爬虫功能：
 
@@ -24,7 +28,7 @@
     3. 考研地区，可以选择A类地区或B类地区
 3. 导出文件到CSV
    导出文件示例
-   ![](img/2022-08-31_18-06-44.png)
+   ![](img/2022-09-01_01-25-24.png)
 
 ---
 
@@ -38,11 +42,12 @@ SQLite
 
 数据库文件位于`db/database.db`
 
+
+
 ## 打包
 
-
 ```
-pyinstaller -D -w -i img/ico.ico main.py
+venv\Scripts\activate.bat
+pyinstaller -F -w -i img/ico.ico main.py
 ```
-
 
