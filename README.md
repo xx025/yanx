@@ -19,8 +19,8 @@
 
 ## 使用演示:
 
-<iframe src="//player.bilibili.com/player.html?aid=900106957&bvid=BV1SP4y1f7HG&cid=820513453&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
+[![Watch the video](img/OIP-C.jpg)](https://www.bilibili.com/video/BV1SP4y1f7HG)
 ## 爬虫功能：
 
 1. 选择门类类别（专业学位或某个学术学位）、选择学科类别或专业领域，这决定了爬虫的方向
@@ -42,7 +42,7 @@ Python 3.8.5
 
 SQLite
 
-数据库文件位于`db/database.db`
+数据库文件位于[db/database.db](db/database.db)
 
 ## 打包
 
