@@ -1,3 +1,7 @@
+from datetime import datetime
+import threading
+from time import sleep
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 
@@ -5,6 +9,17 @@ from dl_s.selectable_params import xkml_code, xkly_code
 from user import user
 from user.main_win_choice import choice
 
+
+#
+# class Thread(QThread):
+#
+#
+#     def __init__ ():
+#         super(Thread,self).__init__()
+#
+#     def run(self):
+#         # 线程相关的代码
+#         pass
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -183,9 +198,8 @@ class Ui_MainWindow(object):
 
             user1.set_learn_way(code=choice.c_learn_mode(self.learn_mode.currentText()))
 
-            user1.dl_schools()
-            user1.dl_majors()
-            user1.dl_details()
+            t = threading.Thread(target=user1.dl_all, args=tuple())
+            t.start()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
