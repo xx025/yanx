@@ -1,18 +1,17 @@
+<div align=center>
+<img style="height: 300px" src="img/main.png" />
+
 # 研招网院校专业爬虫2022 -YanX
 
 研招网院校专业爬虫2022-YanX是可用的研招网招生专业目录爬虫程序。
 
-使用Sqlite数据库，无需连接其他数据库；基于PyQT的GUI操作界面，不用敲任何命令直接下载使用，让零代码基础的人也能快速使用。
+基于PyQT的GUI操作界面，不用敲任何命令直接下载使用，让零代码基础的人也能快速使用。
 
 都说考研选择大于努力，我希望能够帮助更多的考研人做更好的选择！
 
+</div>
+
 ## 使用
-
-进入项目目录 运行下面的命令
-
-```text
-venv\Scripts\python.exe main.py
-```
 
 ![](img/2022-08-31_18-04-20.png)
 
@@ -35,6 +34,14 @@ Python 3.8.5
 
 ## 数据库
 
-Sqlite: db/database.db
+SQLite
+
+数据库文件位于`db/database.db`
+
+## 打包
+
+```
+pyinstaller -D -w -i img/ico.ico main.py
+```
 
 
