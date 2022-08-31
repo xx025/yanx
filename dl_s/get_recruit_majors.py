@@ -2,8 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 
 from deal_text import replace_bank
-from dl_s.yzw_pages import yzw_table
 from deal_text.print_txt import print_t
+from dl_s.yzw_pages import yzw_table
 
 
 class dl_majors:
@@ -29,8 +29,6 @@ class dl_majors:
         count: int = len(self.__urls)
         for i in range(count):
             tmp_data = self.__req_data_on_page(url=self.__urls[i])
-            for k in tmp_data:
-                print_t(''.join(k[1:]))
             print_t(f'正在下载招专业信息:[{i + 1}/{count}]')
             self.__data.extend(tmp_data)
         self.__store_in_db(con, cur)
