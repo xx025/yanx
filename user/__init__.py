@@ -1,5 +1,6 @@
-from db import db_con, con, cur
+from db import con, cur
 from dl_s import dlYzw
+from print_txt import print_t
 
 
 class user:
@@ -13,6 +14,7 @@ class user:
         self.__construction_plans = None
 
         # self.choice = choice()
+        self.text_area = None
         self.dl_yzw = dlYzw()
 
         self.con = con
@@ -90,4 +92,4 @@ class user:
         self.dl_schools()
         self.dl_majors()
         self.dl_details()
-        print("全部下载结束")
+        print_t("全部下载结束")
