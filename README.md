@@ -12,12 +12,13 @@
 </div>
 
 ## 使用:
-   ![](img/2022-09-01_01-25-44.png)
+
+![](img/2022-09-01_01-25-44.png)
+
 ### 下载：
+
 - 龟速下载:[GitHub Releases](https://github.com/xx025/YanX/releases/download/0.1/2022_YanX_Win64.zip)
 - 高速下载:[蓝奏云](https://wwu.lanzouv.com/ihzfD0aqva7a) 密码:c82p
-
-
 
 ## 爬虫功能：
 
@@ -41,8 +42,6 @@ Python 3.8.5
 SQLite
 
 数据库文件位于`db/database.db`
-
-
 
 ## 打包
 
