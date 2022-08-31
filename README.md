@@ -7,13 +7,14 @@
     1. 学校是A区院校或B区院校
     2. 学校是双一流院校或985或211院校
 
-
 ### 数据库
-   Sqlite: db/database.db
 
+Sqlite: db/database.db
 
 ## 使用
+
 进入项目目录 运行下面的命令
+
 ```text
 venv\Scripts\python.exe main2.py
 ```
