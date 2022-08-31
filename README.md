@@ -27,6 +27,11 @@ venv\Scripts\python.exe main.py
    导出文件示例
    ![](img/2022-08-31_18-06-44.png)
 
+---
+
+## 环境
+
+Python 3.8.5
 
 ## 数据库
 
