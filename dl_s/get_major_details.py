@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from deal_text import replace_bank
-from print_txt import print_t
+from deal_text.print_txt import print_t
 
 
 class dl_details:
