@@ -1,5 +1,6 @@
 import csv
 import datetime
+import winreg
 
 from db import con
 from global_values import GLOBALS_DICT
@@ -31,9 +32,6 @@ def out_csv():
 
     except Exception as e:
         print(Exception)
-
-
-import winreg
 
 
 def desktop_path():
