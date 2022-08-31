@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 
 from deal_text import replace_bank
 from dl_s.yzw_pages import yzw_table
+from print_txt import print_t
 
 
 class dl_majors:
@@ -29,8 +30,8 @@ class dl_majors:
         for i in range(count):
             tmp_data = self.__req_data_on_page(url=self.__urls[i])
             for k in tmp_data:
-                print(''.join(k[1:]))
-            print(f'正在下载招专业信息:[{i + 1}/{count}]')
+                print_t(''.join(k[1:]))
+            print_t(f'正在下载招专业信息:[{i + 1}/{count}]')
             self.__data.extend(tmp_data)
         self.__store_in_db(con, cur)
 
@@ -67,7 +68,7 @@ class dl_majors:
 
             now_page = yzw_table.get_now_page(soup)
 
-            print('共{}页，当前第{}页'.format(max_page, now_page))
+            print_t('共{}页，当前第{}页'.format(max_page, now_page))
             if now_page == max_page:
                 break
             else:
