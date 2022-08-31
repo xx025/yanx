@@ -205,7 +205,7 @@ class Ui_MainWindow(object):
             t = threading.Thread(target=user1.dl_all, args=tuple())
             t.start()
 
-            GLOBALS_DICT['file_name'] = self.xuanze_menlei.currentText() + self.xuanzexueke.currentText()
+            GLOBALS_DICT['file_name'] = self.xuanze_menlei.currentText() + '-' + self.xuanzexueke.currentText()
 
             # 下一步输出文件的前缀名
 
