@@ -1,6 +1,5 @@
 import csv
 import datetime
-import os
 
 from db import con
 from global_values import GLOBALS_DICT
@@ -12,7 +11,7 @@ from global_values import GLOBALS_DICT
 def out_csv():
     now = datetime.datetime.now()
     try:
-        path = os.getcwd() + r'\{}-{}-{}.csv'.format(GLOBALS_DICT['file_name'], now.date(), now.second)
+        path = desktop_path() + r'\{}-{}-{}.csv'.format(GLOBALS_DICT['file_name'], now.date(), now.second)
         path = path.replace(' ', '')
         with open(path, 'a', encoding='utf-8-sig', newline="") as f:
             writer = csv.writer(f)
@@ -32,3 +31,12 @@ def out_csv():
 
     except Exception as e:
         print(Exception)
+
+
+import winreg
+
+
+def desktop_path():
+    key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders')
+    path = winreg.QueryValueEx(key, "Desktop")[0]
+    return path
