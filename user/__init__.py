@@ -1,6 +1,7 @@
 from db import con, cur
 from dl_s import dlYzw
-from print_txt import print_t
+from global_values import GLOBALS_DICT
+from deal_text.print_txt import print_t
 
 
 class user:
@@ -92,4 +93,7 @@ class user:
         self.dl_schools()
         self.dl_majors()
         self.dl_details()
+
+        GLOBALS_DICT['down_end'] = True
+
         print_t("全部下载结束")
