@@ -11,14 +11,16 @@
 
 </div>
 
-## 使用:
-
-![](img/2022-09-01_01-25-44.png)
-
 ### 下载：
 
 - 龟速下载:[GitHub Releases](https://github.com/xx025/YanX/releases/download/0.1/2022_YanX_Win64.zip)
 - 高速下载:[蓝奏云](https://wwu.lanzouv.com/ihzfD0aqva7a) 密码:c82p
+
+
+## 使用演示:
+
+![](img/2022-09-01_01-25-44.png)
+
 
 ## 爬虫功能：
 
