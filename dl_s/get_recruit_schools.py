@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from dl_s.yzw_pages import yzw_table
+from print_txt import print_t
 
 
 class dl_schools:
@@ -71,9 +72,9 @@ class dl_schools:
         for i in range(count):
             # os.system('cls')
 
-            print(f'正在下载招生院校信息:[{i + 1}/{count}]')
+            print_t(f'正在下载招生院校信息:[{i + 1}/{count}]')
             tmp_data = self.__req_data_on_page(data=self.__datas_for_req_get[i])
-            print(' '.join([kl[:2][0] for kl in tmp_data]))
+            print_t(' '.join([kl[:2][0] for kl in tmp_data]))
 
             self.__data.extend(tmp_data)
 
@@ -107,7 +108,7 @@ class dl_schools:
 
             now_page = yzw_table.get_now_page(soup)
             if max_page > 1:
-                print('共{}页，当前第{}页'.format(max_page, now_page))
+                print_t('共{}页，当前第{}页'.format(max_page, now_page))
 
             if now_page == max_page:
                 break
