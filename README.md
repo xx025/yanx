@@ -14,7 +14,7 @@
 进入项目目录 运行下面的命令
 
 ```text
-venv\Scripts\python.exe main2.py
+venv\Scripts\python.exe main.py
 ```
 
 ![](img/2022-08-29_11-37-48.png)
