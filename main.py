@@ -1,26 +1,19 @@
 import threading
+from time import sleep
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 
+from db import del_tables
+from deal_text.print_txt import GLOBALS_DICT, print_t
 from dl_s.selectable_params import xkml_code, xkly_code
-from print_txt import GLOBALS_DICT
+from out_put import out_csv
 from user import user
 from user.main_win_choice import choice
 
 
-#
-# class Thread(QThread):
-#
-#
-#     def __init__ ():
-#         super(Thread,self).__init__()
-#
-#     def run(self):
-#         # 线程相关的代码
-#         pass
-
 class Ui_MainWindow(object):
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(843, 800)
@@ -30,23 +23,33 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser.setGeometry(QtCore.QRect(190, 50, 461, 71))
         self.textBrowser.setStyleSheet("border:0px")
         self.textBrowser.setObjectName("textBrowser")
 
         self.textBrowser1 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser1.setGeometry(QtCore.QRect(40, 560, 741, 151))
+        self.textBrowser1.setGeometry(QtCore.QRect(40, 550, 741, 151))
         self.textBrowser1.setObjectName("textBrowser")
 
         self.widget = QtWidgets.QWidget(self.centralwidget)
         self.widget.setGeometry(QtCore.QRect(20, 150, 811, 391))
         self.widget.setObjectName("widget")
+
         self.pushButton = QtWidgets.QPushButton(self.widget)
         self.pushButton.setGeometry(QtCore.QRect(330, 320, 93, 28))
         self.pushButton.setObjectName("pushButton")
 
         self.pushButton.clicked.connect(self.dl_click)
+
+        self.pushButton2 = QtWidgets.QPushButton(self.widget)
+        self.pushButton2.setGeometry(QtCore.QRect(660, 320, 93, 28))
+        self.pushButton2.setObjectName("pushButton2")
+
+        self.pushButton2.clicked.connect(self.o_c_click)
+
+        self.pushButton2.setVisible(False)
 
         self.groupBox = QtWidgets.QGroupBox(self.widget)
         self.groupBox.setGeometry(QtCore.QRect(20, 10, 771, 131))
@@ -184,6 +187,8 @@ class Ui_MainWindow(object):
     def dl_click(self):
 
         GLOBALS_DICT['text_area'] = self.textBrowser1
+        self.textBrowser1.clear()
+
         if self.check():
             self.pushButton.setVisible(False)
 
@@ -200,6 +205,41 @@ class Ui_MainWindow(object):
             t = threading.Thread(target=user1.dl_all, args=tuple())
             t.start()
 
+            GLOBALS_DICT['file_name'] = self.xuanze_menlei.currentText() + self.xuanzexueke.currentText()
+
+            # 下一步输出文件的前缀名
+
+            def awb(th1):
+                while True:
+                    sleep(0.5)
+                    if th1.is_alive():
+                        print("线程1 live")
+                    else:
+                        print("线程1 dead")
+                        self.pushButton2.setVisible(True)
+                        break
+
+            t2 = threading.Thread(target=awb, args=(t,))
+            t2.start()
+
+    def o_c_click(self):
+        def t2_d():
+            self.pushButton2.setVisible(False)
+            while True:
+                sleep(0.2)
+                if t2.is_alive():
+                    pass
+                else:
+                    print_t('导出成功:' + GLOBALS_DICT['out_path'])
+                    self.pushButton.setVisible(True)
+                    del_tables()
+                    break
+
+        t2 = threading.Thread(target=out_csv, args=tuple())
+        t2.start()
+        t3 = threading.Thread(target=t2_d, args=tuple())
+        t3.start()
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "研招网专业目录爬虫2022-YanX"))
@@ -211,6 +251,7 @@ class Ui_MainWindow(object):
                                             "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">研招网专业目录爬虫2022-YanX</span></p></body></html>"))
 
         self.pushButton.setText(_translate("MainWindow", "开始下载"))
+        self.pushButton2.setText(_translate("MainWindow", "导出"))
 
         self.groupBox.setTitle(_translate("MainWindow", "必选"))
         self.menleileibie_lable.setText(_translate("MainWindow", "门类类别："))
