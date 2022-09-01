@@ -28,13 +28,18 @@ class Ui_MainWindow(object):
 
         MainWindow.setWindowIcon(QIcon(os.getcwd() + '/img/ico.ico'))
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser.setGeometry(QtCore.QRect(190, 50, 461, 71))
+        self.textBrowser.setGeometry(QtCore.QRect(190, 50, 431, 71))
         self.textBrowser.setStyleSheet("border:0px")
         self.textBrowser.setObjectName("textBrowser")
 
         self.textBrowser1 = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser1.setGeometry(QtCore.QRect(40, 550, 741, 151))
         self.textBrowser1.setObjectName("textBrowser")
+
+        self.textBrowser2 = QtWidgets.QTextBrowser(self.centralwidget)
+        self.textBrowser2.setGeometry(QtCore.QRect(630, 20, 201, 71))
+        self.textBrowser2.setObjectName("textBrowser")
+        self.textBrowser2.setOpenExternalLinks(True)
 
         self.widget = QtWidgets.QWidget(self.centralwidget)
         self.widget.setGeometry(QtCore.QRect(20, 150, 811, 391))
@@ -251,6 +256,15 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "研招网专业目录爬虫2022-YanX"))
+
+        self.textBrowser2.setHtml(_translate("MainWindow",
+                                             "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                             "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+                                             "p, li { white-space: pre-wrap; }\n"
+                                             "</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+                                             "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"https://github.com/xx025/YanX\"><img src=\"img/forkme.png\" /></a></p></body></html>"
+                                             ))
+
         self.textBrowser.setHtml(_translate("MainWindow",
                                             "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                             "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
