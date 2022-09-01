@@ -90,9 +90,12 @@ class user:
         self.dl_yzw.dl_details.dl_data(con=self.con, cur=self.cur)
 
     def dl_all(self):
-        self.dl_schools()
-        self.dl_majors()
-        self.dl_details()
+        try:
+            self.dl_schools()
+            self.dl_majors()
+            self.dl_details()
+        except ExceptionGroup:
+            print(ExceptionGroup)
 
         GLOBALS_DICT['down_end'] = True
 
