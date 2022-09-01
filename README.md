@@ -18,6 +18,8 @@
 
 ## 使用演示:
 
+- 注意：文件导出到桌面，导出文件为CSV格式，这个文件可用Excel打开（WPS亦可）
+
 [![Watch the video](img/play_ico.jpg)](https://www.bilibili.com/video/BV1SP4y1f7HG)
 
 ## 爬虫功能：
