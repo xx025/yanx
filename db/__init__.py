@@ -29,7 +29,7 @@ def del_tables():
 
 con = con_data.get_con()
 cur = con_data.get_cur()
-del_tables()
+# del_tables()
 
 # cur.execute('DELETE  from xuekemenlei_code')
 # cur.execute('DELETE  from xuekelingyu_code')
