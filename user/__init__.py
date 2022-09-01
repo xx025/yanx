@@ -94,8 +94,8 @@ class user:
             self.dl_schools()
             self.dl_majors()
             self.dl_details()
-        except ExceptionGroup:
-            print(ExceptionGroup)
+        except Exception as e:
+            print(e)
 
         GLOBALS_DICT['down_end'] = True
 
