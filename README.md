@@ -13,14 +13,13 @@
 
 ### 下载：
 
-- 龟速下载:[GitHub Releases](https://github.com/xx025/YanX/releases/download/0.1/2022_YanX_Win64.zip)
+- 龟速下载:[GitHub Releases](https://github.com/xx025/YanX/releases/)
 - 高速下载:[蓝奏云](https://wwu.lanzouv.com/ihzfD0aqva7a) 密码:c82p
-
 
 ## 使用演示:
 
+[![Watch the video](img/play_ico.jpg)](https://www.bilibili.com/video/BV1SP4y1f7HG)
 
-[![Watch the video](img/OIP-C.jpg)](https://www.bilibili.com/video/BV1SP4y1f7HG)
 ## 爬虫功能：
 
 1. 选择门类类别（专业学位或某个学术学位）、选择学科类别或专业领域，这决定了爬虫的方向
@@ -31,6 +30,13 @@
 3. 导出文件到CSV
    导出文件示例
    ![](img/2022-09-01_01-25-24.png)
+
+## 项目声明
+
+项目声明：
+
+1. 本软件只供学习交流使用，勿作为商业用途
+2.
 
 ---
 
@@ -47,7 +53,9 @@ SQLite
 ## 打包
 
 ### 打包步骤
-[![Watch the video](img/OIP-C.jpg)](https://www.bilibili.com/video/BV1Ce4y1Z7Nq/)
+
+[![Watch the video](img/play_ico.jpg)](https://www.bilibili.com/video/BV1Ce4y1Z7Nq/)
+
 ```
 venv\Scripts\activate.bat
 pyinstaller -F -w -i img/ico.ico main.py
