@@ -126,3 +126,8 @@ class getEdu:
             return self.get_data()
         else:
             return data
+
+
+# cur.execute('DELETE FROM 院校库')
+# use2 = getEdu()
+# use2.get_data()
