@@ -22,7 +22,6 @@ def out_csv():
                  '招生人数', '政治考试', '外语考试',
                  '专业课1考试', '专业课二考试'])
             con = db_con.get_con()
-            cur = con.cursor()
             data = [i for i in con.execute('''select 招生专业.id,
        院校库.院校名称,
        院校库.所在地,
@@ -46,7 +45,6 @@ where substr(招生专业.id, 0, 6) == 院校库.院校代码''')]
                     data2.extend(u2)
                 d1.extend(data2)
                 writer.writerow(d1)
-            con.commit()
             con.close()
         GLOBALS_DICT['out_path'] = path
 
