@@ -6,12 +6,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox
 
-from db import del_tables
-from processing_string.print_string import GLOBALS_DICT, print_t
-from download_university_info.selectable_params import xkml_code, xkly_code
-from export_to_file import out_csv
-from user import user
-from user.main_win_choice import choice
+from pys.download_university_info.selectable_params import xkml_code, xkly_code
+from pys.export_to_file import out_csv
+from pys.global_values import GLOBALS_DICT
+from pys.processing_string import print_t
+from pys.user import user
+from pys.user.main_win_choice import choice
 
 
 class Ui_MainWindow(object):
@@ -172,6 +172,7 @@ class Ui_MainWindow(object):
                 rq = self.xuanze_menlei_2.currentText().split(' ')[0]
                 my_xkly_code = xkly_code(dm=rq)
                 data = my_xkly_code.get_data()
+
             self.xuanzexueke.clear()
             self.xuanzexueke.addItem('选择学科类别/学科领域')
             self.xuanzexueke.addItems([" ".join(i) for i in data])
@@ -245,7 +246,6 @@ class Ui_MainWindow(object):
                 else:
                     print_t('导出成功:' + GLOBALS_DICT['out_path'])
                     self.pushButton.setVisible(True)
-                    del_tables()
                     break
 
         t2 = threading.Thread(target=out_csv, args=tuple())
