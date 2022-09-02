@@ -1,8 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
-from deal_text import replace_bank
-from deal_text.print_txt import print_t
+from processing_string import replace_bank
+from processing_string.print_string import print_t
 
 
 class dl_details:
@@ -36,7 +36,7 @@ class dl_details:
                     research_direction, instructor, number_of_proposed_recruits)
 
             cur.execute(
-                'insert into recruit_details (id, enrollment_unit, examination_method, '
+                'insert into 招生专业 (id, enrollment_unit, examination_method, '
                 'departments, major, learning_style, research_direction, instructor, number_recruit) '
                 'VALUES (?,?,?,?,?,?,?,?,?)', row1
             )
@@ -50,12 +50,12 @@ class dl_details:
                 data.append(td)
 
             cur.executemany(
-                'INSERT INTO exam_scope (id, political, foreign_language, pro_course_1, pro_course_2) '
+                'INSERT INTO 考试范围 (id, political, foreign_language, pro_course_1, pro_course_2) '
                 'VALUES (?,?,?,?,?)', data)
             con.commit()
 
             print_t('正在下载招生专业详情[{}/{}]'.format(l_j, count))
 
     def set_urls(self, con, cur):
-        cons = cur.execute('select ksfw from recruit_major')
+        cons = cur.execute('select ID from 招生专业索引')
         self.__urls = ['https://yz.chsi.com.cn/zsml/kskm.jsp?id=' + i[0] for i in cons]

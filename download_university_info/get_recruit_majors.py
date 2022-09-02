@@ -1,16 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 
-from deal_text import replace_bank
-from deal_text.print_txt import print_t
-from dl_s.yzw_pages import yzw_table
+from processing_string import get_url_param
+from processing_string.print_string import print_t
+from download_university_info.yzw_pages import yzw_table
 
 
 class dl_majors:
     def __init__(self):
         self.__rules = None
         self.__data = []
-        self.__urls = None
+        self.__urls = []
 
     def set_rules(self, rules, con, cur):
         self.__rules = rules
@@ -20,10 +20,12 @@ class dl_majors:
 
         t_data = [i[1] for i in self.__rules.items()]
         cons = cur.execute(
-            "SELECT recruit_school.url from recruit_school where recruit_school.zsdw "
-            "in (SELECT name from edus  where edus.is211 >= ? and edus.is985 >= ? and edus.is11 >= ?)",
+            '''SELECT * from 招生院校索引 where 招生院校索引.dwmc in (SELECT 院校名称 from 院校库 where 院校库.IS211 >= ? and 院校库.IS985 >= ? and 院校库.双一流 >= ?)''',
             t_data)
-        self.__urls = [i[0] for i in cons]
+        for ks in cons:
+            u = 'https://yz.chsi.com.cn/zsml/querySchAction.do?ssdm={}&dwmc={}&mldm={}&mlmc={}&yjxkdm={}&xxfs={}&zymc={}'.format(
+                ks[0], ks[1], ks[2], ks[3], ks[4], ks[5], ks[6])
+            self.__urls.append(u)
 
     def dl_data(self, con, cur):
         count: int = len(self.__urls)
@@ -45,22 +47,9 @@ class dl_majors:
             page_text = page.text
             soup = BeautifulSoup(page_text, 'html.parser')
             for k in soup.select('.zsml-list-box tbody tr'):
-                ksfs = k.select('td')[0].text
-                yxs = k.select('td')[1].text
-                zy = k.select('td')[2].text
-                yjfx = k.select('td')[3].text
-                xxfs = k.select('td')[4].text
-                # 学习方式
-                zdls = replace_bank(k.select('td')[5].text)
-                # 指导老师
-                zsrs = k.select('td')[6].select_one('script').text.split('\'')[1]
-                # 招生人数
-                ksfw = k.select('td')[7].select_one('a').get('href').split('=')[-1]
-                # 考试方式 超链接
-                bz = replace_bank(k.select('td')[8].text)
-                # 备注
-                lrd = (url, ksfs, yxs, zy, yjfx, xxfs, zdls, zsrs, ksfw, bz)
-                result_list.append(lrd)
+                ksfw = get_url_param(k.select('td')[7].select_one('a').get('href')).get('id')
+
+                result_list.append((ksfw,))
 
             max_page = yzw_table.get_max_page(soup) if max_page is None else max_page
 
@@ -77,6 +66,5 @@ class dl_majors:
     def __store_in_db(self, con, cur):
 
         cur.executemany(
-            'INSERT INTO recruit_major(yxlj, ksfs, yxs, zy, yjfx, xxfs, zdls, zsrs, ksfw, bz)'
-            'VALUES (?,?,?,?,?,?,?,?,?,?)', self.__data)
+            'INSERT INTO 招生专业索引(ID)VALUES (?)', self.__data)
         con.commit()

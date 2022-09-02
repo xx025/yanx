@@ -1,6 +1,6 @@
 from db import con, cur
-from deal_text.print_txt import print_t
-from dl_s import dlYzw
+from processing_string.print_string import print_t
+from download_university_info import dlYzw
 from global_values import GLOBALS_DICT
 
 
@@ -83,16 +83,22 @@ class user:
         self.dl_yzw.dl_schools.dl_data(con=self.con, cur=self.cur)
 
     def dl_majors(self):
-        self.__set_dl_major()
-        self.dl_yzw.dl_majors.dl_data(con=self.con, cur=self.cur)
+        try:
+            self.__set_dl_major()
+            self.dl_yzw.dl_majors.dl_data(con=self.con, cur=self.cur)
+        except Exception:
+            print(Exception)
 
     def dl_details(self):
         self.dl_yzw.dl_details.dl_data(con=self.con, cur=self.cur)
 
     def dl_all(self):
-        self.dl_schools()
-        self.dl_majors()
-        self.dl_details()
+        try:
+            self.dl_schools()
+            self.dl_majors()
+            self.dl_details()
+        except Exception as e:
+            print(e)
 
         GLOBALS_DICT['down_end'] = True
 

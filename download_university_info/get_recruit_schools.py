@@ -1,11 +1,11 @@
-import re
 from copy import copy
 
 import requests
 from bs4 import BeautifulSoup
 
-from deal_text.print_txt import print_t
-from dl_s.yzw_pages import yzw_table
+from processing_string import get_url_param
+from processing_string.print_string import print_t
+from download_university_info.yzw_pages import yzw_table
 
 
 class dl_schools:
@@ -76,7 +76,7 @@ class dl_schools:
             tmp_data = self.__req_data_on_page(data=self.__datas_for_req_get[i])
             self.__data.extend(tmp_data)
 
-        self.__store_in_db(con, cur)
+            self.__store_in_db(con, cur)
 
     def __req_data_on_page(self, data):
 
@@ -93,13 +93,22 @@ class dl_schools:
             tr_list = soup.select(".ch-table tbody tr")
             for i in tr_list:
                 url = 'https://yz.chsi.com.cn' + i.select_one('td form a').get('href')
-                zsdw = (re.sub('\(.*?\)', '', i.select_one('td form a').text))
-                local = (re.sub('\(.*?\)', '', i.select('td')[1].text))
-                yjsy = i.select('td')[2].select('i').__len__()
-                zzhxyx = i.select('td')[3].select('i').__len__()
-                bsd = i.select('td')[4].select('i').__len__()
+                ud = get_url_param(url=url)
 
-                lds = (zsdw, local, yjsy, zzhxyx, bsd, url)
+                def trn(strd):
+                    return strd if strd else ''
+
+                ssdm = trn(ud.get('ssdm'))
+                dwmc = trn(ud.get('dwmc'))
+                mldm = trn(ud.get('mldm'))
+                mlmc = trn(ud.get('mlmc'))
+                yjxkdm = trn(ud.get('yjxkdm'))
+                xxfs = trn(ud.get('xxfs'))
+                zymc = trn(ud.get('zymc'))
+
+                # 博士点 = True if i.select('td')[-1].select_one('i') else False
+
+                lds = (ssdm, dwmc, mldm, mlmc, yjxkdm, xxfs, zymc)
                 result_list.append(lds)
 
             max_page = yzw_table.get_max_page(soup) if max_page is None else max_page
@@ -117,7 +126,7 @@ class dl_schools:
         return result_list
 
     def __store_in_db(self, con, cur):
-
-        cur.executemany('INSERT INTO recruit_school (zsdw, local, yjsy, zzhxyx, bsd, url)'
-                        ' VALUES (?,?,?,?,?,?)', self.__data)
+        cur.executemany('INSERT INTO 招生院校索引 (ssdm, dwmc, mldm, mlmc, yjxkdm, xxfs, zymc) VALUES (?,?,?,?,?,?,?)',
+                        self.__data)
         con.commit()
+        self.__data = []

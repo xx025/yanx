@@ -22,6 +22,8 @@ A、B区：https://yzc.hsi.com.cn/kyzx/jybzc/202009/20200904/1972918872.html
 '''
 import requests
 
+from processing_string import get_url_param
+
 list985 = ['北京大学', '中国人民大学', '清华大学', '北京航空航天大学', '北京理工大学', '中国农业大学', '北京师范大学',
            '中央民族大学', '南开大学', '天津大学', '大连理工大学', '东北大学', '吉林大学', '哈尔滨工业大学', '复旦大学',
            '同济大学', '上海交通大学', '华东师范大学', '南京大学', '东南大学', '浙江大学', '中国科学技术大学',
@@ -59,75 +61,65 @@ from db import con, cur
 
 
 class edu:
-    def __init__(self, name, is11, loc, lishu, yjsy, zzhx):
-        self.name = name
-        self.is11 = is11
-        self.is985 = 1 if name in list985 else 0
-        self.is211 = 1 if name in list211 else 0
-        self.locAB = 'B' if loc in loc_B else 'A'
-        self.loc = loc
-        self.lishu = lishu
-        self.yjsy = yjsy
-        self.zzhx = zzhx
+    def __init__(self, 院校名称, 所在地, 双一流, 院校隶属, 研究生院, 自主划线, 院校代码):
+        self.院校名称 = 院校名称
+        self.双一流 = 双一流
+        self.所在地 = 所在地
+        self.院校隶属 = 院校隶属
+        self.研究生院 = 研究生院
+        self.自主划线 = 自主划线
+        self.院校代码 = 院校代码
+        self.IS985 = 1 if 院校名称 in list985 else 0
+        self.IS211 = 1 if 院校名称 in list211 else 0
+        self.AB = 'B' if 所在地 in loc_B else 'A'
 
     def info(self):
-        return (self.name,
-                self.is11,
-                self.is985,
-                self.is211,
-                self.locAB,
-                self.loc,
-                self.lishu,
-                self.yjsy,
-                self.zzhx)
+        return (
+            self.院校名称, self.所在地, self.院校隶属, self.研究生院, self.自主划线, self.院校代码, self.IS985,
+            self.IS211, self.AB, self.双一流)
 
 
 class getEdu:
     def __init__(self):
-        self.url = 'https://yz.chsi.com.cn/sch/'
-        self.data = []
-        self.l_B = loc_B
-        self.l_A = loc_A
-        self.list211 = list211
-        self.list985 = list985
-        self.start = 0
+        self.链接 = 'https://yz.chsi.com.cn/sch/search.do'
+        self.数据 = []
+        self.页码 = 0
+        # 初始页面设置为0
 
     def __req_data(self):
         while True:
-            page_text = requests.get(url=self.url, params={'start': self.start}).text
-            soup = BeautifulSoup(page_text)
+            print(self.页码)
+            page_text = requests.get(url=self.链接, params={'start': self.页码}).text
+            soup = BeautifulSoup(page_text, "html.parser")
             if soup.select('.yxk-table table tbody tr').__len__() == 1 and soup.select_one(
                     '.yxk-table table .noResult'):
                 break
             else:
-                self.start += 20
-                print('下一页')
-            for i in soup.select('.yxk-table table tbody tr'):
-                name = i.select('td')[0].select_one('a').text.strip()
-                is11 = 1 if i.select('td')[0].select_one('span') else 0
-                loc = i.select('td')[1].text
-                lishu = i.select('td')[2].text
-                yjsy = 1 if i.select('td')[3].select_one('i') is None else 0
-                zzhx = 1 if i.select('td')[4].select_one('i') is None else 0
-
-                newedu = edu(name=name,
-                             is11=is11,
-                             loc=loc,
-                             lishu=lishu,
-                             yjsy=yjsy,
-                             zzhx=zzhx)
-                self.data.append(newedu.info())
-        self.__store_in_db()
+                us_list = soup.select('.yxk-table table tbody tr')
+                self.页码 = len(us_list) + self.页码
+                for i in us_list:
+                    院校名称 = i.select('td')[0].select_one('a').text.strip()
+                    双一流 = 1 if i.select('td')[0].select_one('span') else 0
+                    所在地 = i.select('td')[1].text
+                    院校隶属 = i.select('td')[2].text
+                    研究生院 = 1 if i.select('td')[3].select_one('i') else 0
+                    自主划线 = 1 if i.select('td')[4].select_one('i') else 0
+                    院校代码 = get_url_param(i.select('td')[5].select_one('a').attrs['href'])['dwdm']
+                    院校1 = edu(院校名称=院校名称, 所在地=所在地, 院校隶属=院校隶属, 研究生院=研究生院,
+                                自主划线=自主划线,
+                                双一流=双一流, 院校代码=院校代码)
+                    self.数据.append(院校1.info())
+                self.__store_in_db()
 
     def __store_in_db(self):
-        cur.execute('DELETE FROM edus')
         cur.executemany(
-            'INSERT INTO edus(name, is11, is985, is211,locAB, loc, lishu, yjsy, zzhx)'
-            'VALUES (?,?,?,?,?,?,?,?,?)', self.data)
+            'INSERT INTO 院校库 (院校名称, 所在地, 院校隶属, 研究生院, 自划线院校, 院校代码, IS211, IS985, AB, 双一流)values (?,?,?,?,?,?,?,?,?,?) ',
+            self.数据)
         con.commit()
+        self.数据 = []
 
     def get_data(self):
-        cursor = cur.execute("SELECT *  FROM edus")
+        cursor = cur.execute("SELECT *  FROM 院校库")
         data = [i for i in cursor]
         if len(data) == 0:
             self.__req_data()
@@ -135,6 +127,6 @@ class getEdu:
         else:
             return data
 
-
-use2 = getEdu()
-use2.get_data()
+# cur.execute('DELETE FROM 院校库')
+# use2 = getEdu()
+# use2.get_data()

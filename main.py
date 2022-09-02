@@ -7,9 +7,9 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox
 
 from db import del_tables
-from deal_text.print_txt import GLOBALS_DICT, print_t
-from dl_s.selectable_params import xkml_code, xkly_code
-from out_put import out_csv
+from processing_string.print_string import GLOBALS_DICT, print_t
+from download_university_info.selectable_params import xkml_code, xkly_code
+from export_to_file import out_csv
 from user import user
 from user.main_win_choice import choice
 
@@ -255,7 +255,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "研招网专业目录爬虫2022-YanX"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "研招网专业目录下载2022-YanX"))
 
         self.textBrowser2.setHtml(_translate("MainWindow",
                                              "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
@@ -270,7 +270,7 @@ class Ui_MainWindow(object):
                                             "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
                                             "p, li { white-space: pre-wrap; }\n"
                                             "</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-                                            "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">研招网专业目录爬虫2022-YanX</span></p></body></html>"))
+                                            "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt; font-weight:600;\">研招网专业目录下载2022-YanX</span></p></body></html>"))
 
         self.pushButton.setText(_translate("MainWindow", "开始下载"))
         self.pushButton2.setText(_translate("MainWindow", "导出"))

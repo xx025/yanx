@@ -3,7 +3,7 @@ import json
 import requests
 
 from db import cur, con
-from edus import loc_A, loc_B
+from get_university_lib import loc_A, loc_B
 
 
 def show_codes(data: list):
@@ -81,12 +81,12 @@ class xkml_code:
             学位代码 学位名称
         :return:None
         """
-        cur.execute('DELETE FROM xuekemenlei_code')
-        cur.executemany('INSERT INTO xuekemenlei_code (dm, mc) VALUES (?,?)', self.__data)
+        cur.execute('DELETE FROM 学科门类')
+        cur.executemany('INSERT INTO 学科门类 (dm, mc) VALUES (?,?)', self.__data)
         con.commit()
 
     def get_data(self):
-        cursor = cur.execute("SELECT *  FROM xuekemenlei_code")
+        cursor = cur.execute("SELECT *  FROM 学科门类")
 
         data = [(i[0], i[1]) for i in cursor]
         if len(data) == 0:
@@ -109,11 +109,11 @@ class xkly_code:
         self.__store_in_db()
 
     def __store_in_db(self):
-        cur.executemany('INSERT INTO xuekelingyu_code (xkml, mc, dm)values (?,?,?)', self.__data)
+        cur.executemany('INSERT INTO 学科领域代码 (xkml, mc, dm)values (?,?,?)', self.__data)
         con.commit()
 
     def get_data(self):
-        cursor = cur.execute("SELECT *  FROM xuekelingyu_code where xkml=?", (self.__mldm,))
+        cursor = cur.execute("SELECT *  FROM 学科领域代码 where xkml=?", (self.__mldm,))
         data = [(i[2], i[1]) for i in cursor]
 
         if len(data) == 0:
@@ -137,12 +137,12 @@ class zy_name:
         self.__store_in_db()
 
     def __store_in_db(self):
-        cur.execute('DELETE FROM zhuanye_name')
-        cur.executemany('INSERT INTO zhuanye_name (zy_code, name,dm) VALUES (?,?,?)', self.__data)
+        cur.execute('DELETE FROM 专业代码')
+        cur.executemany('INSERT INTO 专业代码 (zy_code, name,dm) VALUES (?,?,?)', self.__data)
         con.commit()
 
     def get_data(self):
-        cursor = cur.execute("SELECT dm,name  FROM zhuanye_name where zy_code=?", (self.__ly_code,))
+        cursor = cur.execute("SELECT dm,name  FROM 专业代码 where zy_code=?", (self.__ly_code,))
         data = [i for i in cursor]
         if len(data) == 0:
             self.__req_data()
