@@ -3,15 +3,15 @@ from copy import copy
 import requests
 from bs4 import BeautifulSoup
 
+from download_university_info.yzw_pages import yzw_table
 from processing_string import get_url_param
 from processing_string.print_string import print_t
-from download_university_info.yzw_pages import yzw_table
 
 
 class dl_schools:
     def __init__(self):
         self.url = 'https://yz.chsi.com.cn/zsml/queryAction.do'
-        self.__data = []
+        # self.__data = []
         self.__datas_for_req_get = []
 
     def set_user_select_datas(self, choice_):
@@ -74,9 +74,9 @@ class dl_schools:
 
             print_t(f'正在下载招生院校信息:[{i + 1}/{count}]')
             tmp_data = self.__req_data_on_page(data=self.__datas_for_req_get[i])
-            self.__data.extend(tmp_data)
 
-            self.__store_in_db(con, cur)
+            self.store_in_database(data=tmp_data, con=con, cur=cur)
+            # 一次请求完成后里面存储进数据库
 
     def __req_data_on_page(self, data):
 
@@ -125,8 +125,12 @@ class dl_schools:
 
         return result_list
 
-    def __store_in_db(self, con, cur):
-        cur.executemany('INSERT INTO 招生院校索引 (ssdm, dwmc, mldm, mlmc, yjxkdm, xxfs, zymc) VALUES (?,?,?,?,?,?,?)',
-                        self.__data)
-        con.commit()
-        self.__data = []
+    @staticmethod
+    def store_in_database(data, con, cur):
+        try:
+            cur.executemany(
+                'INSERT INTO 招生院校索引 (ssdm, dwmc, mldm, mlmc, yjxkdm, xxfs, zymc) VALUES (?,?,?,?,?,?,?)',
+                data)
+            con.commit()
+        except Exception:
+            print(Exception)
