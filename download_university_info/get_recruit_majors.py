@@ -9,7 +9,6 @@ from processing_string.print_string import print_t
 class dl_majors:
     def __init__(self):
         self.__rules = None
-        self.__data = []
         self.__urls = []
 
     def set_rules(self, rules, con, cur):
@@ -33,12 +32,9 @@ class dl_majors:
             for i in range(count):
                 tmp_data = self.__req_data_on_page(url=self.__urls[i])
                 print_t(f'正在下载招专业信息:[{i + 1}/{count}]')
-                self.__data.extend(tmp_data)
-            self.__store_in_db(con, cur)
+                self.store_in_database(data=tmp_data, con=con, cur=cur)
         except Exception:
             print(Exception)
-
-        return self.__data
 
     @staticmethod
     def __req_data_on_page(url):
@@ -66,8 +62,11 @@ class dl_majors:
                 url = next_page_url + str(next_page)
         return result_list
 
-    def __store_in_db(self, con, cur):
-
-        cur.executemany(
-            'INSERT INTO 招生专业索引(ID)VALUES (?)', self.__data)
-        con.commit()
+    @staticmethod
+    def store_in_database(data, con, cur):
+        try:
+            cur.executemany(
+                'INSERT INTO 招生专业索引(ID)VALUES (?)', data)
+            con.commit()
+        except Exception:
+            print(Exception)
