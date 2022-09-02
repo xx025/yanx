@@ -32,30 +32,43 @@ class dl_details:
             instructor = zsdw[6]
             number_of_proposed_recruits = zsdw[7]
 
-            row1 = (sid, enrollment_unit, examination_method, departments, major, learning_style,
+            data = (sid, enrollment_unit, examination_method, departments, major, learning_style,
                     research_direction, instructor, number_of_proposed_recruits)
 
-            cur.execute(
-                'insert into 招生专业 (id, enrollment_unit, examination_method, '
-                'departments, major, learning_style, research_direction, instructor, number_recruit) '
-                'VALUES (?,?,?,?,?,?,?,?,?)', row1
-            )
             scope_items = soup.select('.zsml-result .zsml-res-items')
-
-            data = []
+            data2 = []
             for i in scope_items:
                 td = [replace_bank(k.contents[0]) for k in i.select('tr td')]
-
                 td.insert(0, sid)
-                data.append(td)
+                data2.append(td)
 
-            cur.executemany(
-                'INSERT INTO 考试范围 (id, political, foreign_language, pro_course_1, pro_course_2) '
-                'VALUES (?,?,?,?,?)', data)
-            con.commit()
+            self.store_in_database_scop(data=data, con=con, cur=cur)
+            self.store_in_database_scop(data=data2, con=con, cur=cur)
 
             print_t('正在下载招生专业详情[{}/{}]'.format(l_j, count))
 
     def set_urls(self, con, cur):
         cons = cur.execute('select ID from 招生专业索引')
         self.__urls = ['https://yz.chsi.com.cn/zsml/kskm.jsp?id=' + i[0] for i in cons]
+
+    @staticmethod
+    def store_in_database_major(data, con, cur):
+        try:
+            cur.execute(
+                'insert into 招生专业 (id, enrollment_unit, examination_method, '
+                'departments, major, learning_style, research_direction, instructor, number_recruit) '
+                'VALUES (?,?,?,?,?,?,?,?,?)', data
+            )
+            con.commit()
+        except Exception:
+            print(Exception)
+
+    @staticmethod
+    def store_in_database_scop(data, con, cur):
+        try:
+            cur.executemany(
+                'INSERT INTO 考试范围 (id, political, foreign_language, pro_course_1, pro_course_2) '
+                'VALUES (?,?,?,?,?)', data)
+            con.commit()
+        except Exception:
+            print(Exception)
