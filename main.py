@@ -7,9 +7,9 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox
 
 from db import del_tables
-from deal_text.print_txt import GLOBALS_DICT, print_t
-from dl_s.selectable_params import xkml_code, xkly_code
-from out_put import out_csv
+from processing_string.print_string import GLOBALS_DICT, print_t
+from download_university_info.selectable_params import xkml_code, xkly_code
+from export_to_file import out_csv
 from user import user
 from user.main_win_choice import choice
 
