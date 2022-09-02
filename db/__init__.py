@@ -20,11 +20,11 @@ con_data = db_con()
 
 
 def del_tables():
-    cur.execute('DELETE  from zhuanye_name')
+    cur.execute('DELETE  from 专业代码')
     cur.execute('DELETE  from 招生院校索引')
     cur.execute('DELETE  from 招生专业索引')
-    cur.execute('DELETE  from exam_scope')
-    cur.execute('DELETE  from recruit_details')
+    cur.execute('DELETE  from 考试范围')
+    cur.execute('DELETE  from 招生专业')
 
 
 con = con_data.get_con()
