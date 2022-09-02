@@ -45,7 +45,7 @@ class dl_details:
             self.store_in_database_scop(data=data, con=con, cur=cur)
             self.store_in_database_scop(data=data2, con=con, cur=cur)
 
-            print_t('正在下载招生专业详情[{}/{}]'.format(l_j, count))
+            print_t('正在下载招生专业详情[{}/{}]'.format(l_j + 1, count))
 
     def set_urls(self, con, cur):
         cons = cur.execute('select ID from 招生专业索引')
