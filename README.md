@@ -1,6 +1,7 @@
 <div align=center>
 <img style="height: 300px" src="img/main.png" />
 
+
 # 研招网专业目录下载2022 -YanX
 
 *研招网专业目录下载2022-YanX* 是可用的研招网招生专业目录下载程序。
@@ -9,12 +10,14 @@
 
 常说考研选择大于努力，我希望这个程序能够帮助更多的考研人做更好的选择！
 
+<img style="height: 300px" src="img/2022-09-02_11-22-20.png" />
+
 </div>
 
 ---
 
 ### 下载：
-<img style="height: 100px" src="img/2022-09-02_11-22-20.png" />
+
 
 - 龟速下载:[GitHub Releases](https://github.com/xx025/YanX/releases/)
 - 高速下载:[蓝奏云](https://wwu.lanzouv.com/ihzfD0aqva7a) 密码:c82p
