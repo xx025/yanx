@@ -6,19 +6,6 @@ from db import cur, con
 from get_university_lib import loc_A, loc_B
 
 
-def show_codes(data: list):
-    r_dict = dict()
-    for i in range(data.__len__()):
-        r_dict[data[i][0]] = data[i][1]
-        if i != 0 and i % 5 == 0:
-            print('\n', end='')
-        print(' ' * 3 + data[i][1] + ':' + data[i][0] + '\t', end='')
-    else:
-        print('\n', end='')
-
-    return r_dict
-
-
 class location_code:
     def __init__(self):
         self.__url = 'https://yz.chsi.com.cn/zsml/pages/getSs.jsp'
@@ -54,14 +41,18 @@ class location_code:
             return data
 
     def __store_in_db(self):
-        """
-        数据库表设计
-            地区代码 地区名称 AB区
-        :return:None
-        """
-        cur.execute('DELETE FROM location_code')
-        cur.executemany('INSERT INTO location_code (dm, mc,ab) VALUES (?,?,?)', self.__data)
-        con.commit()
+
+        try:
+            """
+            数据库表设计
+                地区代码 地区名称 AB区
+            :return:None
+            """
+            cur.execute('DELETE FROM location_code')
+            cur.executemany('INSERT INTO location_code (dm, mc,ab) VALUES (?,?,?)', self.__data)
+            con.commit()
+        except Exception:
+            print(Exception)
 
 
 class xkml_code:
@@ -81,9 +72,11 @@ class xkml_code:
             学位代码 学位名称
         :return:None
         """
-        cur.execute('DELETE FROM 学科门类')
-        cur.executemany('INSERT INTO 学科门类 (dm, mc) VALUES (?,?)', self.__data)
-        con.commit()
+        try:
+            cur.executemany('INSERT INTO 学科门类 (dm, mc) VALUES (?,?)', self.__data)
+            con.commit()
+        except Exception:
+            print(Exception)
 
     def get_data(self):
         cursor = cur.execute("SELECT *  FROM 学科门类")
@@ -137,9 +130,12 @@ class zy_name:
         self.__store_in_db()
 
     def __store_in_db(self):
-        cur.execute('DELETE FROM 专业代码')
-        cur.executemany('INSERT INTO 专业代码 (zy_code, name,dm) VALUES (?,?,?)', self.__data)
-        con.commit()
+        try:
+            cur.execute('DELETE FROM 专业代码')
+            cur.executemany('INSERT INTO 专业代码 (zy_code, name,dm) VALUES (?,?,?)', self.__data)
+            con.commit()
+        except Exception:
+            print(Exception)
 
     def get_data(self):
         cursor = cur.execute("SELECT dm,name  FROM 专业代码 where zy_code=?", (self.__ly_code,))
