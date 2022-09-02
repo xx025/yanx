@@ -1,4 +1,4 @@
-from download_university_info.selectable_params import location_code
+from pys.download_university_info.selectable_params import location_code
 
 
 class choice:
