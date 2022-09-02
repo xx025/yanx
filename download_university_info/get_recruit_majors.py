@@ -1,9 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 
+from download_university_info.yzw_pages import yzw_table
 from processing_string import get_url_param
 from processing_string.print_string import print_t
-from download_university_info.yzw_pages import yzw_table
 
 
 class dl_majors:
@@ -28,12 +28,15 @@ class dl_majors:
             self.__urls.append(u)
 
     def dl_data(self, con, cur):
-        count: int = len(self.__urls)
-        for i in range(count):
-            tmp_data = self.__req_data_on_page(url=self.__urls[i])
-            print_t(f'正在下载招专业信息:[{i + 1}/{count}]')
-            self.__data.extend(tmp_data)
-        self.__store_in_db(con, cur)
+        try:
+            count: int = len(self.__urls)
+            for i in range(count):
+                tmp_data = self.__req_data_on_page(url=self.__urls[i])
+                print_t(f'正在下载招专业信息:[{i + 1}/{count}]')
+                self.__data.extend(tmp_data)
+            self.__store_in_db(con, cur)
+        except Exception:
+            print(Exception)
 
         return self.__data
 
