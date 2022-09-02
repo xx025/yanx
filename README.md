@@ -14,6 +14,7 @@
 ---
 
 ### 下载：
+<img style="height: 100px" src="img/2022-09-02_11-22-20.png" />
 
 - 龟速下载:[GitHub Releases](https://github.com/xx025/YanX/releases/)
 - 高速下载:[蓝奏云](https://wwu.lanzouv.com/ihzfD0aqva7a) 密码:c82p
