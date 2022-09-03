@@ -3,6 +3,12 @@
 
 # 研招网专业目录下载2022 -YanX
 
+![下载数量](https://img.shields.io/github/downloads/xx025/yanx/total.svg?style=for-the-badge)
+![stars](https://img.shields.io/github/stars/xx025/yanx?style=for-the-badge)
+![](https://img.shields.io/github/forks/xx025/yanx?style=for-the-badge)
+![](https://img.shields.io/github/commit-activity/w/xx025/yanx?style=for-the-badge)
+![](https://img.shields.io/github/languages/code-size/xx025/yanx?style=for-the-badge)
+
 *研招网专业目录下载2022-YanX* 是可用的研招网招生专业目录下载程序。
 
 基于PyQT的GUI操作界面，不用敲任何命令直接下载使用，让零代码基础的人也能快速使用。
@@ -12,6 +18,7 @@
 <img style="height: 300px" src="img/2022-09-02_11-22-20.png" />
 
 </div>
+
 
 ---
 
