@@ -1,16 +1,15 @@
 import os
 import threading
-from time import sleep
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMessageBox
 
+from addx import UpdateThread, t1x
+from global_values import GLOBALS_DICT
+from pys.db import kks
 from pys.download_university_info.selectable_params import xkml_code, xkly_code
 from pys.export_to_file import out_csv
-from pys.global_values import GLOBALS_DICT
-from pys.processing_string import print_t
-from pys.user import user
 from pys.user.main_win_choice import choice
 
 
@@ -194,64 +193,47 @@ class Ui_MainWindow(object):
                     QMessageBox.about(MainWindow, "错误选择", "您选择了学术学位但未选择门类")
 
     def dl_click(self):
-
-        GLOBALS_DICT['text_area'] = self.textBrowser1
         self.textBrowser1.clear()
-
+        kks()
         if self.check():
             self.pushButton.setVisible(False)
 
-            user1 = user()
-            user1.set_location(loca_code=choice.c_location(self.edu_local.currentText()))
-            user1.set_discipline(
-                code=choice.c_discipline(self.xuanze_menlei.currentText(), self.xuanze_menlei_2.currentText()))
-
-            user1.set_field_of_study(code=choice.c_field_of_study(self.xuanzexueke.currentText()))
-
-            user1.set_construction_plans(code=choice.c_constraction_plans(self.constraction_plans.currentText()))
-
-            user1.set_learn_way(code=choice.c_learn_mode(self.learn_mode.currentText()))
-            t = threading.Thread(target=user1.dl_all, args=tuple())
-            t.start()
+            data3 = {'地区': choice.c_location(self.edu_local.currentText()),
+                     '门类': choice.c_discipline(self.xuanze_menlei.currentText(), self.xuanze_menlei_2.currentText()),
+                     '领域': choice.c_field_of_study(self.xuanzexueke.currentText()),
+                     '建设计划': choice.c_constraction_plans(self.constraction_plans.currentText()),
+                     '学习方式': choice.c_learn_mode(self.learn_mode.currentText())
+                     }
 
             def create_file_name():
                 name_1 = self.xuanze_menlei.currentText() + '-' + self.xuanzexueke.currentText()
-                name_2 = self.constraction_plans.currentText() + self.learn_mode.currentText() + self.edu_local.currentText()
+                name_2 = self.constraction_plans.currentText() + '-' + self.learn_mode.currentText() + '-' + self.edu_local.currentText()
                 name = name_1 + '-' + name_2
-                return name.replace('不做选择', '')
+                return name.replace('不做选择', '').replace('---', '-').replace('--', '-')
 
             GLOBALS_DICT['file_name'] = create_file_name()
 
-            # 下一步输出文件的前缀名
+            t1 = threading.Thread(target=t1x, args=(data3,))
+            t1.setDaemon(True)
 
-            def awb(th1):
-                while True:
-                    sleep(0.5)
-                    if th1.is_alive():
-                        pass
-                    else:
-                        self.pushButton2.setVisible(True)
-                        break
+            self.subThread = UpdateThread()
+            self.subThread.update_data.connect(self.show_inr)
 
-            t2 = threading.Thread(target=awb, args=(t,))
-            t2.start()
+            t1.start()
+            self.subThread.start()
+
+    def show_inr(self, data):
+        self.textBrowser1.append(data)
+        self.textBrowser1.moveCursor(self.textBrowser1.textCursor().End)
+        if data == '下载完成':
+            self.pushButton2.setVisible(True)
+        if data == '导出完成':
+            self.pushButton.setVisible(True)
 
     def o_c_click(self):
-        def t2_d():
-            self.pushButton2.setVisible(False)
-            while True:
-                sleep(0.2)
-                if t2.is_alive():
-                    pass
-                else:
-                    print_t('导出成功:' + GLOBALS_DICT['out_path'])
-                    self.pushButton.setVisible(True)
-                    break
-
+        self.pushButton2.setVisible(False)
         t2 = threading.Thread(target=out_csv, args=tuple())
         t2.start()
-        t3 = threading.Thread(target=t2_d, args=tuple())
-        t3.start()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
