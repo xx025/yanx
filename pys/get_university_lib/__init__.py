@@ -22,7 +22,7 @@ A、B区：https://yzc.hsi.com.cn/kyzx/jybzc/202009/20200904/1972918872.html
 '''
 import requests
 
-from pys.processing_string import get_url_param, print_t
+from pys.processing_string import get_url_param
 
 list985 = ['北京大学', '中国人民大学', '清华大学', '北京航空航天大学', '北京理工大学', '中国农业大学', '北京师范大学',
            '中央民族大学', '南开大学', '天津大学', '大连理工大学', '东北大学', '吉林大学', '哈尔滨工业大学', '复旦大学',
@@ -57,7 +57,7 @@ loc_B = ['内蒙古', '广西', '海南', '贵州', '云南', '西藏', '甘肃'
 
 from bs4 import BeautifulSoup
 
-from pys.db import  db_con
+from pys.db import db_con
 
 
 class edu:
@@ -88,7 +88,7 @@ class getEdu:
 
     def __req_data(self):
         while True:
-            print_t(self.页码)
+            print(self.页码)
             page_text = requests.get(url=self.链接, params={'start': self.页码}).text
             soup = BeautifulSoup(page_text, "html.parser")
             if soup.select('.yxk-table table tbody tr').__len__() == 1 and soup.select_one(
@@ -114,8 +114,11 @@ class getEdu:
                     self.store_in_database(tmp_data)
 
     def get_data(self):
+        con = db_con().get_con()
+        cur = con.cursor()
         cursor = cur.execute("SELECT *  FROM 院校库")
         data = [i for i in cursor]
+        con.close()
         if len(data) == 0:
             self.__req_data()
             return self.get_data()
@@ -133,7 +136,7 @@ class getEdu:
             con.commit()
             con.close()
         except Exception:
-            print_t(Exception)
+            print(Exception)
 
 # cur.execute('DELETE FROM 院校库')
 # use2 = getEdu()
