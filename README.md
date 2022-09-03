@@ -25,7 +25,8 @@
 ### 下载：
 
 - 龟速下载:[GitHub Releases](https://github.com/xx025/YanX/releases/)
-- 高速下载:[蓝奏云](https://wwu.lanzouv.com/ihzfD0aqva7a) 密码:c82p
+- ~~高速下载:[蓝奏云](https://wwu.lanzouv.com/ihzfD0aqva7a)密码:c82p~~
+   已失效
 
 ## 使用演示:
 
