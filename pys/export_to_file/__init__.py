@@ -2,9 +2,8 @@ import csv
 import datetime
 import winreg
 
+from global_values import GLOBALS_DICT, global_queue
 from pys.db import db_con
-from pys.global_values import GLOBALS_DICT
-from pys.processing_string import print_t
 
 
 # https://www.jb51.net/article/181007.htm
@@ -21,7 +20,9 @@ def out_csv():
                 ['学校', '所在地', 'AB区', '985院校', '211院校', '双一流院校', '考试方式', '学院', '专业', '学习方式',
                  '招生人数', '政治考试', '外语考试',
                  '专业课1考试', '专业课二考试'])
+
             con = db_con.get_con()
+
             data = [i for i in con.execute('''select 招生专业.id,
        院校库.院校名称,
        院校库.所在地,
@@ -48,8 +49,11 @@ where substr(招生专业.id, 0, 6) == 院校库.院校代码''')]
             con.close()
         GLOBALS_DICT['out_path'] = path
 
+        global_queue.put('导出完成')
+        global_queue.put('导出目录' + GLOBALS_DICT['out_path'])
+
     except Exception:
-        print_t(Exception)
+        print(Exception)
 
 
 def desktop_path():
