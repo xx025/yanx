@@ -1,6 +1,5 @@
 from pys.download_university_info import dlYzw
-from pys.global_values import GLOBALS_DICT
-from pys.processing_string import print_t
+from global_values import GLOBALS_DICT
 
 
 class user:
@@ -16,6 +15,7 @@ class user:
         # self.choice = choice()
         self.text_area = None
         self.dl_yzw = None
+
 
     def get_user_choice_items(self):
         """
@@ -73,4 +73,4 @@ class user:
         self.dl_yzw.down_all()
         GLOBALS_DICT['down_end'] = True
 
-        print_t("全部下载结束")
+        print("全部下载结束")
