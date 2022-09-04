@@ -1,17 +1,11 @@
 
 <div align=center>
+
 <img style="height: 300px" src="https://raw.githubusercontent.com/xx025/cloudimg/main/img/202209041724462.png" />
 
-# 研招网专业目录下载2022 -YanX
+<h1>研招网专业目录下载2022 -YanX</h1> 
 
-![下载数量](https://img.shields.io/github/downloads/xx025/yanx/total.svg?style=flat-square)
-![stars](https://img.shields.io/github/stars/xx025/yanx?style=flat-square)
-![](https://img.shields.io/github/forks/xx025/yanx?style=flat-square)
-![](https://img.shields.io/github/commit-activity/w/xx025/yanx?style=flat-square)
-![](https://img.shields.io/github/languages/code-size/xx025/yanx?style=flat-square)
-
-
-<img style="height: 300px" src="https://raw.githubusercontent.com/xx025/cloudimg/main/img/202209041724326.png" />
+<img src="https://img.shields.io/github/downloads/xx025/yanx/total.svg?style=flat-square"> <img src="https://img.shields.io/github/stars/xx025/yanx?style=flat-square"> <img src="https://img.shields.io/github/forks/xx025/yanx?style=flat-square"> <img src="https://img.shields.io/github/commit-activity/w/xx025/yanx?style=flat-square"> <img src="https://img.shields.io/github/languages/code-size/xx025/yanx?style=flat-square"> <img style="height: 300px" src="https://raw.githubusercontent.com/xx025/cloudimg/main/img/202209041724326.png" />
 
 </div>
 
