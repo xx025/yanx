@@ -64,7 +64,7 @@
 
 ### 院校库
 
-[院校库.csv](/院校库.csv])
+[院校库.csv](docs/院校库.csv)
 ![](https://raw.githubusercontent.com/xx025/cloudimg/main/img/202209041839557.png)
 
 - 数据来自于研招网[院校库](https://yz.chsi.com.cn/sch/)
