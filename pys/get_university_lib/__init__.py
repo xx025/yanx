@@ -1,4 +1,3 @@
-
 import requests
 
 from pys.processing_string import get_url_param
@@ -54,8 +53,9 @@ class edu:
 
     def info(self):
         return (
-            self.院校名称, self.所在地, self.院校隶属, self.研究生院, self.自主划线, self.院校代码, self.IS985,
-            self.IS211, self.AB, self.双一流)
+            self.院校名称, self.所在地, self.院校隶属, self.研究生院, self.自主划线, self.院校代码, self.IS211,
+            self.IS985,
+            self.AB, self.双一流)
 
 
 class getEdu:
@@ -63,9 +63,13 @@ class getEdu:
         self.链接 = 'https://yz.chsi.com.cn/sch/search.do'
         self.数据 = []
         self.页码 = 0
+        self.con = db_con.get_con()
+        self.cur = self.con.cursor()
+        self.cur.execute('DELETE FROM 院校库')
+
         # 初始页面设置为0
 
-    def __req_data(self):
+    def dl_data(self):
         while True:
             print(self.页码)
             page_text = requests.get(url=self.链接, params={'start': self.页码}).text
@@ -91,32 +95,15 @@ class getEdu:
                     tmp_data.append(院校1.info())
                 else:
                     self.store_in_database(tmp_data)
+        self.con.close()
 
-    def get_data(self):
-        con = db_con().get_con()
-        cur = con.cursor()
-        cursor = cur.execute("SELECT *  FROM 院校库")
-        data = [i for i in cursor]
-        con.close()
-        if len(data) == 0:
-            self.__req_data()
-            return self.get_data()
-        else:
-            return data
-
-    @staticmethod
-    def store_in_database(data):
+    def store_in_database(self, data):
         try:
-            con = db_con.get_con()
-            cur = con.cursor()
-            cur.executemany(
+
+            self.cur.executemany(
                 'INSERT INTO 院校库 (院校名称, 所在地, 院校隶属, 研究生院, 自划线院校, 院校代码, IS211, IS985, AB, 双一流)values (?,?,?,?,?,?,?,?,?,?) ',
                 data)
-            con.commit()
-            con.close()
+            self.con.commit()
+
         except Exception:
             print(Exception)
-
-# cur.execute('DELETE FROM 院校库')
-# use2 = getEdu()
-# use2.get_data()
