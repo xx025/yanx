@@ -1,11 +1,11 @@
 <div align=center>
 
-<img style="height: 200px" src="https://raw.githubusercontent.com/xx025/cloudimg/main/img/202209041724462.png" />
+<img style="height: 200px" src="favicon.ico" />
 
 <h1>研招网专业目录下载2022 -YanX</h1> 
 
 <img src="https://img.shields.io/github/downloads/xx025/yanx/total.svg?style=flat-square"> <img src="https://img.shields.io/github/stars/xx025/yanx?style=flat-square"> <img src="https://img.shields.io/github/forks/xx025/yanx?style=flat-square"> <img src="https://img.shields.io/github/commit-activity/w/xx025/yanx?style=flat-square"> <img src="https://img.shields.io/github/languages/code-size/xx025/yanx?style=flat-square"> 
-<br/><img style="height: 300px" src="https://raw.githubusercontent.com/xx025/cloudimg/main/img/202209041724326.png" />
+<br/><img style="height: 300px" src="img/2022-09-02_11-22-20.png" />
 </div>
 
 ### 速达目录
