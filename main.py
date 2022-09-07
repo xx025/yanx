@@ -25,7 +25,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
-        MainWindow.setWindowIcon(QIcon(os.getcwd() + '/img/ico.ico'))
+        MainWindow.setWindowIcon(QIcon(os.getcwd() + '/favicon.ico'))
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser.setGeometry(QtCore.QRect(190, 50, 431, 71))
         self.textBrowser.setStyleSheet("border:0px")
@@ -244,7 +244,7 @@ class Ui_MainWindow(object):
                                              "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
                                              "p, li { white-space: pre-wrap; }\n"
                                              "</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-                                             "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"https://github.com/xx025/YanX\"><img src=\"img/forkme.png\" /></a></p></body></html>"
+                                             "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"https://github.com/xx025/YanX\"><img src=\"db/forkme.png\" /></a></p></body></html>"
                                              ))
 
         self.textBrowser.setHtml(_translate("MainWindow",
