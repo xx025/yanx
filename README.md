@@ -6,15 +6,18 @@
 
 <img src="https://img.shields.io/github/downloads/xx025/yanx/total.svg?style=flat-square"> <img src="https://img.shields.io/github/stars/xx025/yanx?style=flat-square"> <img src="https://img.shields.io/github/forks/xx025/yanx?style=flat-square"> <img src="https://img.shields.io/github/commit-activity/w/xx025/yanx?style=flat-square"> <img src="https://img.shields.io/github/languages/code-size/xx025/yanx?style=flat-square"> 
 <br/><img style="height: 300px" src="docs/img/2022-09-02_11-22-20.png" />
+    
+ #### 下载程序
+
+[🔗安装版（建议）](https://github.com/xx025/YanX/releases/download/0.1.97/YanX_Setup_0.1.97.exe) [🔗免 安 装 版](https://github.com/xx025/YanX/releases/download/0.1.97/YanX_Win64_0.1.97.zip)  
+    
 </div>
 
 
 
 
 
-#### 下载程序
 
-[🔗安装版（建议）](https://github.com/xx025/YanX/releases/download/0.1.97/YanX_Setup_0.1.97.exe) [🔗免 安 装 版](https://github.com/xx025/YanX/releases/download/0.1.97/YanX_Win64_0.1.97.zip)
 
 ### 速达目录
 
