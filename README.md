@@ -1,5 +1,3 @@
-theme: jekyll-theme-minimal
-
 <div align=center>
 
 <img style="height: 200px" src="favicon.ico" />
