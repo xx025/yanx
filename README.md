@@ -68,11 +68,18 @@
 
 
 
-### 资料参考
+## 资料参考
+
+### AB类地区和985、211院校目录
 
 [AB类地区和985、211院校目录](docs/AB类地区和985、211院校目录.md)
 
-[院校库.csv](https://github.com/xx025/YanX/blob/main/docs/院校库.csv)，数据来自于研招网[院校库](https://yz.chsi.com.cn/sch/)
+### 院校库
+
+[院校库.csv](https://github.com/xx025/YanX/blob/main/docs/院校库.csv)
+![](https://raw.githubusercontent.com/xx025/cloudimg/main/img/202209041839557.png)
+
+- 数据来自于研招网[院校库](https://yz.chsi.com.cn/sch/)
 
 ### 调试与开发
 
