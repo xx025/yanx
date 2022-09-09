@@ -1,8 +1,8 @@
 from copy import copy
 
-import requests
 from bs4 import BeautifulSoup
 
+import requestsp
 from global_values import global_queue
 from pys.download_university_info.yzw_pages import yzw_table
 from pys.processing_string import get_url_param
@@ -82,7 +82,7 @@ class dl_schools:
         result_list = []
         max_page = None
         while True:
-            page_text = requests.post(url=self.__url, data=data).text
+            page_text = requestsp.post(url=self.__url, data=data).text
 
             soup = BeautifulSoup(page_text, 'html.parser')
 
