@@ -1,6 +1,6 @@
-import requests
 from bs4 import BeautifulSoup
 
+import requestsp
 from global_values import global_queue
 from pys.download_university_info.yzw_pages import yzw_table
 from pys.processing_string import get_url_param
@@ -46,7 +46,7 @@ class dl_majors:
         result_list = []
         max_page = None
         while True:
-            page = requests.get(url=url)
+            page = requestsp.get(url=url)
             page_text = page.text
             soup = BeautifulSoup(page_text, 'html.parser')
             for k in soup.select('.zsml-list-box tbody tr'):
