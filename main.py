@@ -126,8 +126,9 @@ class Ui_MainWindow(object):
         self.learn_mode.addItem("")
         self.learn_mode.addItem("")
         MainWindow.setCentralWidget(self.centralwidget)
-
         self.retranslateUi(MainWindow)
+        self.tsque()
+        # 开启监听队列消息
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def indexChange_xuan_ze_men_lei_1(self):
@@ -216,11 +217,12 @@ class Ui_MainWindow(object):
             t1 = threading.Thread(target=t1x, args=(data3,))
             t1.setDaemon(True)
 
-            self.subThread = UpdateThread()
-            self.subThread.update_data.connect(self.show_inr)
-
             t1.start()
-            self.subThread.start()
+
+    def tsque(self):
+        self.subThread = UpdateThread()
+        self.subThread.update_data.connect(self.show_inr)
+        self.subThread.start()
 
     def show_inr(self, data):
         self.textBrowser1.append(data)
