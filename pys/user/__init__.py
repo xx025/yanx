@@ -1,5 +1,5 @@
-from pys.download_university_info import dlYzw
 from global_values import GLOBALS_DICT
+from pys.download_university_info import dlYzw
 
 
 class user:
