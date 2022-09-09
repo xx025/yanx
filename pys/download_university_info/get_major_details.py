@@ -1,6 +1,6 @@
-import requests
 from bs4 import BeautifulSoup
 
+import requestsp
 from global_values import global_queue
 from pys.processing_string import replace_bank
 
@@ -20,7 +20,7 @@ class dl_details:
         count = len(self.__urls)
         for l_j in range(len(self.__urls)):
             k = self.__urls[l_j]
-            soup = BeautifulSoup(requests.get(k).text, features="html.parser")
+            soup = BeautifulSoup(requestsp.get(k).text, features="html.parser")
 
             zsdw = soup.select('.zsml-condition tbody tr .zsml-summary')
             zsdw = [replace_bank(i.text) for i in zsdw]
