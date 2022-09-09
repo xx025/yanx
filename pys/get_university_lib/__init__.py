@@ -1,5 +1,4 @@
-import requests
-
+import requestsp
 from pys.processing_string import get_url_param
 
 list985 = ['北京大学', '中国人民大学', '清华大学', '北京航空航天大学', '北京理工大学', '中国农业大学', '北京师范大学',
@@ -72,7 +71,7 @@ class getEdu:
     def dl_data(self):
         while True:
             print(self.页码)
-            page_text = requests.get(url=self.链接, params={'start': self.页码}).text
+            page_text = requestsp.get(url=self.链接, params={'start': self.页码}).text
             soup = BeautifulSoup(page_text, "html.parser")
             if soup.select('.yxk-table table tbody tr').__len__() == 1 and soup.select_one(
                     '.yxk-table table .noResult'):
