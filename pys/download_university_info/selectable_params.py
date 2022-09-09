@@ -1,7 +1,6 @@
 import json
 
-import requests
-
+import requestsp
 from pys.db import db_con
 from pys.get_university_lib import loc_A, loc_B
 
@@ -12,7 +11,7 @@ class location_code:
         self.__data = []
 
     def __req_data(self):
-        json_data = json.loads(requests.get(self.__url).text)
+        json_data = json.loads(requestsp.get(self.__url).text)
 
         def check(str1):
             for i in loc_A:
@@ -69,7 +68,7 @@ class xkml_code:
         self.__data = []
 
     def __req_data(self):
-        json_data = json.loads(requests.get(self.url).text)
+        json_data = json.loads(requestsp.get(self.url).text)
         self.__data = [(k['dm'], k['mc']) for k in json_data]
         self.__store_in_db()
 
@@ -110,7 +109,7 @@ class xkly_code:
 
     def __req_data(self):
         # 获取学科门类或领域
-        r = requests.post(url=self.url, data={'mldm': self.__mldm}).text
+        r = requestsp.post(url=self.url, data={'mldm': self.__mldm}).text
         self.__data = [(self.__mldm, k['mc'], k['dm']) for k in json.loads(r)]
         self.__store_in_db()
 
@@ -147,7 +146,7 @@ class zy_name:
         self.__ly_code = ly_code
 
     def __req_data(self):
-        r = requests.post(url=self.url, data={'q': self.__ly_code}).text
+        r = requestsp.post(url=self.url, data={'q': self.__ly_code}).text
         req_data = json.loads(r)
         self.__data = [(self.__ly_code, req_data[i], str(i + 1)) for i in range(len(req_data))]
         self.__store_in_db()
