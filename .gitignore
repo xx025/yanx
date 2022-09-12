@@ -1,0 +1,5 @@
+
+*.xml
+.idea/YanX.iml
+*.pyc
+db/database.db
