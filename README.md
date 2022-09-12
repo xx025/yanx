@@ -5,8 +5,7 @@
 
 <h1>研招网专业目录下载2023 -YanX</h1> 
 
-<img src="https://img.shields.io/github/downloads/xx025/yanx/total.svg?style=flat-square" alt=""> <img src="https://img.shields.io/github/stars/xx025/yanx?style=flat-square" alt=""> <img src="https://img.shields.io/github/forks/xx025/yanx?style=flat-square" alt=""> <img src="https://img.shields.io/github/commit-activity/w/xx025/yanx?style=flat-square" alt="">
-<br/><img src="https://github.com/xx025/YanX/raw/pages/docs/img/index_display.jpg"  alt=""/>
+<img src="https://github.com/xx025/YanX/raw/pages/docs/img/index_display.jpg"  alt=""/>
 </a>  
 </div>
 
