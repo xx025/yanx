@@ -10,8 +10,8 @@ from pyd.db import kks
 from pyd.dui.selectable_params import xkml_code, xkly_code
 from pyd.etf import out_csv
 
-from pyd.pys.global_values import GLOBALS_DICT, WindowTitle, MainTitle, yanx_docs_url, upload_yanx_docs_tips
-from pyd.pys.ps2 import t1x, UpdateThread
+from pyd.pys.global_values import GLOBALS_DICT, WindowTitle, MainTitle, YAN_X_DOCS_URL, UPLOAD_TIPS
+from pyd.pys.ps2 import t1x, UpdateThread, get_Latest_Announcements
 from pyd.user.main_win_choice import choice
 
 
@@ -19,7 +19,7 @@ class Ui_MainWindow(object):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(843, 718)
+        MainWindow.resize(1188, 711)
         font = QtGui.QFont()
         font.setFamily("微软雅黑")
         MainWindow.setFont(font)
@@ -34,13 +34,20 @@ class Ui_MainWindow(object):
         self.textBrowser.setObjectName("textBrowser")
 
         self.textBrowser1 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser1.setGeometry(QtCore.QRect(40, 550, 741, 151))
+        self.textBrowser1.setGeometry(QtCore.QRect(40, 545, 772, 151))
         self.textBrowser1.setObjectName("textBrowser")
 
         self.textBrowser2 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser2.setGeometry(QtCore.QRect(630, 20, 201, 71))
+        self.textBrowser2.setGeometry(QtCore.QRect(610, 20, 201, 71))
         self.textBrowser2.setObjectName("textBrowser")
         self.textBrowser2.setOpenExternalLinks(True)
+
+        self.textBrowser3 = QtWidgets.QTextBrowser(self.centralwidget)
+        self.textBrowser3.setGeometry(QtCore.QRect(850, 20,320, 670))
+        self.textBrowser3.setObjectName("textBrowser")
+        self.textBrowser3.setOpenExternalLinks(True)
+        self.textBrowser3.setText(get_Latest_Announcements())
+
 
         self.widget = QtWidgets.QWidget(self.centralwidget)
         self.widget.setGeometry(QtCore.QRect(20, 150, 811, 391))
@@ -212,7 +219,7 @@ class Ui_MainWindow(object):
                 name_1 = self.xuanze_menlei.currentText() + '-' + self.xuanzexueke.currentText()
                 name_2 = self.constraction_plans.currentText() + '-' + self.learn_mode.currentText() + '-' + self.edu_local.currentText()
                 name = name_1 + '-' + name_2
-                return name.replace('不做选择', '').replace('---', '-').replace('--', '-')
+                return name.replace('不做选择', '')
 
             GLOBALS_DICT['file_name'] = create_file_name()
 
@@ -233,10 +240,10 @@ class Ui_MainWindow(object):
             self.pushButton2.setVisible(True)
         if data == '导出完成':
             ans = QMessageBox.question(MainWindow, "导出完成",
-                                       upload_yanx_docs_tips,
+                                       UPLOAD_TIPS,
                                        QMessageBox.Yes | QMessageBox.No)
             if ans == 16384:
-                QDesktopServices.openUrl(QUrl(yanx_docs_url))
+                QDesktopServices.openUrl(QUrl(YAN_X_DOCS_URL))
             self.pushButton.setVisible(True)
 
     def o_c_click(self):
