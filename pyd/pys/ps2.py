@@ -1,5 +1,6 @@
 import time
 
+import requests
 from PyQt5.QtCore import pyqtSignal, QThread
 
 from pyd.pys.global_values import global_queue
@@ -33,9 +34,11 @@ def t1x(data3):
     global_queue.put('下载完成')
 
 
-
-
-
-
-
-
+def get_Latest_Announcements():
+    textssss = '''或许由于github连接原因，你没有获取到最新公告，关注：https://yanx.loefairy.top/ 获取最新动态'''
+    try:
+        url = 'https://gist.githubusercontent.com/xx025/904e719c8a74be36176ef167df82fc3b/raw/'
+        textssss = '公告：\n' + requests.get(url, timeout=4).text
+    except Exception:
+        pass
+    return textssss
