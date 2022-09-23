@@ -1,13 +1,17 @@
 <div align=center>
-
 <a href='https://github.com/xx025/YanX'>
+
 <img style="height: 200px" src="https://github.com/xx025/YanX/raw/pages/docs/img/favicon2.ico"  alt=""/>
+<h1>研招网硕士专业目录下载-YanX</h1></a>
 
-<h1>研招网专业目录下载2023 -YanX</h1> 
+ <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/xx025/yanx"> <img alt="GitHub Release Date" src="https://img.shields.io/github/release-date/xx025/yanx"> <img alt="GitHub tag (latest by date)" src="https://img.shields.io/github/v/tag/xx025/yanx"> <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/xx025/yanx/total">
 
-![Snipaste_2022-09-23_08-51-41](https://user-images.githubusercontent.com/71559822/191874874-5cbc84c0-4665-4f60-82f6-90189cd36800.png)
-</a>  
+<br/>
+
+<img alt="ziwels" src="https://user-images.githubusercontent.com/71559822/191874874-5cbc84c0-4665-4f60-82f6-90189cd36800.png">
+
 </div>
+
 
 ### 速达目录
 
