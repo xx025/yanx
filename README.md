@@ -8,7 +8,7 @@
 
 <br/>
 
-<img alt="ziwels" src="https://user-images.githubusercontent.com/71559822/191874874-5cbc84c0-4665-4f60-82f6-90189cd36800.png">
+<img alt="ziwels" src="https://raw.githubusercontent.com/xx025/YanX/pages/docs/img/Snipaste_2022-09-24_00-17-30.png">
 
 </div>
 
