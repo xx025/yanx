@@ -5,7 +5,7 @@
 
 <h1>研招网专业目录下载2023 -YanX</h1> 
 
-<img width="960" alt="v0916" src="https://user-images.githubusercontent.com/71559822/190708560-89bb759a-bd4d-4acd-948a-c5de55e558ce.png">
+![Snipaste_2022-09-23_08-51-41](https://user-images.githubusercontent.com/71559822/191874874-5cbc84c0-4665-4f60-82f6-90189cd36800.png)
 </a>  
 </div>
 
