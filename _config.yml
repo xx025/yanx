@@ -1,0 +1,12 @@
+#github pages 使用minimal主題 https://github.com/pages-themes/minimal
+
+remote_theme: pages-themes/minimal@v0.2.0
+plugins:
+  - jekyll-remote-theme # add this line to the plugins list if you already have one
+
+#下面是对主题的自定义配置
+
+lang: zh
+
+show_downloads: "true"
+
