@@ -78,7 +78,7 @@
 
 ## 调试与开发
 
-[调试与开发](https://xx025.github.io/YanX/调试与开发)
+[调试与开发](https://xx025.github.io/YanX/docs/调试与开发)
 
 ## 项目声明
 
