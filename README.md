@@ -1,7 +1,7 @@
 <div align=center>
 <a href='https://github.com/xx025/YanX'>
 
-<img alt="ziwels" src="docs/img/Snipaste_2022-09-24_00-17-30.png">
+<img alt="ziwels" src="docs/img/example_index.png">
 
 <h1>YanX-研招网硕士专业目录下载</h1></a>
 
