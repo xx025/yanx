@@ -12,7 +12,6 @@
 
 </div>
 
-
 ### 速达目录
 
 [快速使用](#快速使用) [资料参考](#资料参考) [调试与开发](#调试与开发)
@@ -70,14 +69,14 @@
 
 ## 资料参考
 
-[AB类地区和985、211院校目录](https://github.com/xx025/YanX/blob/pages/docs/AB类地区和985、211院校目录.md)
+[AB类地区和985、211院校目录](https://xx025.github.io/YanX/docs/AB类地区和985、211院校目录)
 
 [院校库.csv](https://github.com/xx025/YanX/blob/pages/docs/院校库.csv)
 ，数据来自于研招网[院校库](https://yz.chsi.com.cn/sch/)
 
 ## 调试与开发
 
-[调试与开发](https://github.com/xx025/YanX/blob/pages/调试与开发.md)
+[调试与开发](https://xx025.github.io/YanX/调试与开发)
 
 ## 项目声明
 
