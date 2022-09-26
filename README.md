@@ -84,3 +84,8 @@
 
 1. 本软件只供学习交流使用，勿作为商业用途
 2. 对使用本软件造成的任何影响，概不负责
+
+
+## YanX-Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=xx025/YanX&type=Timeline)](https://star-history.com/#xx025/YanX&Timeline)
