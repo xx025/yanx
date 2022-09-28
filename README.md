@@ -29,9 +29,6 @@
 
 ## 快速使用
 
-如果你不想下载程序，这里可能有已经下载好的目录[🔗去搜索](https://github.com/xx025/YanX-Docs#%E6%90%9C%E7%B4%A2%E6%96%87%E4%BB%B6)
-
-
 ### 1. 下载
 
 1. *学位类别*：先选择 *学术学位* 或 *专业学位* 中的一个；
@@ -55,7 +52,7 @@
 
 下载完成后的任务可以进行导出，对多个下载任务可以导出到同一个文件、也可以每一个任务导出到单独的文件；例如可以将 学硕-0821 和 专硕-0854 导出到同一个文件中。
 
-下图是选择 [学术学位-0201理论经济学-全日制](https://github.com/xx025/YanX-Docs/blob/main/%E5%AD%A6%E6%9C%AF%E5%AD%A6%E4%BD%8D-0201%E7%90%86%E8%AE%BA%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E5%85%A8%E6%97%A5%E5%88%B6-2022-09-16-8.csv) 的导出文件内容
+下图是选择 [学术学位-0201理论经济学-全日制](https://github.com/xx025/YanX/blob/pages/docs/%E5%AD%A6%E6%9C%AF%E5%AD%A6%E4%BD%8D-0201%E7%90%86%E8%AE%BA%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E5%85%A8%E6%97%A5%E5%88%B6-2022-09-16-8.csv) 的导出文件内容
 
 <img width="991" alt="ziwels" src="https://user-images.githubusercontent.com/71559822/190682008-956b4598-4191-4263-9dbe-f84e8442139a.png">
 
