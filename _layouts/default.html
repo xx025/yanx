@@ -57,25 +57,26 @@
     </div>
     <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
     <script>
-$.ajax({
-  url: "https://api.github.com/repos/xx025/yanx/releases/latest",
-  dataType: "jsonp",
-  jsonpCallback: "m1",
-  success: function (data1) {
-    data1.data.assets.forEach(element => {
-      let dlurl = element.browser_download_url
-      if (dlurl.search('.exe') > 0) {
-        $('.dl_exe_url').attr('href', dlurl)
-      }
-      if (dlurl.search('.7z') > 0 || dlurl.search('.zip') > 0 ) {
-        $('.dl_zip_url').attr('href', dlurl)
-      }
-    });
-       let imgurl='https://img.shields.io/github/downloads/xx025/yanx/'+data1.data.tag_name+'/total'
+              $.ajax({
+          url: "https://api.github.com/repos/xx025/yanx/releases/latest",
+          dataType: "jsonp",
+          jsonpCallback: "m1",
+          success: function (data1) {
+            data1.data.assets.forEach(element => {
+              let dlurl = element.browser_download_url
+              if (dlurl.search('.exe') > 0) {
+                $('.dl_exe_url').attr('href', dlurl)
+              }
+              if (dlurl.search('.7z') > 0 || dlurl.search('.zip') > 0 ) {
+                $('.dl_zip_url').attr('href', dlurl)
+              }
+            });
+            let imgurl='https://img.shields.io/github/downloads/xx025/yanx/'+data1.data.tag_name+'/total'
 
-    $("#leastdown").attr('src',imgurl)
-}
-)
+            $("#leastdown").attr('src',imgurl)
+          }
+        }
+        )
     </script>
   </body>
 </html>
