@@ -71,7 +71,9 @@ $.ajax({
         $('.dl_zip_url').attr('href', dlurl)
       }
     });
-  }
+       let imgurl='https://img.shields.io/github/downloads/xx025/yanx/'+data1.data.tag_name+'/total'
+
+    $("#leastdown").attr('src',imgurl)
 }
 )
     </script>
