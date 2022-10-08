@@ -5,7 +5,7 @@
 
 <h1>YanX-研招网硕士专业目录下载</h1></a>
 
- <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/xx025/yanx"> <img alt="GitHub Release Date" src="https://img.shields.io/github/release-date/xx025/yanx"> <img alt="GitHub tag (latest by date)" src="https://img.shields.io/github/v/tag/xx025/yanx"> <img alt="GitHub all releases" id='leastdown' src="">
+ <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/xx025/yanx"> <img alt="GitHub Release Date" src="https://img.shields.io/github/release-date/xx025/yanx"> <img alt="GitHub tag (latest by date)" src="https://img.shields.io/github/v/tag/xx025/yanx"> <img alt="GitHub all releases" id='leastdown' src="https://img.shields.io/github/downloads/xx025/yanx/999/total">
 
 <br/>
 
