@@ -66,6 +66,7 @@
               let dlurl = element.browser_download_url
               if (dlurl.search('.exe') > 0) {
                 $('.dl_exe_url').attr('href', dlurl)
+                $('.dl_zip_url').attr('href', dlurl)
               }
               if (dlurl.search('.7z') > 0 || dlurl.search('.zip') > 0 ) {
                 $('.dl_zip_url').attr('href', dlurl)
