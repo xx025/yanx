@@ -37,8 +37,8 @@
         {% if site.show_downloads %}
         <h3>下载软件</h3>
         <ul class="downloads">
-          <li><a  class='dl_exe_url'href="{{ site.github.repository_url }}/releases/latest">Download <strong>安装包</strong></a></li>
-          <li><a  class='dl_zip_url' href="{{ site.github.repository_url }}/releases/latest">Download <strong>免安装</strong></a></li>
+          <li><a  class='dl_exe_url'href="{{ site.github.repository_url }}/releases/latest">Download <strong>Github</strong></a></li>
+          <li><a  class='dl_zip_url' href="https://wwqg.lanzouf.com/b00qky81a">Download <strong>蓝奏云/密码:37md</strong></a></li>
           <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
         </ul>
         {% endif %}
@@ -66,7 +66,6 @@
               let dlurl = element.browser_download_url
               if (dlurl.search('.exe') > 0) {
                 $('.dl_exe_url').attr('href', dlurl)
-                $('.dl_zip_url').attr('href', dlurl)
               }
               if (dlurl.search('.7z') > 0 || dlurl.search('.zip') > 0 ) {
                 $('.dl_zip_url').attr('href', dlurl)
