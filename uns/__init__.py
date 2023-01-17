@@ -1,4 +1,7 @@
-from pyd.db import db_con
+import stools
+
+from db2 import db_con
+from stools.sk3 import req_get
 
 list985 = ['北京大学', '中国人民大学', '清华大学', '北京航空航天大学', '北京理工大学', '中国农业大学', '北京师范大学',
            '中央民族大学', '南开大学', '天津大学', '大连理工大学', '东北大学', '吉林大学', '哈尔滨工业大学', '复旦大学',
@@ -34,8 +37,6 @@ loc_B = ['内蒙古', '广西', '海南', '贵州', '云南', '西藏', '甘肃'
 from bs4 import BeautifulSoup
 
 
-
-
 class edu:
     def __init__(self, 院校名称, 所在地, 双一流, 院校隶属, 研究生院, 自主划线, 院校代码):
         self.院校名称 = 院校名称
@@ -68,11 +69,10 @@ class getEdu:
         # 初始页面设置为0
 
     def dl_data(self):
-        from pyd import rsp
-        from pyd.g_uparam import get_url_param
+        from stools.sk2 import get_url_param
         while True:
             print(self.页码)
-            page_text = rsp.get(url=self.链接, params={'start': self.页码}).text
+            page_text = req_get(url=self.链接, params={'start': self.页码}).text
             soup = BeautifulSoup(page_text, "html.parser")
             if soup.select('.yxk-table table tbody tr').__len__() == 1 and soup.select_one(
                     '.yxk-table table .noResult'):

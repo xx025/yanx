@@ -2,18 +2,21 @@ from time import sleep
 
 import requests
 
-from pyd.pys.global_values import global_queue
+from _g import global_queue
 
 
-def get(url: str, params=None):
+
+
+# 自动重试的 post 和 get 方法
+
+def req_post(url: str, data=None):
     i = 1
     while True:
-
         try:
-            if params is None:
-                return requests.get(url=url, timeout=6)
+            if data is None:
+                return requests.post(url=url, timeout=6)
             else:
-                return requests.get(url=url, params=params, timeout=6)
+                return requests.post(url=url, data=data, timeout=6)
         except Exception:
             k = 2 ** i
             global_queue.put("第{}次，请求失败，等待{}s 后继续".format(i, k))
@@ -24,14 +27,15 @@ def get(url: str, params=None):
                 break
 
 
-def post(url: str, data=None):
+def req_get(url: str, params=None):
     i = 1
     while True:
+
         try:
-            if data is None:
-                return requests.post(url=url, timeout=6)
+            if params is None:
+                return requests.get(url=url, timeout=6)
             else:
-                return requests.post(url=url, data=data, timeout=6)
+                return requests.get(url=url, params=params, timeout=6)
         except Exception:
             k = 2 ** i
             global_queue.put("第{}次，请求失败，等待{}s 后继续".format(i, k))
