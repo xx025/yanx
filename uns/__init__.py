@@ -1,4 +1,4 @@
-from _g import global_queue
+from _g.g3 import global_queue
 from db2 import db_con
 from stools.sk3 import req_get
 
