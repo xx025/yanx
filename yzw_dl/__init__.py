@@ -1,7 +1,8 @@
 import datetime
 
-from _g import global_queue, GLOBAL_VAL
+from _g import global_queue, GLOBAL_VAL, G_config
 from db2 import db_con
+from uns import getEdu
 from yzw_dl.get_recruit_schools import get_dwmc
 
 '''
@@ -71,6 +72,17 @@ class dlYzw:
 
     def down_all(self):
         self.__add_task()
+
+        # 下载院校库
+
+        if G_config.get('yuanxiaoku') == 0:
+            global_queue.put("首次使用，更新院校库")
+            edu2 = getEdu()
+
+            edu2.dl_data()
+
+            G_config['yuanxiaoku'] = 1
+            G_config.write()
 
         ls = self.__dl_school()
 
