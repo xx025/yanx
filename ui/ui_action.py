@@ -331,8 +331,7 @@ class Ui(Ui_MainWindow):
                 # 后两项分别为按钮(以|隔开，共有7种按钮类型，见示例后)、默认按钮(省略则默认为第一个按钮)
                 QMessageBox.question(QtWidgets.QMainWindow(), "导出完成",
                                      UPLOAD_TIPS, QMessageBox.Yes)
-
-            self.dangQianRenWuLable.setText(data)
+            self.dangQianRenWuLable.setText(str(data))
 
     def daShang(self):
 
