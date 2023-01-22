@@ -1,9 +1,49 @@
 import sqlite3
 
-import numpy
 import numpy as np
 
-from _g import REAL_PATH
+from _g import REAL_PATH, G_config
+from db2.sqls import sqls, sql_table_dqdm
+
+
+class db_con:
+
+    @staticmethod
+    def get_con():
+        con = sqlite3.connect(REAL_PATH + '\db\database.db', check_same_thread=False)
+        return con
+
+
+class Database:
+
+    def init(self):
+
+        con = db_con.get_con()
+
+        cur = con.cursor()
+
+        l = cur.execute("select name from sqlite_master")
+
+        l = [i[0] for i in l]
+
+        tables_name = sqls.keys()
+
+        for table_name, exsql in sqls.items():
+            if table_name not in l:
+                q = cur.execute(exsql)
+                if table_name == '地区代码':
+                    cur.execute(sql_table_dqdm)
+
+        else:
+            con.commit()
+        con.close()
+
+        G_config['yuanxiaoku'] = 0
+        G_config.write()
+
+
+db = Database()
+db.init()
 
 
 def get_dqdm():
@@ -34,14 +74,6 @@ def get_abquy(ab):
     con.close()
 
     return list11
-
-
-class db_con:
-
-    @staticmethod
-    def get_con():
-        con = sqlite3.connect(REAL_PATH + '\db\database.db', check_same_thread=False)
-        return con
 
 
 def get_down_task():
@@ -76,14 +108,21 @@ def daochu_xinxi(tids):
             data = [None, None, None, None, None]
             sql1 = 'select 所在地,AB,院校隶属,IS985,IS211,双一流 from 院校库 where 院校代码 = ?'
             data5 = []
-            dats2 = list([k for k in con.execute(sql1, ((id[:5]),))][0])
+
+            try:
+                dats2 = list([k for k in con.execute(sql1, ((id[:5]),))][0])
+            except:
+                dats2 = [None, None, None, None, None, None]
 
             data5.append(dats2[0])
             data5.append(f'{dats2[1]}区')
             data5.append(dats2[2])
 
-            if '1' not in dats2[3:]:
-                data5.append('普通院校')
+            if '1' not in dats2[3:] or None in dats2[3:]:
+                if None not in dats2[3:]:
+                    data5.append('普通院校')
+                else:
+                    data5.append(None)
             else:
                 data5.append(
                     f"{'985,' if dats2[3] == '1' else ''}{'211,' if dats2[4] == '1' else ''}{'双一流' if dats2[5] == '1' else ''}")
