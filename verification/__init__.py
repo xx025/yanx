@@ -6,7 +6,7 @@ import requests
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QInputDialog, QLineEdit
 
-from _g import G_config
+from _g.g2 import G_config
 from ui.static_def import opurl
 from ui.ui_texts import GITHUB_URL, XMLL, WSXM
 
