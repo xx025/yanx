@@ -6,7 +6,7 @@
 ----
 **打包**：
 ```shell
-pyinstaller -D -w -i favicon.ico main.py --add-data "favicon.ico;.\\" 
+pyinstaller -D -w -i favicon.ico main.py --add-data "favicon.ico;.\\"  --add-data ".\\imgs\\*;.\\imgs"
 ```
 
 ```shell
