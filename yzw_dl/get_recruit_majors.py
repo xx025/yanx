@@ -2,7 +2,8 @@ from bs4 import BeautifulSoup
 
 import stools
 import stools.sk2
-from _g import global_queue
+from _g.g3 import global_queue
+
 from stools.sk3 import req_get
 from yzw_dl.yzw_pages import yzw_table
 
