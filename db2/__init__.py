@@ -1,8 +1,7 @@
+import os
 import sqlite3
 
-import numpy as np
-
-from _g import REAL_PATH, G_config
+from _g.g2 import REAL_PATH, G_config
 from db2.sqls import sqls, sql_table_dqdm
 
 
@@ -10,7 +9,8 @@ class db_con:
 
     @staticmethod
     def get_con():
-        con = sqlite3.connect(REAL_PATH + '\db\database.db', check_same_thread=False)
+        path = os.path.join(REAL_PATH, 'database.db')
+        con = sqlite3.connect(path, check_same_thread=False)
         return con
 
 
@@ -26,20 +26,21 @@ class Database:
 
         l = [i[0] for i in l]
 
-        tables_name = sqls.keys()
-
         for table_name, exsql in sqls.items():
             if table_name not in l:
                 q = cur.execute(exsql)
                 if table_name == '地区代码':
                     cur.execute(sql_table_dqdm)
 
+                if table_name == '院校库':
+                    G_config['yuanxiaoku'] = 0
+                    G_config.write()
+
         else:
+            G_config['yuanxiaoku'] = 0
+            G_config.write()
             con.commit()
         con.close()
-
-        G_config['yuanxiaoku'] = 0
-        G_config.write()
 
 
 db = Database()
@@ -150,7 +151,7 @@ def daochu_xinxi(tids):
         if len(d1[i]) < max_length:
             d1[i].extend(['-' for _ in range(max_length - len(d1[i]))])
 
-    d1 = np.array(d1, dtype=str)
+    # d1 = np.array(d1, dtype=str)
 
     # d1 = np.delete(d1, [0, 1, 2, 3], axis=1)
 
