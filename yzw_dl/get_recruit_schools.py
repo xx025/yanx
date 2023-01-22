@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 
-from _g import global_queue, GLOBAL_VAL
+from _g.g2 import GLOBAL_VAL
+from _g.g3 import global_queue
 from db2 import get_abquy, get_uis11_list
 from stools.sk2 import get_url_param
 from stools.sk3 import req_post
