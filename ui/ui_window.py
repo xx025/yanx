@@ -133,17 +133,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.addWidget(self.daShangBtn)
         self.daShangBtn.setText("💴打赏")
 
-
-
         self.daoChuSheZhi = QtWidgets.QPushButton(self.verticalLayoutWidget_3)
         self.daoChuSheZhi.setObjectName("daoChuSheZhi")
         self.horizontalLayout_3.addWidget(self.daoChuSheZhi)
 
-
         self.daoChu = QtWidgets.QPushButton(self.verticalLayoutWidget_3)
         self.daoChu.setObjectName("daoChu")
         self.horizontalLayout_3.addWidget(self.daoChu)
-
 
         self.verticalLayout_3.addLayout(self.horizontalLayout_3)
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
