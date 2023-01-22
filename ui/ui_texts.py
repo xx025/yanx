@@ -2,8 +2,8 @@
 from _g import REAL_PATH
 from stools.sk2 import get_year, gta
 
-version = {'v': 'v3.1.15',
-           'id': "20230115"}
+version = {'v': 'v3.1.22',
+           'id': "20230122"}
 version_build = version.get('v')
 # 软件的版本，每次构建时更改,显示在标题栏
 
