@@ -1,6 +1,7 @@
 import datetime
 
-from _g import global_queue, GLOBAL_VAL, G_config
+from _g.g2 import GLOBAL_VAL, G_config, YEAR_VERSION
+from _g.g3 import global_queue
 from db2 import db_con
 from uns import getEdu
 from yzw_dl.get_recruit_schools import get_dwmc
@@ -71,22 +72,22 @@ class dlYzw:
         print(datetime.datetime.now())
 
     def down_all(self):
-        self.__add_task()
-
         # 下载院校库
-
-        if G_config.get('yuanxiaoku') == 0:
-            global_queue.put("首次使用，更新院校库")
+        save_year = int(G_config.get('yuanxiaoku')) if G_config.get('yuanxiaoku') else 0
+        if YEAR_VERSION > save_year:
+            global_queue.put("更新院校库")
             edu2 = getEdu()
 
             edu2.dl_data()
 
-            G_config['yuanxiaoku'] = 1
+            G_config['yuanxiaoku'] = YEAR_VERSION
             G_config.write()
 
-        ls = self.__dl_school()
+            global_queue.put("更新成功")
 
-        print(ls)
+        self.__add_task()
+
+        ls = self.__dl_school()
 
         lm = self.__dl_majors(ls=ls)
 
