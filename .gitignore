@@ -3,3 +3,6 @@
 .idea/YanX.iml
 *.pyc
 db/database.db
+*.iml
+*.png
+*.spec
