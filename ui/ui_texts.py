@@ -1,6 +1,9 @@
 # 这个文件内包含程序界面文字和外链内容
-from _g import REAL_PATH
-from stools.sk2 import get_year, gta
+from os import path
+
+
+from _g.g2 import REAL_PATH, YEAR_VERSION
+from stools.sk2 import gta
 
 version = {'v': 'v3.1.22',
            'id': "20230122"}
@@ -12,15 +15,16 @@ version_id = version.get('id')
 # 用于更新和检查
 project_name = 'YanX'
 
-year = get_year()
+year = YEAR_VERSION
 # 年份根据据研招网（https://yz.chsi.com.cn/zsml/zyfx_search.jsp）动态生产
 
 WIN_TITLE = win_title = '{}-研招网硕士专业目录下载-{}'.format(project_name, version_build)
 # 窗体的标题
 
 
-TITLE = title = '研招网{}年硕士专业目录下载'.format(year)
-PIC_PATH = pic_path = REAL_PATH + '\db\githubstar3.png'
+TITLE = title = f'研招网{year}年硕士专业目录下载'
+
+PIC_PATH = pic_path = path.join(REAL_PATH, 'imgs\githubstar3.png')
 
 GITHUB_URL = github_url = 'https://github.com/xx025/YanX'
 GITHUB_URL2 = 'https://github.com/xx025/YanX-Docs#%E6%AD%A4%E4%BB%93%E5%BA%93%E8%B4%A1%E7%8C%AE%E8%80%85'
