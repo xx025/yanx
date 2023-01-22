@@ -12,7 +12,8 @@ import datetime
 import os
 import threading
 
-from _g import GLOBAL_VAL, global_queue
+from _g.g2 import GLOBAL_VAL
+from _g.g3 import global_queue
 from db2 import db_con, daochu_xinxi
 from stools.sk2 import get_desktop_path
 
