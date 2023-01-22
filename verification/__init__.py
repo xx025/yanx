@@ -6,7 +6,6 @@ import requests
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QInputDialog, QLineEdit
 
-import stools
 from _g import G_config
 from ui.static_def import opurl
 from ui.ui_texts import GITHUB_URL, XMLL, WSXM
@@ -23,7 +22,7 @@ def if_star(content=GITHUB_URL, op_e=True):
             res = requests.get(f'https://api.github.com/users/{val}/starred?per_page=1', timeout=4, verify=False).text
             res = json.loads(res)
             for i in res:
-                html_url =  i.get('owner').get('html_url') + '/' +  i.get('name')
+                html_url = i.get('owner').get('html_url') + '/' + i.get('name')
                 # print(html_url)
                 if GITHUB_URL == html_url:
                     return True
