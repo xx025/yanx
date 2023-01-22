@@ -1,11 +1,8 @@
 import os
-from queue import Queue
 
 from configobj import ConfigObj
 
-# maxsize默认为0，不受限
-# 一旦>0，而消息数又达到限制，q.put()也将阻塞
-global_queue = Queue(maxsize=0)
+from stools.sk4 import get_year
 
 REAL_PATH = os.getcwd()
 
@@ -33,3 +30,4 @@ GLOBAL_VAL['DOWN_TASK'] = None
 GLOBAL_VAL['gcodes'] = {}
 
 GLOBAL_VAL['TASK_SELECTED'] = {'ids': [], 'texts': []}
+YEAR_VERSION= get_year()
