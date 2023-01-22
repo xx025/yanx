@@ -1,11 +1,13 @@
 from PyQt5 import QtWidgets
 
+from db2 import Database
 from ui.static_def import out_date
 from ui.ui_action import Ui
 from verification import if_star
 
 if __name__ == "__main__":
     import sys
+
 
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
