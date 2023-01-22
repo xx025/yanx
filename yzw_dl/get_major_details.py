@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 
-from _g import global_queue, GLOBAL_VAL
+from _g.g2 import GLOBAL_VAL
+from _g.g3 import global_queue
 from stools.sk2 import remove_spaces
 from stools.sk3 import req_get
 
