@@ -38,7 +38,7 @@ def dao_chu_ren_wu():
             path = os.path.join(get_desktop_path(), f'{filename}.csv')
 
             data4 = daochu_xinxi(selected_ids)
-            with open(path, 'a', encoding='utf-8-sig', newline="") as f:
+            with open(path, 'w', encoding='utf-8-sig', newline="") as f:
                 writer = csv.writer(f)
                 writer.writerows(data4)
 
