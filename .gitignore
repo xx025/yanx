@@ -6,3 +6,4 @@ db/database.db
 *.iml
 *.png
 *.spec
+*.cfg
