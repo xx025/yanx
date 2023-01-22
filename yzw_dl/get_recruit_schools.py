@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup
 
-import stools
-
 from _g import global_queue, GLOBAL_VAL
 from db2 import get_abquy, get_uis11_list
 from stools.sk2 import get_url_param
