@@ -6,8 +6,6 @@ https://yz.chsi.com.cn/zsml/zyfx_search.jsp
 """
 import json
 
-import stools
-
 from db2 import get_dqdm
 from stools.sk3 import req_get, req_post
 
