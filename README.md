@@ -3,6 +3,22 @@
 [YanX-研招网硕士专业目录下载](https://github.com/xx025/YanX)
 
 
+----
+**打包**：
+```shell
+pyinstaller -D -w -i favicon.ico main.py --add-data "favicon.ico;.\\" 
+```
+
+```shell
+
+pip install pipreqs
+```
+
+```shell
+
+pipreqs  --encoding=utf8 --force
+```
+
 
 ---
 
