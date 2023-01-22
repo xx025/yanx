@@ -1,7 +1,5 @@
 import json
 
-import stools
-
 from db2 import db_con
 from stools.sk3 import req_get
 from uns import loc_A, loc_B
