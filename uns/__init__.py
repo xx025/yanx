@@ -1,5 +1,4 @@
-import stools
-
+from _g import global_queue
 from db2 import db_con
 from stools.sk3 import req_get
 
@@ -69,9 +68,10 @@ class getEdu:
         # 初始页面设置为0
 
     def dl_data(self):
+
         from stools.sk2 import get_url_param
         while True:
-            print(self.页码)
+            global_queue.put(f'下载院校库：{self.页码}')
             page_text = req_get(url=self.链接, params={'start': self.页码}).text
             soup = BeautifulSoup(page_text, "html.parser")
             if soup.select('.yxk-table table tbody tr').__len__() == 1 and soup.select_one(
