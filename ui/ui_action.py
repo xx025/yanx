@@ -7,7 +7,7 @@ from PyQt5.QtCore import QStringListModel
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QAbstractItemView, QMessageBox, QDialog, QLabel
 
-from _g import global_queue, GLOBAL_VAL, REAL_PATH
+from _g.g2 import GLOBAL_VAL, REAL_PATH
 from db2 import get_down_task
 from task.dls import dao_chu_ren_wu, shan_chu_ren_wu
 from ui.static_def import UpdateThread
@@ -337,7 +337,7 @@ class Ui(Ui_MainWindow):
 
         dialog_fault = QDialog()
 
-        image_path = os.path.join(REAL_PATH, "db\dashang.png")
+        image_path = os.path.join(REAL_PATH, "imgs\dashang.png")
 
         dialog_fault.setWindowTitle('💴打赏')
         print(image_path)
