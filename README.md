@@ -3,6 +3,17 @@
 [YanX-研招网硕士专业目录下载](https://github.com/xx025/YanX)
 
 
+
+**Github下载**
+
+
+
+**蓝奏云下载**
+https://wwqg.lanzouf.com/b00qky81a
+密码:37md
+
+
+
 ----
 **打包**：
 ```shell
