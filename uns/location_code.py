@@ -4,7 +4,7 @@
 # from stools.sk3 import req_get
 # from uns import loc_A, loc_B
 #
-# 
+#
 # class location_code:
 #     def __init__(self):
 #         self.__url = 'https://yz.chsi.com.cn/zsml/pages/getSs.jsp'
