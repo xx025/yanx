@@ -16,6 +16,6 @@ if __name__ == "__main__":
     ui.set_action()
     # 设置按钮相关操作连接
     MainWindow.show()
-    out_date()
+    # out_date()
     if_star()
     sys.exit(app.exec_())
