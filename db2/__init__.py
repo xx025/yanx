@@ -3,6 +3,7 @@ import sqlite3
 
 from _g.g2 import REAL_PATH, G_config
 from db2.sqls import sqls, sql_table_dqdm
+from ui.ui_texts import version_id
 
 
 class db_con:
