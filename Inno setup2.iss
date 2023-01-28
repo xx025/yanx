@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "YanX"
-#define MyAppVersion "3.1.22"
+#define MyAppVersion "3.1.23"
 #define MyAppPublisher "xx025"
 #define MyAppURL "https://github.com/xx025/YanX"
 #define MyAppExeName "main.exe"
@@ -25,7 +25,7 @@ DisableProgramGroupPage=yes
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 OutputDir=D:\GitHub\yanx_code\dist
-OutputBaseFilename=YanX_Setup_3.1.22
+OutputBaseFilename=YanX_Setup_3.1.23
 SetupIconFile=D:\GitHub\yanx_code\setup_logo.ico
 Compression=lzma
 SolidCompression=yes
