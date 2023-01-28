@@ -7,6 +7,7 @@ from PyQt5.QtCore import QThread, pyqtSignal, QUrl
 from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtWidgets import QMessageBox
 
+from _g.g2 import G_config
 from _g.g3 import global_queue
 from ui.ui_texts import GITHUBPAGE3, version_id, UPDATE, version_build
 
@@ -25,6 +26,10 @@ class UpdateThread(QThread):
 
 
 def out_date():
+    if G_config.get('istest') == '1':
+        # 测试环境
+        return
+
     upd = UPDATE
     local = upd.get('local')
     if local:
