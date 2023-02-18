@@ -1,7 +1,7 @@
 <div align=center>
 <a href='https://github.com/xx025/YanX'>
 
-<img alt="ziwels" src="https://xx025.github.io/YanX/docs/img/Snipaste_2022-09-25_20-06-40.png">
+<img alt="ziwels" src="https://raw.githubusercontent.com/xx025/yanx/pages/docs/img/Snipaste_2022-09-25_20-06-40.png">
 
 <h1>YanX-研招网硕士专业目录下载</h1></a>
 
@@ -74,7 +74,7 @@
 
 ## 调试与开发
 
-[调试与开发](https://xx025.github.io/YanX/docs/调试与开发)
+[调试与开发](https://github.com/xx025/yanx/blob/pages/docs/%E8%B0%83%E8%AF%95%E4%B8%8E%E5%BC%80%E5%8F%91.md)
 
 ## 声明
 
