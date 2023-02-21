@@ -13,7 +13,7 @@
 
 </div>
 
-**推荐魔法网络**：[点此链接有月1元优惠套餐](https://xx025.github.io/73ycd9u.html)
+**推荐魔法网络**：[点此链接有月1元优惠套餐](https://xx025.github.io/773ycd9u.html)
 
 ### 速达目录
 
