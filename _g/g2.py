@@ -31,3 +31,5 @@ GLOBAL_VAL['gcodes'] = {}
 
 GLOBAL_VAL['TASK_SELECTED'] = {'ids': [], 'texts': []}
 YEAR_VERSION= get_year()
+version = {'v': 'v3.2.23',
+           'id': "20230323"}

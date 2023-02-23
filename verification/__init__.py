@@ -19,7 +19,7 @@ def if_star(content=GITHUB_URL, op_e=True):
 
     def check_val(val):
         try:
-            res = requests.get(f'https://api.github.com/users/{val}/starred?per_page=1', timeout=4, verify=False).text
+            res = requests.get(f'https://api.github.com/users/{val}/starred', timeout=4, verify=False).text
             res = json.loads(res)
             for i in res:
                 html_url = i.get('owner').get('html_url') + '/' + i.get('name')
@@ -31,6 +31,8 @@ def if_star(content=GITHUB_URL, op_e=True):
         except Exception:
             return False
 
+    if G_config.get('istest') == '1':
+        return
     if saved_id and check_val(saved_id):
         # 存在保存的id 而且检查通过
         pass
