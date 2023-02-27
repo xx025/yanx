@@ -1,7 +1,7 @@
 <div align=center>
 <a href='https://github.com/xx025/YanX'>
 
-<img alt="界面" src="https://raw.githubusercontent.com/xx025/yanx/pages/docs/img/Snipaste_2022-09-25_20-06-40.png">
+<img alt="界面" src="/docs/img/img-yanx-program2022925.png">
 
 <h1>YanX-研招网硕士专业目录下载</h1></a>
 
@@ -13,7 +13,10 @@
 
 </div>
 
-**推荐魔法网络**：[点此链接有月1元优惠套餐](https://xx025.github.io/773ycd9u.html)
+
+> 🧡🧡 开发不易，感谢[赞赏](https://xx025.github.io/pages/zs/)
+
+**推荐魔法网络**：[点此链接有月1元优惠套餐](https://xx025.github.io/773ycd9u)
 
 ### 速达目录
 
