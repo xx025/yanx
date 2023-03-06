@@ -3,9 +3,10 @@ from bs4 import BeautifulSoup
 from _g.g2 import GLOBAL_VAL
 from _g.g3 import global_queue
 from db2 import get_abquy, get_uis11_list
-from stools.sk2 import get_url_param
-from stools.sk3 import req_post
+
 from uns import list985, list211
+from utils.request_utils.rewirte_requests import req_post
+from utils.request_utils.url import get_url_param
 from yzw_dl.yzw_pages import yzw_table
 
 

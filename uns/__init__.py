@@ -1,6 +1,7 @@
 from _g.g3 import global_queue
 from db2 import db_con
-from stools.sk3 import req_get
+from utils.request_utils.rewirte_requests import req_get
+from utils.request_utils.url import get_url_param
 
 list985 = ['北京大学', '中国人民大学', '清华大学', '北京航空航天大学', '北京理工大学', '中国农业大学', '北京师范大学',
            '中央民族大学', '南开大学', '天津大学', '大连理工大学', '东北大学', '吉林大学', '哈尔滨工业大学', '复旦大学',
@@ -69,7 +70,7 @@ class getEdu:
 
     def dl_data(self):
 
-        from stools.sk2 import get_url_param
+
         while True:
             global_queue.put(f'下载院校库：{self.页码}')
             page_text = req_get(url=self.链接, params={'start': self.页码}).text

@@ -2,7 +2,7 @@ import os
 
 from configobj import ConfigObj
 
-from stools.sk4 import get_year
+from utils.web_info import get_year
 
 os.environ['HTTP_PROXY'] = ''
 os.environ['HTTPS_PROXY'] = ''

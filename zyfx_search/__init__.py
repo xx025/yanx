@@ -7,7 +7,7 @@ https://yz.chsi.com.cn/zsml/zyfx_search.jsp
 import json
 
 from db2 import get_dqdm
-from stools.sk3 import req_get, req_post
+from utils.request_utils.rewirte_requests import req_get, req_post
 
 
 # 设置一给全局查询字典

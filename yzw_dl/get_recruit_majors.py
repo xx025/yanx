@@ -1,10 +1,8 @@
 from bs4 import BeautifulSoup
 
-import stools
-import stools.sk2
+import utils.request_utils.url
 from _g.g3 import global_queue
-
-from stools.sk3 import req_get
+from utils.request_utils import req_get
 from yzw_dl.yzw_pages import yzw_table
 
 
@@ -43,7 +41,7 @@ class dl_majors:
             page_text = req_get(url=url).text
             soup = BeautifulSoup(page_text, 'html.parser')
             for k in soup.select('.zsml-list-box tbody tr'):
-                ksfw = stools.sk2.get_url_param(k.select('td')[7].select_one('a').get('href')).get('id')
+                ksfw = utils.request_utils.url.get_url_param(k.select('td')[7].select_one('a').get('href')).get('id')
                 # 只获取一个id
                 #     def __set_urls(self):
                 #

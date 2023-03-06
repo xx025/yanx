@@ -1,7 +1,7 @@
 import os
 import sqlite3
 
-from _g.g2 import REAL_PATH, G_config
+from _g.g2 import REAL_PATH, G_config, GLOBAL_VAL
 from db2.sqls import sqls, sql_table_dqdm
 from ui.ui_texts import version_id
 
@@ -157,3 +157,15 @@ def daochu_xinxi(tids):
     # d1 = np.delete(d1, [0, 1, 2, 3], axis=1)
 
     return d1
+
+
+def shan_chu_ren_wu():
+    # (伪)删除，available 变成0
+    con = db_con.get_con()
+    cur = con.cursor()
+    selected_ids = GLOBAL_VAL['TASK_SELECTED']['ids']
+
+    sqlm = [(id,) for id in selected_ids]
+    cur.executemany('update 下载任务 set available=0 where id=?', sqlm)
+    con.commit()
+    con.close()

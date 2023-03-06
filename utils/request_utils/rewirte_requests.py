@@ -5,8 +5,6 @@ import requests
 from _g.g3 import global_queue
 
 
-# 自动重试的 post 和 get 方法
-
 def req_post(url: str, data=None):
     i = 1
     while True:

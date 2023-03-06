@@ -8,8 +8,8 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QAbstractItemView, QMessageBox, QDialog, QLabel
 
 from _g.g2 import GLOBAL_VAL, REAL_PATH
-from db2 import get_down_task
-from task.dls import dao_chu_ren_wu, shan_chu_ren_wu
+from db2 import get_down_task, shan_chu_ren_wu
+from task.dls import dao_chu_ren_wu
 from ui.static_def import UpdateThread
 from ui.ui_texts import UPLOAD_TIPS, DL_BAN
 from ui.ui_window import Ui_MainWindow

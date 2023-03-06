@@ -1,7 +1,10 @@
 import json
-import winreg
+import re
 
 import requests
+from bs4 import BeautifulSoup
+
+from utils.request_utils.rewirte_requests import req_get
 
 
 def gta():
@@ -22,17 +25,15 @@ def gta():
     return info
 
 
-def remove_spaces(strs=''):
-    return strs.replace('\n', '').replace('\r', '').replace(' ', '')
+def get_year():
+    try:
+        url = 'https://yz.chsi.com.cn/zsml/zyfx_search.jsp'
 
-
-def get_url_param(url: str):
-    from urllib.parse import urlparse, parse_qs
-    query = urlparse(url).query
-    return dict([(k, v[0]) for k, v in parse_qs(query).items()])
-
-
-def get_desktop_path():
-    key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders')
-    path = winreg.QueryValueEx(key, "Desktop")[0]
-    return path
+        text = req_get(url=url).text
+        soup = BeautifulSoup(text, 'html.parser')
+        lt = soup.select_one('.zsml-form-box h2').text
+        lt = re.findall("\d+", lt)[0]
+        lt = int(lt)
+    except:
+        lt = None
+    return lt

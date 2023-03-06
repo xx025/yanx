@@ -14,8 +14,8 @@ import threading
 
 from _g.g2 import GLOBAL_VAL
 from _g.g3 import global_queue
-from db2 import db_con, daochu_xinxi
-from stools.sk2 import get_desktop_path
+from db2 import daochu_xinxi
+from utils.get_path import get_desktop_path
 
 
 def dao_chu_ren_wu():
@@ -50,13 +50,3 @@ def dao_chu_ren_wu():
     t1.start()
 
 
-def shan_chu_ren_wu():
-    # (伪)删除，available 变成0
-    con = db_con.get_con()
-    cur = con.cursor()
-    selected_ids = GLOBAL_VAL['TASK_SELECTED']['ids']
-
-    sqlm = [(id,) for id in selected_ids]
-    cur.executemany('update 下载任务 set available=0 where id=?', sqlm)
-    con.commit()
-    con.close()

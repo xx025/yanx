@@ -2,8 +2,8 @@ from bs4 import BeautifulSoup
 
 from _g.g2 import GLOBAL_VAL
 from _g.g3 import global_queue
-from stools.sk2 import remove_spaces
-from stools.sk3 import req_get
+from utils.string_utils import remove_spaces
+from utils.request_utils import req_get
 
 
 class dl_details:

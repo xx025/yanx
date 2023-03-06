@@ -3,7 +3,7 @@ from os import path
 
 
 from _g.g2 import REAL_PATH, YEAR_VERSION, version
-from stools.sk2 import gta
+from utils.web_info import gta
 
 version_build = version.get('v')
 # 软件的版本，每次构建时更改,显示在标题栏
