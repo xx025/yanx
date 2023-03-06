@@ -4,6 +4,10 @@ from configobj import ConfigObj
 
 from stools.sk4 import get_year
 
+os.environ['HTTP_PROXY'] = ''
+os.environ['HTTPS_PROXY'] = ''
+# 禁用系统代理
+
 REAL_PATH = os.getcwd()
 
 # 配置文件
@@ -30,6 +34,6 @@ GLOBAL_VAL['DOWN_TASK'] = None
 GLOBAL_VAL['gcodes'] = {}
 
 GLOBAL_VAL['TASK_SELECTED'] = {'ids': [], 'texts': []}
-YEAR_VERSION= get_year()
+YEAR_VERSION = get_year()
 version = {'v': 'v3.2.23',
            'id': "20230223"}
