@@ -1,7 +1,7 @@
 <div align=center>
 <a href='https://github.com/xx025/YanX'>
 
-<img alt="界面" src="/docs/img/img-yanx-program2022925.png">
+<img alt="界面" src="docs/img/img-yanx-program2022925.png">
 
 <h1>YanX-研招网硕士专业目录下载</h1></a>
 
