@@ -6,7 +6,7 @@ plugins:
 
 #下面是对主题的自定义配置
 
-lang : zh-CN
+lang: zh-CN
 
 show_downloads: "true"
 

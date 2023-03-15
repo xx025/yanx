@@ -55,9 +55,7 @@
 
 下图是选择 [学术学位-0201理论经济学-全日制](https://github.com/xx025/YanX/blob/pages/docs/%E5%AD%A6%E6%9C%AF%E5%AD%A6%E4%BD%8D-0201%E7%90%86%E8%AE%BA%E7%BB%8F%E6%B5%8E%E5%AD%A6-%E5%85%A8%E6%97%A5%E5%88%B6-2022-09-16-8.csv) 的导出文件内容
 
-<img width="991" alt="ziwels" src="https://user-images.githubusercontent.com/71559822/190682008-956b4598-4191-4263-9dbe-f84e8442139a.png">
-
-
+![dl-data-example-day20230315121325.png](docs/img/dl-data-example-day20230315121325.png)
 ### 3. Excel 筛选
 
 通过表格软件Excel或WPS打开导出的文件，你可以选择第一行用表格软件的筛选工具，进行更进一步的筛选

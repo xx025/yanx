@@ -1,82 +1,90 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.js"></script>
-    <!-- 添加JQuery-->
-    <link rel="shortcut icon" type="image/x-icon" href="https://xx025.github.io/YanX/favicon.ico">
+<html lang="{{ site.lang }}">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% seo %}
-    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
-    <!--[if lt IE 9]>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <![endif]-->
-    {% include head-custom.html %}
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1><a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
+        <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"
+                type="application/javascript"></script>
+        <!-- 添加JQuery-->
+        <link rel="shortcut icon" type="image/x-icon" href="https://xx025.github.io/YanX/favicon.ico">
 
-        {% if site.logo %}
-          <img src="{{site.logo | relative_url}}" alt="Logo" />
-        {% endif %}
 
-        <p>{{ site.description | default: site.github.project_tagline }}</p>
+        {% seo %}
+        <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
+        <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <![endif]-->
 
-        {% if site.github.is_project_page %}
-        <p class="view"><a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{ site.github.repository_nwo }}</small></a></p>
-        {% endif %}
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <h1><a href="{{ "/" | absolute_url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
 
-        {% if site.github.is_user_page %}
-        <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
-        {% endif %}
+                {% if site.logo %}
+                <img src="{{site.logo | relative_url}}" alt="Logo"/>
+                {% endif %}
 
-        {% if site.show_downloads %}
-        <h3>下载软件</h3>
-        <ul class="downloads">
-          <li><a  class='dl_exe_url'href="{{ site.github.repository_url }}/releases/latest">Download <strong>Github</strong></a></li>
-          <li><a  class='dl_zip_url' href="https://wwqg.lanzouf.com/b00qky81a"><strong>蓝奏云/密码:37md</strong></a></li>
-          <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
-        </ul>
-        {% endif %}
-      </header>
-      <section>
+                <p>{{ site.description | default: site.github.project_tagline }}</p>
 
-      {{ content }}
+                {% if site.github.is_project_page %}
+                <p class="view"><a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{
+                    site.github.repository_nwo }}</small></a></p>
+                {% endif %}
 
-      </section>
-      <footer>
-        {% if site.github.is_project_page %}
-        <p>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
-        {% endif %}
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
-    <script>
-              $.ajax({
-          url: "https://api.github.com/repos/xx025/yanx/releases/latest",
-          dataType: "jsonp",
-          jsonpCallback: "m1",
-          success: function (data1) {
-            data1.data.assets.forEach(element => {
-              let dlurl = element.browser_download_url
-              if (dlurl.search('.exe') > 0) {
-                $('.dl_exe_url').attr('href', dlurl)
-              }
-              if (dlurl.search('.7z') > 0 || dlurl.search('.zip') > 0 ) {
-                $('.dl_zip_url').attr('href', dlurl)
-              }
-            });
-            let imgurl='https://img.shields.io/github/downloads/xx025/yanx/'+data1.data.tag_name+'/total'
+                {% if site.github.is_user_page %}
+                <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
+                {% endif %}
 
-            $("#leastdown").attr('src',imgurl)
-          }
-        }
-        )
-    </script>
-  </body>
+                {% if site.show_downloads %}
+                <h3>下载软件</h3>
+                <ul class="downloads">
+                    <li><a class='dl_exe_url' href="{{ site.github.repository_url }}/releases/latest">Download
+                        <strong>Github</strong></a></li>
+                    <li><a class='dl_zip_url' href="https://wwqg.lanzouf.com/b00qky81a"><strong>蓝奏云/密码:37md</strong></a>
+                    </li>
+                    <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
+                </ul>
+                {% endif %}
+            </header>
+            <section>
+
+                {{ content }}
+
+            </section>
+            <footer>
+                {% if site.github.is_project_page %}
+                <p>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
+                {% endif %}
+                <p><small>Hosted on GitHub Pages &mdash; Theme by <a
+                        href="https://github.com/orderedlist">orderedlist</a></small></p>
+            </footer>
+        </div>
+        <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
+        <script>
+            $.ajax({
+                    url: "https://api.github.com/repos/xx025/yanx/releases/latest",
+                    dataType: "jsonp",
+                    jsonpCallback: "m1",
+                    success: function (data1) {
+                        data1.data.assets.forEach(element => {
+                            let dlurl = element.browser_download_url
+                            if (dlurl.search('.exe') > 0) {
+                                $('.dl_exe_url').attr('href', dlurl)
+                            }
+                            if (dlurl.search('.7z') > 0 || dlurl.search('.zip') > 0) {
+                                $('.dl_zip_url').attr('href', dlurl)
+                            }
+                        });
+                        let imgurl = 'https://img.shields.io/github/downloads/xx025/yanx/' + data1.data.tag_name + '/total'
+
+                        $("#leastdown").attr('src', imgurl)
+                    }
+                }
+            )
+        </script>
+    </body>
+    {% include wxzs.html %}
 </html>
