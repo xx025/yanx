@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>[[title]]</title>
+    [% include "head_includes.html" %]
+    <style>
+        .container-fluid {
+            width: 700px;
+            margin-top: 20px;
+        }
+
+        label {
+            width: 100px;
+        }
+
+        .select-box {
+            width: 200px;
+        }
+
+        .select-box .custom-select {
+            width: 100%;
+        }
+
+
+        .form-group {
+            width: 300px;
+        }
+
+        .my-view-box {
+            padding: 5px 5px 5px;
+            border: 1px solid rgb(211 200 200 / 58%);
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin: 0;
+        }
+
+        table td label {
+            width: 100%;
+        }
+
+        .table td, .table th {
+            padding: 5px;
+        }
+
+        .btn-xs {
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid " id="app">
+
+    <h2>{{ title }}</h2>
+    <p class="lead">{{ describe }} </p>
+    <div class=" my-view-box" id="new-dl">
+        <span>必选</span>
+        <div class="d-flex flex-wrap" id="must-select">
+            <div class="form-group mr-2 flex-grow-1">
+                <label for="mllb" class="col-form-label d-inline-block" style="width: 80px;">门类类别</label>
+                <div class="select-box d-inline-block">
+                    <select class="custom-select" id="mllb" v-model="mllbSelected">
+                        <option value="" selected>选择门类</option>
+                        <optgroup v-for="group in mllb_groups" :label="group.label" :key="group.label">
+                            <option v-for="option in group.options" :value="option.value"
+                                    :key="option.label">{{ option.label }}</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group mr-2 flex-grow-1">
+                <label for="xklb" class="col-form-label d-inline-block" style="width: 80px;">学科类别</label>
+                <div class="select-box d-inline-block">
+                    <select class="custom-select" id="xklb" v-model="xklbSelected">
+                        <option value="" selected> 选择学科类别</option>
+                        <option v-for="option in xklb_options" :value="option.value"
+                                :key="option.label">{{ option.label }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <span>可选</span>
+        <div class="d-flex flex-wrap" id="selectable">
+            <div class="form-group mr-2 flex-grow-1">
+                <label for="zymc" class="col-form-label d-inline-block" style="width: 80px;">专业名称</label>
+                <div class="select-box d-inline-block">
+                    <select class="custom-select" id="zymc" v-model="zymcValue">
+                        <option value="" selected> 选择专业</option>
+                        <option v-for="option in zymc_options" :value="option"
+                                :key="option">{{ option }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group mr-2 flex-grow-1">
+                <label for="xxfs" class="col-form-label d-inline-block" style="width: 80px;">学习方式</label>
+                <div class="select-box d-inline-block">
+                    <select class="custom-select" id="xxfs" v-model="xxfsValue">
+                        <option value="" selected>选择学习方式</option>
+                        <option value="1">全日制</option>
+                        <option value="2">非全日制</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group mr-2 flex-grow-1">
+                <label for="yxjh" class="col-form-label d-inline-block" style="width: 80px;">院校计划</label>
+                <div class="select-box d-inline-block">
+                    <select class="custom-select" id="yxjh" v-model="yxjhValue">
+                        <option value="" selected>选择院校</option>
+                        <option value="111">双一流院校</option>
+                        <option value="985">985院校</option>
+                        <option value="211">211院校</option>
+                        <option value="0">普通院校</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group mr-2 flex-grow-1 form-group-xs">
+                <label for="yxdq" class="col-form-label d-inline-block" style="width: 80px;">院校地区</label>
+                <div class="select-box d-inline-block">
+                    <select class="custom-select" id="yxdq" v-model="yxdqValue">
+                        <option value="" selected>选择地区</option>
+                        <option value="a">A区全部</option>
+                        <option value="b">B区全部</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="d-flex align-items-center justify-content-center" style="margin-top: 10px;">
+            <button type="button" class="btn btn-primary " @click="download">下载</button>
+        </div>
+    </div>
+
+
+    <div class="my-view-box" id="dl-complete" style=" margin-top: 5px;">
+        <div class="d-flex align-items-center justify-content-between" style="margin-bottom:4px">
+            <h6>下载完成</h6>
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-danger btn-xs" @click=" getSelectedItems()">删除选中</button>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <button type="button" class="btn btn-primary btn-xs">刷新</button>
+                    <button type="button" class="btn btn-info btn-xs">合并导出</button>
+                    <button type="button" class="btn btn-primary btn-xs">导出选中</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="height: 200px; overflow: auto;">
+            <table class="table table-bordered" v-if="dl_data.length > 0">
+                <tr v-for="item in dl_data" :key="item.id">
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" :value="item.id"
+                                   :id="'defaultCheck' + item.id" v-model="selectedItems">
+                            <label class="form-check-label" :for="'defaultCheck' + item.id">{{ item.name }}</label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <p v-else>还没有下载任何数据</p>
+        </div>
+    </div>
+
+    [% include "footer.html" %]
+</div>
+
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            title: '',
+            describe: '',
+            issue_url: '',
+            gh_url: '',
+            dl_data: [],
+            mllb_groups: [],
+            xklb_options: [],
+            zymc_options: [],
+            mllbValue: '',
+            xklbValue: '',
+            zymcValue: '',
+            xxfsValue: '',
+            yxjhValue: '',
+            yxdqValue: '',
+            selectedItems: []
+        },
+        mounted: function () {
+            axios.get('/api/main_data').then(response => {
+                this.title = response.data.title;
+                this.describe = response.data.describe;
+                this.issue_url = response.data.issue_url;
+                this.gh_url = response.data.gh_url;
+                this.fetchDownloadData()
+                this.fetchMllbGroups()
+                this.fetchXklbOptions()
+                this.fetchZymcOptions('')
+            });
+        },
+        computed: {
+            mllbSelected: {
+                get() {
+                    return this.mllbValue;
+                },
+                set(newValue) {
+                    this.mllbValue = newValue;
+                    // 当每类类别发生改变时，拉去新的学科类别
+                    this.xklbValue = ''
+                    this.fetchXklbOptions(this.mllbValue)
+                },
+            },
+            xklbSelected: {
+                get() {
+                    return this.xklbValue;
+                },
+                set(newValue) {
+                    this.xklbValue = newValue;
+                    // 当每类类别发生改变时，拉去新的学科类别
+                    this.zymcValue = ''
+                    this.fetchZymcOptions(this.xklbValue)
+                },
+            }
+        },
+        methods: {
+            getSelectedItems() {
+                console.log(this.selectedItems);
+            },
+            download() {
+                const params = {
+                    mllb: this.mllbValue,
+                    xklb: this.xklbValue,
+                    zymc: this.zymcValue,
+                    xxfs: this.xxfsValue,
+                    yxjh: this.yxjhValue,
+                    yxdq: this.yxdqValue
+                };
+
+                if (this.mllbValue && this.xklbValue) {
+                    const baseUrl = window.location.href.split('?')[0];
+                    // 打开新页面
+                    location.href = baseUrl + `dl?mllb=${params.mllb}&xklb=${params.xklb}&zymc=${params.zymc}&xxfs=${params.xxfs}&yxjh=${params.yxjh}&yxdq=${params.yxdq}`
+                } else {
+                    alert('请选择必选项')
+                }
+
+            },
+            fetchDownloadData: function () {
+                axios.get('/api/dl_data').then(response => {
+                    this.dl_data = response.data;
+                });
+            },
+            fetchMllbGroups: function () {
+                axios.get('/api/mldm').then(response => {
+                    this.mllb_groups = response.data;
+                });
+            },
+            fetchXklbOptions: function (dm = '') {
+                axios.get('/api/xklb', {
+                    params: {
+                        mldm: dm  // 将链接作为参数传递给后端接口
+                    }
+                }).then(response => {
+                    this.xklb_options = response.data;
+                }).catch(error => {
+                    console.error(error);
+                });
+            },
+            fetchZymcOptions: function (dm) {
+                axios.get('/api/zymc', {
+                    params: {
+                        dm: dm  // 将链接作为参数传递给后端接口
+                    }
+                }).then(response => {
+                    this.zymc_options = response.data;
+                }).catch(error => {
+                    console.error(error);
+                });
+            },
+            openLink: function (url) {
+                axios.get('/api/open_link', {
+                    params: {
+                        url: url // 将链接作为参数传递给后端接口
+                    }
+                }).then(response => {
+                    console.log(response.data.message); // 打印后端接口返回的消息
+                }).catch(error => {
+                    console.error(error);
+                });
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

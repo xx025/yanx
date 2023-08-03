@@ -1,0 +1,3 @@
+[submodule "yzw-dl"]
+	path = yzw-dl
+	url = https://github.com/xx025/yzw-dl.git
