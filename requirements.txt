@@ -14,3 +14,4 @@ sqlalchemy~=1.4.39
 itsdangerous==2.1.2
 
 git+https://github.com/xx025/requests_enhance.git
+git+https://github.com/xx025/yzw-dl.git
