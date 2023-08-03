@@ -107,7 +107,7 @@
             <div class="form-group mr-2 flex-grow-1">
                 <label for="yxjh" class="col-form-label d-inline-block" style="width: 80px;">院校计划</label>
                 <div class="select-box d-inline-block">
-                    <select class="custom-select" id="yxjh" v-model="yxjhValue">
+                    <select class="custom-select" id="yxjh" v-model="yxjhValue" disabled>
                         <option value="" selected>选择院校</option>
                         <option value="111">双一流院校</option>
                         <option value="985">985院校</option>
@@ -282,7 +282,7 @@
                 });
             },
             openLink: function (url) {
-                axios.get('/api/open_link', {
+                axios.get('/open_link', {
                     params: {
                         url: url // 将链接作为参数传递给后端接口
                     }
