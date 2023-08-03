@@ -72,7 +72,9 @@
             <div class="col-2">院校信息：</div>
             <div class="col-10">
                 <div class="progress" style="height: 20px;">
-                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                    <div class="progress-bar" role="progressbar"
+                         :style="{ width: progressData['院校信息'] + '%'}"
+                         :aria-valuenow="progressData['院校信息']"
                          aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
@@ -82,7 +84,9 @@
             <div class="col-2">专业信息：</div>
             <div class="col-10">
                 <div class="progress" style="height: 20px;">
-                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                    <div class="progress-bar" role="progressbar"
+                         :style="{ width: progressData['专业信息'] + '%'}"
+                         :aria-valuenow="progressData['专业信息']"
                          aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
@@ -91,8 +95,11 @@
             <div class="col-2">考试信息：</div>
             <div class="col-10">
                 <div class="progress" style="height: 20px;">
-                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                         aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar" role="progressbar"
+                         :style="{ width: progressData['考试信息'] + '%'}"
+                         :aria-valuenow="progressData['考试信息']"
+                         aria-valuemin="0"
+                         aria-valuemax="100"></div>
                 </div>
             </div>
 
@@ -117,6 +124,13 @@
         data: {
             title: '',
             describe: '',
+            socket: null, // 用于存储 WebSocket 对象
+            progressData: {  // 存储进度信息
+                "院校信息": 100,
+                "专业信息": 100,
+                "考试信息": 100
+            },
+            downloadFinished: false  // 标识下载是否完成
         },
         mounted: function () {
             axios.get('/api/main_data').then(response => {
@@ -141,7 +155,13 @@
 
             // 监听 WebSocket 接收消息事件
             this.socket.onmessage = (event) => {
-                console.log('WebSocket message received:', event.data);
+                const data = JSON.parse(event.data);
+
+                if (data.download_finished) {
+                    this.downloadFinished = true;
+                } else {
+                    this.progressData = data;
+                }
                 // 在这里处理后端发送的消息
             };
 
