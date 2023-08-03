@@ -1,7 +1,12 @@
-from fastapi import APIRouter, Depends
-from pydantic import BaseModel
+import asyncio
+
+from fastapi import APIRouter, HTTPException
+from fastapi import Depends, Request
 from requests_enhance import req_json_by_post
 from sqlalchemy.orm import Session
+from starlette.websockets import WebSocket, WebSocketState
+from yzw_dl import dl_zsyx, dl_yxzy, dl_ksfw
+from yzw_dl.tools import parse_config, output_csvfile
 
 from database import get_db
 
@@ -78,35 +83,97 @@ async def dl_data(db: Session = Depends(get_db)):
     return [{'id': i[0], 'name': i[1]} for i in tasks]
 
 
-@yanx_app.get('/open_link')
-async def open_link(url: str):
-    """
-    通过外部浏览器打开链接
-    """
-    import webbrowser
-    webbrowser.open_new_tab(url)
-    return {"message": f"已打开链接{url}"}
+# 定义一个依赖项函数，用于获取请求对象
+def get_request(request: Request = Depends()):
+    return request
 
 
-class DlParams(BaseModel):
-    mllb: str  # 门类类别，如专硕和学硕
-    xklb: str  # 学科类别，如哲学和经济学
-    zymc: str  # 专业名称
-    xxfs: str  # 学习方式
-    yxjh: str  # 院校建设计划，如985、211
-    yxdq: str  # 院校地区， 如A区和B区
+@yanx_app.websocket("/wsdl")
+async def websocket_endpoint(ws: WebSocket):
+    await ws.accept()
+    try:
+        dlparams = ws.session.get('dlparams', {})  # 从 Session 中获取下载参数
+        # tag: 原来向办法通过传递一个 request 对象来获取 Session,问了chatgpt好久也没说明白
+        # 调试后发现，ws 对象中已经包含了 request 对象的session属性，所以直接使用即可
+        # {'mllb': 'zyxw', 'xklb': '0101', 'zymc': '', 'xxfs': '', 'yxjh': '', 'yxdq': ''}
+        if not dlparams:
+            raise HTTPException(status_code=400, detail="No download parameters found")
+        # dlparams 和 yzw-dl  的 config_values 不一致，需要转换一下
+        config_values = {}
+        config_values['ssdm'] = ''  # 省市代码
+        config_values['dwmc'] = ''  # 单位名称
+        config_values['mldm'] = dlparams.get('mllb', '')  # 门类类别
+        config_values['yjxkdm'] = dlparams.get('xklb', '')  # 学科类别
+        config_values['zymc'] = dlparams.get('zymc', '')  # 专业名称
+        config_values['xxfs'] = dlparams.get('xxfs', '')  # 学习方式
 
+        param_list = parse_config(config_values)  # 解析后的参数列表
+        Dl_Data = {}
 
-@yanx_app.post('/new_dl')
-async def new_dl(params: DlParams):
-    return {'message': '创建成功'}
+        # 构造进度信息的初始状态
+        progress_data = {
+            "院校信息": 0,
+            "专业信息": 0,
+            "考试信息": 0
+        }
 
-
-@yanx_app.post("/stop_download")
-async def stop_download():
-    return {"message": "下载进程已停止"}
-
-
-@yanx_app.get('/progress')
-async def get_progress():
-    return {'message': '获取进度'}
+        for i_ in range(len(param_list)):
+            _param = param_list[i_]
+            for sch in dl_zsyx(**_param):
+                Dl_Data[sch.招生单位] = sch.dict()
+                progress_data["院校信息"] = int((i_ + 1) / len(param_list) * 100)
+                await ws.send_json(progress_data)
+        else:
+            # 院校信息下载完成后，开始下载专业信息
+            Dl_Data_keys = list(Dl_Data.keys())
+            for j_ in range(len(Dl_Data_keys)):
+                key = Dl_Data_keys[j_]
+                param = Dl_Data[key]['dl_params']
+                Dl_Data[key]['招生专业'] = {zs.id: zs.dict() for zs in dl_yxzy(**param)}
+                progress_data["专业信息"] = int((j_ + 1) / len(Dl_Data_keys) * 100)
+                await ws.send_json(progress_data)
+            else:
+                for k_ in range(len(Dl_Data_keys)):
+                    key = Dl_Data_keys[k_]
+                    for zyid in Dl_Data[key]['招生专业'].keys():
+                        my_dl_ksfw = dl_ksfw(zyid)
+                        zsml = my_dl_ksfw['zsml'].dict()  # 在详情页面会有一些更详细的信息
+                        ksfw = [ks_.dict() for ks_ in my_dl_ksfw['ksfw']]  # 考试科目范围
+                        dict1 = Dl_Data[key]['招生专业'][zyid]
+                        dict1.update(zsml)  # 更新招生专业信息
+                        dict1['考试范围'] = ksfw  # 添加考试科目范围
+                        Dl_Data[key]['招生专业'][zyid] = dict1  # 更新招生专业信息
+                    else:
+                        progress_data["考试信息"] = int((k_ + 1) / len(Dl_Data_keys) * 100)
+                        await ws.send_json(progress_data)
+                else:
+                    # 发送初始进度信息给前端
+                    await ws.send_json(progress_data)
+                    csv_title = [
+                        "id",
+                        "招生单位",
+                        "所在地",
+                        "院系所",
+                        "专业",
+                        '学习方式',
+                        "研究方向",
+                        "拟招人数",
+                        "政治",
+                        "外语",
+                        "业务课一",
+                        "业务课二",
+                        "考试方式",
+                        "指导老师",
+                        '备注'
+                    ]
+                    # 保存数据到数据库
+                    await output_csvfile(Dl_Data, 'data.csv',csv_title)
+        # 发送下载结束标识给前端
+        await ws.send_json({"download_finished": True})
+    except Exception as e:
+        if ws.state == WebSocketState.CONNECTED:
+            await ws.send_text(f"An error occurred: {str(e)}")
+        else:
+            print(f"An error occurred: {str(e)}")
+    finally:
+        await ws.close()
