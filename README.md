@@ -1,5 +1,5 @@
 
-![img.png](docs/img/img.png)
+![img.png](assets/img/img.png)
 
 **YanX 是一个一键下载全国所有院校*硕士研究生专业目录*的工具**
 
@@ -45,9 +45,9 @@
 
 ## 资料参考
 
-[AB类地区和985、211院校目录](docs/AB类地区和985、211院校目录)
+[AB类地区和985、211院校目录](assets/AB类地区和985、211院校目录)
 
-[院校库.csv](docs/院校库.csv)
+[院校库.csv](assets/院校库.csv)
 ，数据来自于研招网[院校库](https://yz.chsi.com.cn/sch/)
 
 ## 调试与开发
