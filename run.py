@@ -36,10 +36,6 @@ async def root(request: Request):
 
 @app.get("/dl", response_class=HTMLResponse)
 async def root2(request: Request):
-    session = request.session
-
-    session["username"] = "john.doe"
-
     return templates.TemplateResponse("download.html", {"request": request, 'title': 'YanX-研招网硕士专业目录下载'})
 
 

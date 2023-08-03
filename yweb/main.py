@@ -4,7 +4,6 @@ from requests_enhance import req_json_by_post
 from sqlalchemy.orm import Session
 
 from database import get_db
-from yweb.models import Download
 
 yanx_app = APIRouter()
 
@@ -44,9 +43,7 @@ async def get_xklb(mldm: str):
     获取学科类别
     允许有一个 mldm 标识门类代码
     """
-
     data = []
-
     try:
         url = 'https://yz.chsi.com.cn/zsml/pages/getZy.jsp'
         json_data = req_json_by_post(url=url, data={'mldm': mldm})
@@ -73,8 +70,12 @@ async def get_zymc(dm: str):
 
 @yanx_app.get('/dl_data')
 async def dl_data(db: Session = Depends(get_db)):
-    tasks = db.query(Download).filter(Download.available == 1).all()
-    return [{'id': i.id, 'name': i.task_name} for i in tasks]
+    # tasks = db.query(Download).filter(Download.available == 1).all()
+    # 数据库中已下载的任务
+    tasks = [
+        [1, 1]
+    ]
+    return [{'id': i[0], 'name': i[1]} for i in tasks]
 
 
 @yanx_app.get('/open_link')
