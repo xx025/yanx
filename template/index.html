@@ -241,9 +241,9 @@
                 };
 
                 if (this.mllbValue && this.xklbValue) {
-                    const baseUrl = window.location.href.split('?')[0];
+                    const baseUrl =window.location.origin
                     // 打开新页面
-                    location.href = baseUrl + `dl?mllb=${params.mllb}&xklb=${params.xklb}&zymc=${params.zymc}&xxfs=${params.xxfs}&yxjh=${params.yxjh}&yxdq=${params.yxdq}`
+                    location.href = baseUrl + `/dl?mllb=${params.mllb}&xklb=${params.xklb}&zymc=${params.zymc}&xxfs=${params.xxfs}&yxjh=${params.yxjh}&yxdq=${params.yxdq}`
                 } else {
                     alert('请选择必选项')
                 }
