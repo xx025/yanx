@@ -167,13 +167,14 @@ async def websocket_endpoint(ws: WebSocket):
                         '备注'
                     ]
                     # 保存数据到数据库
-                    await output_csvfile(Dl_Data, 'data.csv',csv_title)
+                    output_csvfile(Dl_Data, 'data.csv',csv_title)
         # 发送下载结束标识给前端
         await ws.send_json({"download_finished": True})
     except Exception as e:
         if ws.state == WebSocketState.CONNECTED:
             await ws.send_text(f"An error occurred: {str(e)}")
         else:
-            print(f"An error occurred: {str(e)}")
+            # 抛出一场
+            raise HTTPException(status_code=400, detail=f"An error occurred: {str(e)}")
     finally:
         await ws.close()
