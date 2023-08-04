@@ -1,4 +1,5 @@
 database.db
 .idea/
-/static/dldocs/
+/dldocs/
 /yzw-dl/yzw_dl.egg-info
+/dist/
