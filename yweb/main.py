@@ -1,6 +1,6 @@
 import asyncio
-import json
 import os
+from typing import List
 
 from fastapi import APIRouter, HTTPException
 from fastapi import Request
@@ -11,7 +11,7 @@ from starlette.websockets import WebSocket, WebSocketState
 
 from yweb.tools import create_file_name
 from yweb.yzw_down import DownTask
-from yzw_dl.tools import output_csvfile
+from yzw_dl.tools import csv_data_output, json_file_scv_output, json_file_to_list_data
 
 yanx_app = APIRouter()
 
@@ -88,13 +88,45 @@ async def get_zymc(dm: str, request: Request):
         return data
 
 
+g_tasks = []
+
+
 @yanx_app.get('/dl_data')
 async def dl_data():
     # 不用数据库
-    tasks = [
-        [1, 1]
-    ]
-    return [{'id': i[0], 'name': i[1]} for i in tasks]
+    def find_json_files(directory):
+        json_files = []
+        for root, dirs, files in os.walk(directory):
+            for file in files:
+                if file.endswith('.json'):
+                    json_files.append(file)
+        return json_files
+
+    folder_path = 'dldocs'  # 替换为你的文件夹路径
+    json_files = find_json_files(folder_path)
+
+    global g_tasks
+    g_tasks = []
+    for i in range(len(json_files)):
+        g_tasks.append({'id': i, 'name': json_files[i].replace('.json', ''), 'path': json_files[i]})
+
+    return g_tasks
+
+
+@yanx_app.get('/out_data')
+async def out_data(ids: List[int]):
+    dic_ = {item['id']: item['path'] for item in g_tasks}
+    output_files_path = [dic_[id] for id in ids]
+    all_csv_data = []
+    for file_path in output_files_path:
+        all_csv_data.extend(json_file_to_list_data(file_path))
+    filename = '123.csv'
+    out_csv_path = os.path.join('dldocs', filename)
+    csv_data_output(all_csv_data, out_csv_path)
+
+    return FileResponse(out_csv_path,
+                        filename=filename,
+                        background=BackgroundTask(lambda: os.remove(out_csv_path)))
 
 
 g_save_name = ''
@@ -143,14 +175,9 @@ async def websocket_endpoint(ws: WebSocket):
 @yanx_app.get("/out_to_csv")
 async def out_to_csv():
     save_name = g_save_name
-    out_json_path = os.path.join('static/dldocs', f'{save_name}.json')
-    out_csv_path = os.path.join('static/dldocs', f'{save_name}.csv')
-    csv_title = ["id", "招生单位", "所在地", "院系所", "专业", '学习方式', "研究方向", "拟招人数", "政治",
-                 "外语", "业务课一", "业务课二", "考试方式", "指导老师", '备注']
-
-    with open(out_json_path, 'r', encoding='utf-8') as f:
-        Dl_Data = json.load(f)  # 保存为CSV文件
-        output_csvfile(data=Dl_Data, file_name=out_csv_path, title=csv_title)
+    out_json_path = os.path.join('dldocs', f'{save_name}.json')
+    out_csv_path = os.path.join('dldocs', f'{save_name}.csv')
+    json_file_scv_output(out_json_path, out_csv_path)
     return FileResponse(out_csv_path,
                         filename=f'{save_name}.csv',
                         background=BackgroundTask(lambda: os.remove(out_csv_path)))

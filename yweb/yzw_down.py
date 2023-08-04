@@ -1,9 +1,9 @@
+import os
 import threading
 import time
 
-from yweb.tools import save_jsonfile
 from yzw_dl import dl_zsyx, dl_yxzy, dl_ksfw
-from yzw_dl.tools import parse_config
+from yzw_dl.tools import parse_config, output_jsonfile
 
 
 class DownTask(threading.Thread):
@@ -70,7 +70,8 @@ class DownTask(threading.Thread):
                 dict1['考试范围'] = ksfw  # 添加考试科目范围
                 Dl_Data[key]['招生专业'][zyid] = dict1  # 更新招生专业信息
 
-        save_jsonfile(Dl_Data, self.save_name)
+        # 保存数据
+        output_jsonfile(Dl_Data, os.path.join('dldocs', f'{self.save_name}.json'))
 
         progress_data = {key: 100 for key in progress_data.keys()}
         # 发送初始进度信息给前端
