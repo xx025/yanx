@@ -143,12 +143,12 @@
             <h6>下载完成</h6>
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group mr-2" role="group" aria-label="First group">
-<!--                    <button type="button" class="btn btn-danger btn-xs" @click=" getSelectedItems()">删除选中</button>-->
+                    <!--                    <button type="button" class="btn btn-danger btn-xs" @click=" getSelectedItems()">删除选中</button>-->
                 </div>
                 <div class="btn-group mr-2" role="group" aria-label="Second group">
-<!--                    <button type="button" class="btn btn-primary btn-xs">刷新</button>-->
-<!--                    <button type="button" class="btn btn-info btn-xs">合并导出</button>-->
-                    <button type="button" class="btn btn-primary btn-xs">导出选中</button>
+                    <!--                    <button type="button" class="btn btn-primary btn-xs">刷新</button>-->
+                    <!--                    <button type="button" class="btn btn-info btn-xs">合并导出</button>-->
+                    <button type="button" class="btn btn-primary btn-xs" @click="outputData">导出</button>
                 </div>
             </div>
         </div>
@@ -294,6 +294,20 @@
                 }).catch(error => {
                     console.error(error);
                 });
+            },
+            outputData: function () {
+                if (this.selectedItems.length === 0) {
+                    alert('请选择要导出的数据')
+                } else {
+                    console.log(this.selectedItems)
+                    try {
+                        location.href = '/api/output_data?ids=' + this.selectedItems.join('')
+                        console.log('后端返回的数据：', response.data);
+                    } catch (error) {
+                        console.error('发送数据到后端时发生错误：', error);
+                    }
+                }
+
             }
         }
     });

@@ -1,6 +1,5 @@
 import asyncio
 import os
-from typing import List
 
 from fastapi import APIRouter, HTTPException
 from fastapi import Request
@@ -11,7 +10,7 @@ from starlette.websockets import WebSocket, WebSocketState
 
 from yweb.tools import create_file_name
 from yweb.yzw_down import DownTask
-from yzw_dl.tools import csv_data_output, json_file_scv_output, json_file_to_list_data
+from yzw_dl.tools import json_file_scv_output, json_file_to_list_data, csv_data_output
 
 yanx_app = APIRouter()
 
@@ -113,13 +112,15 @@ async def dl_data():
     return g_tasks
 
 
-@yanx_app.get('/out_data')
-async def out_data(ids: List[int]):
+@yanx_app.get('/output_data')
+async def output_data(ids):
+    ids = [int(id) for id in ids]
+
     dic_ = {item['id']: item['path'] for item in g_tasks}
     output_files_path = [dic_[id] for id in ids]
     all_csv_data = []
     for file_path in output_files_path:
-        all_csv_data.extend(json_file_to_list_data(file_path))
+        all_csv_data.extend(json_file_to_list_data(os.path.join('dldocs', file_path)))
     filename = '123.csv'
     out_csv_path = os.path.join('dldocs', filename)
     csv_data_output(all_csv_data, out_csv_path)
