@@ -3,4 +3,4 @@ database.db
 /dldocs/
 /yzw-dl/yzw_dl.egg-info
 /dist/
-/run.spec
+*.spec
