@@ -1,4 +1,7 @@
-import uvicorn
+import os
+import sys
+
+
 from fastapi import FastAPI
 from fastapi import Request
 from fastapi.responses import HTMLResponse
@@ -9,6 +12,8 @@ from starlette.middleware.sessions import SessionMiddleware
 from starlette.staticfiles import StaticFiles
 
 from yweb import yanx_app
+
+# 获取应用程序所在的目录路径
 
 app = FastAPI()
 
@@ -26,7 +31,7 @@ app.add_middleware(SessionMiddleware, secret_key="your-secret-key")
 app.include_router(yanx_app, prefix='/api')
 
 # Mounting default static files
-app.mount(path="/static", app=StaticFiles(directory="./static"), name="static")
+app.mount(path="/static", app=StaticFiles(directory=os.path.join('static')), name="static")
 
 templates = Jinja2Templates(directory="template")
 # 设置新的模板渲染标记
@@ -81,9 +86,9 @@ async def open_link(url: str):
 
 
 if __name__ == "__main__":
-    uvicorn.run('run:app', host='localhost', reload=True, port=5511)
+    # uvicorn.run('run:app', host='localhost', reload=True, port=5511)
 
-    # FlaskUI(app=app, server="fastapi",
-    #         width=720,
-    #         height=680,
-    #         ).run()
+    FlaskUI(app=app, server="fastapi",
+            width=720,
+            height=680,
+            ).run()
