@@ -62,11 +62,9 @@
     <p class="lead">{{ describe }} </p>
     <div class="my-view-box">
         <h5>下载</h5>
-
-
         <div style="margin-top:100px "></div>
         <span>
-           正在下载，请不要关闭此页面或程序
+            {{ downloadMessage }}
         </span>
         <div class="line-progress row">
             <div class="col-2">院校信息：</div>
@@ -107,7 +105,7 @@
         <div style="margin-top:100px "></div>
         <div class="d-flex align-items-center justify-content-end" style="margin-bottom:10px;">
 
-            <button type="button" class="btn btn-info ">导出</button>
+            <button type="button" class="btn btn-info " @click="outToCSV">导出</button>
             <span style="margin-right: 15px"></span>
             <button type="button" class="btn btn-primary" @click="backHome">返回</button>
         </div>
@@ -130,7 +128,8 @@
                 "专业信息": 100,
                 "考试信息": 100
             },
-            downloadFinished: false  // 标识下载是否完成
+            downloadFinished: false,  // 标识下载是否完成
+            userEnd: false,// 用户主动结束
         },
         mounted: function () {
             axios.get('/api/main_data').then(response => {
@@ -156,20 +155,27 @@
             // 监听 WebSocket 接收消息事件
             this.socket.onmessage = (event) => {
                 const data = JSON.parse(event.data);
-
-                if (data.download_finished) {
+                if (data.downloadFinished) {
                     this.downloadFinished = true;
                     alert('下载完成')
                 } else {
                     this.progressData = data;
                 }
-                // 在这里处理后端发送的消息
             };
-
             // 监听 WebSocket 关闭事件
             this.socket.onclose = (event) => {
                 console.log('WebSocket connection closed');
+                if (!this.downloadFinished && !this.userEnd) {
+                    alert('下载未完成，意外结束')
+                }
             };
+        },
+        computed: {
+            downloadMessage() {
+                return this.downloadFinished
+                    ? '下载已完成'
+                    : '正在下载，请不要关闭此页面或程序';
+            },
         },
         methods: {
             openLink: function (url) {
@@ -185,12 +191,28 @@
             }
             ,
             backHome: function () {
-                re = confirm('当前下载未结束，确定要返回吗？返回则需要重新下载')
-                if (re) {
-                    // 关闭 WebSocket 连接, 后端自动处理断开后的下载任务
-                    if (this.socket !== null) {
-                        this.socket.close();
+
+                if (this.downloadFinished) {
+                    window.location.href = '/';
+                } else {
+                    re = confirm('当前下载未结束，确定要返回吗？返回则需要重新下载')
+                    if (re) {
+                        // 关闭 WebSocket 连接, 后端自动处理断开后的下载任务
+                        if (this.socket !== null) {
+                            this.socket.send('close')
+                            this.socket.close();
+
+                        }
+                        this.userEnd = true;
+                        window.location.href = '/';
                     }
+                }
+            },
+            outToCSV: function () {
+                if (this.downloadFinished) {
+                    window.location.href = '/api/out_to_csv';
+                } else {
+                    alert('下载未完成')
                 }
             }
         }
