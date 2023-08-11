@@ -9,7 +9,7 @@ from starlette.responses import FileResponse
 from starlette.websockets import WebSocket, WebSocketState
 
 from yweb.tools import create_file_name
-from yweb.yzw_down import DownTask
+from yweb.yzw_down import DownTask, YanxDownTask
 from yzw_dl.tools import json_file_scv_output, json_file_to_list_data, csv_data_output
 
 yanx_app = APIRouter()
@@ -139,7 +139,8 @@ async def websocket_endpoint(ws: WebSocket):
     await ws.accept()
     dlparams = ws.session.get('dlparams')
     save_name = create_file_name(dlparams, ws.session)
-    dlth = DownTask(dlparams, save_name)
+
+    dlth = YanxDownTask(dlparams, save_json_path=f'dldocs\\{save_name}.json')
     global g_save_name
     g_save_name = save_name
     try:
@@ -157,8 +158,8 @@ async def websocket_endpoint(ws: WebSocket):
                 if dlth.is_alive():
                     await asyncio.sleep(1)
                     progress_data = dlth.get_dl_progress()
-                    await ws.send_json(progress_data)
-                    if all([i == 100 for i in progress_data.values()]):
+                    await ws.send_json(progress_data.get('progress'))
+                    if progress_data.get('finished'):
                         await ws.send_json({'downloadFinished': True})
                         dlth.stop()
                         break
