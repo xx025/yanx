@@ -10,7 +10,7 @@ class YanxDownTask(DownTask):
         super().__init__(param_list=self.param_list, save_json_file=[True, save_json_path], save_csv_file=[False, 1, 1])
 
     def tarnsform_dlparams(self):
-        # 和yzw_dl中的函数的对齐
+        # 和yzw_dl中的参数对齐
         dl_params = self.dl_params
         config_values = {'ssdm': '',
                          'dwmc': '',
