@@ -59,9 +59,6 @@ git clone -b main https://github.com/xx025/yanx.git yanx
 cd yanx
 conda create -n yanx python=3.8 -y
 conda activate yanx # 使用 conda 创建虚拟环境
-git submodule init
-git submodule update --init --recursive
-pip install -e yzw-dl
 pip install -r requirements.txt
 python run.py
 ```
