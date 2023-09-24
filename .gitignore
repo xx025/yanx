@@ -4,3 +4,4 @@ database.db
 /yzw-dl/yzw_dl.egg-info
 /dist/
 *.spec
+/build/
