@@ -8,6 +8,7 @@ from starlette.background import BackgroundTask
 from starlette.responses import FileResponse
 from starlette.websockets import WebSocket, WebSocketState
 
+from global_values import global_vals
 from yweb.tools import create_file_name
 from yweb.yzw_down import DownTask, YanxDownTask
 from yzw_dl.tools import json_file_scv_output, json_file_to_list_data, csv_data_output
@@ -40,13 +41,8 @@ async def get_mldm(request: Request):
         }
     ]
 
-    if request.session.get('mldm') is None:
-        request.session['mldm'] = {}
-
-    tmp_dict = request.session['mldm']
-    tmp_dict.update({'zyxw': '专业学位'})
-    tmp_dict.update({item['dm']: item['mc'] for item in json_data})
-    request.session['mldm'] = tmp_dict
+    global_vals['mllb'].update({'zyxw': '专业学位'})
+    global_vals['mllb'].update({item['dm']: item['mc'] for item in json_data})
 
     return groups
 
@@ -63,13 +59,8 @@ async def get_xklb(mldm: str, request: Request):
         url = 'https://yz.chsi.com.cn/zsml/pages/getZy.jsp'
         json_data = req_json_by_get(url=url, params={'mldm': mldm})
         data = [{'label': f"{item['dm']}-{item['mc']}", 'value': item['dm']} for item in json_data]
-
     finally:
-        if request.session.get('xklb') is None:
-            request.session['xklb'] = {}
-        tmp_dict = request.session['xklb']
-        tmp_dict.update({item['dm']: item['mc'] for item in json_data})
-        request.session['xklb'] = tmp_dict
+        global_vals['xklb'].update({item['dm']: item['mc'] for item in json_data})
         return data
 
 
@@ -130,19 +121,16 @@ async def output_data(ids):
                         background=BackgroundTask(lambda: os.remove(out_csv_path)))
 
 
-g_save_name = ''
-
-
 @yanx_app.websocket("/wsdl")
 async def websocket_endpoint(ws: WebSocket):
     # 将新连接添加到活动连接集合
     await ws.accept()
-    dlparams = ws.session.get('dlparams')
-    save_name = create_file_name(dlparams, ws.session)
+
+    dlparams = global_vals['dlparams']
+    save_name = create_file_name(dlparams)
 
     dlth = YanxDownTask(dlparams, save_json_path=f'dldocs\\{save_name}.json')
-    global g_save_name
-    g_save_name = save_name
+    global_vals['save_name'] = save_name
     try:
         async def receive_messages():
             while True:
@@ -176,7 +164,7 @@ async def websocket_endpoint(ws: WebSocket):
 
 @yanx_app.get("/out_to_csv")
 async def out_to_csv():
-    save_name = g_save_name
+    save_name = global_vals['save_name']
     out_json_path = os.path.join('dldocs', f'{save_name}.json')
     out_csv_path = os.path.join('dldocs', f'{save_name}.csv')
     json_file_scv_output(out_json_path, out_csv_path)

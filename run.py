@@ -1,6 +1,4 @@
 import os
-import sys
-
 
 from fastapi import FastAPI
 from fastapi import Request
@@ -11,9 +9,8 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.staticfiles import StaticFiles
 
+from global_values import global_vals
 from yweb import yanx_app
-
-# 获取应用程序所在的目录路径
 
 app = FastAPI()
 
@@ -58,7 +55,7 @@ async def root2(request: Request,
                 yxjh: str = '',
                 yxdq: str = ''):
     # 清空之前的 Session 中的 dlparams 数据
-    request.session.pop("dlparams", None)
+    global_vals['dlparams'] = []
     # 存储参数到 dlparams 字典
     dlparams = {
         "mllb": mllb,
@@ -68,7 +65,7 @@ async def root2(request: Request,
         "yxjh": yxjh,
         "yxdq": yxdq
     }
-    request.session["dlparams"] = dlparams  # 存储 dlparams 字典到 Session
+    global_vals["dlparams"] = dlparams  # 存储 dlparams 字典到 Session
     return templates.TemplateResponse("download.html",
                                       {"request": request,
                                        'title': 'YanX-研招网硕士专业目录下载'}

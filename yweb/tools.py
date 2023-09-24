@@ -1,9 +1,11 @@
 import time
 
+from global_values import global_vals
 
-def create_file_name(dlparams, session):
-    name_mllb = session['mldm'][dlparams['mllb']]
-    name_xklb = session['xklb'][dlparams['xklb']]
+
+def create_file_name(dlparams):
+    name_mllb = global_vals['mllb'][dlparams['mllb']]
+    name_xklb = global_vals['xklb'][dlparams['xklb']]
     name_xxfs = '全日制' if dlparams['xxfs'] == '1' else '非全日制'
     name_yxdq = f"{dlparams['yxdq']}区" if dlparams['yxdq'] in ['a', 'b'] else ''  # 院校地区
     name_yxjh = ''  # 院校计划
