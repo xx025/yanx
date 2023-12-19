@@ -8,7 +8,7 @@ from starlette.background import BackgroundTask
 from starlette.responses import FileResponse
 from starlette.websockets import WebSocket, WebSocketState
 
-from global_values import global_vals
+from global_vals import global_vals
 from yweb.tools import create_file_name
 from yweb.yzw_down import DownTask, YanxDownTask
 from yzw_dl.tools import json_file_scv_output, json_file_to_list_data, csv_data_output

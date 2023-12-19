@@ -9,7 +9,7 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.staticfiles import StaticFiles
 
-from global_values import global_vals
+from global_vals import global_vals
 from yweb import yanx_app
 
 app = FastAPI()

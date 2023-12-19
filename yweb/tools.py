@@ -1,6 +1,6 @@
 import time
 
-from global_values import global_vals
+from global_vals import global_vals
 
 
 def create_file_name(dlparams):
