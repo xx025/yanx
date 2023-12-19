@@ -1,15 +1,17 @@
 import os
 
+import uvicorn
+import webview
 from fastapi import FastAPI
 from fastapi import Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from flaskwebgui import FlaskUI
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.staticfiles import StaticFiles
 
 from global_vals import global_vals
+from global_vals import port
 from yweb import yanx_app
 
 app = FastAPI()
@@ -82,16 +84,23 @@ async def open_link(url: str):
     return {"message": f"已打开链接{url}"}
 
 
+def init():
+    # 创建文件夹，用于存放下载的文件
+    os.makedirs('dldocs', exist_ok=True)
+
+    # 启动 FastAPI
+    uvicorn.run(app, host="localhost", port=port)
+
+
 if __name__ == "__main__":
-    # uvicorn.run('run:app', host='localhost', reload=True, port=5511)
-
-    def init():
-        # 创建文件夹，用于存放下载的文件
-        os.makedirs('dldocs', exist_ok=True)
-
-    init()
-
-    FlaskUI(app=app, server="fastapi",
-            width=720,
-            height=680,
-            ).run()
+    # 使用 webview 打开 FastAPI
+    webview.create_window(
+        title='Yanx',
+        url=f"http://localhost:{port}/",
+        width=720,
+        height=690,
+        resizable=False,
+        confirm_close=True,
+        text_select=False
+    )
+    webview.start(init)
