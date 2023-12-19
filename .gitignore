@@ -5,3 +5,4 @@ database.db
 /dist/
 *.spec
 /build/
+*.pyc
