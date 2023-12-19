@@ -85,6 +85,12 @@ async def open_link(url: str):
 if __name__ == "__main__":
     # uvicorn.run('run:app', host='localhost', reload=True, port=5511)
 
+    def init():
+        # 创建文件夹，用于存放下载的文件
+        os.makedirs('dldocs', exist_ok=True)
+
+    init()
+
     FlaskUI(app=app, server="fastapi",
             width=720,
             height=680,
