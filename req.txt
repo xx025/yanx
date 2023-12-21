@@ -1,4 +1,5 @@
 beautifulsoup4
+pywebview
 configobj
 pyaes
 requests
@@ -10,5 +11,6 @@ starlette
 uvicorn
 sqlalchemy
 itsdangerous
+pyinstaller
 git+https://github.com/xx025/requests_enhance.git
 git+https://github.com/xx025/yzw-dl.git
