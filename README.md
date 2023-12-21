@@ -7,7 +7,7 @@
 
 ## 下载软件
 
-<img src="https://github.com/xx025/yanx/assets/71559822/5d0d5d58-621a-4fee-a0f5-357cee1ca553" width = "auto" height = "43" alt="图片名称" align=center />
+[<img src="https://github.com/xx025/yanx/assets/71559822/5d0d5d58-621a-4fee-a0f5-357cee1ca553" width = "auto" height = "43" alt="图片名称" align=center />](https://github.com/xx025/yanx/releases/latest)
 
 ## 快速使用
 
