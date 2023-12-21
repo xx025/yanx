@@ -1,4 +1,6 @@
 import os
+import signal
+import sys
 
 import uvicorn
 import webview
@@ -84,23 +86,29 @@ async def open_link(url: str):
     return {"message": f"已打开链接{url}"}
 
 
-def init():
+def start_server():
     # 创建文件夹，用于存放下载的文件
     os.makedirs('dldocs', exist_ok=True)
-
     # 启动 FastAPI
     uvicorn.run(app, host="localhost", port=port)
 
 
+def on_closed():
+    os.kill(os.getpid(), signal.SIGTERM)
+    print("窗口关闭，退出程序")
+
+
 if __name__ == "__main__":
     # 使用 webview 打开 FastAPI
-    webview.create_window(
+    window = webview.create_window(
         title='Yanx',
         url=f"http://localhost:{port}/",
         width=720,
         height=690,
         resizable=False,
         confirm_close=True,
-        text_select=False
+        text_select=False,
     )
-    webview.start(init)
+
+    window.events.closed += on_closed # 窗口关闭时退出程序
+    webview.start(start_server)
